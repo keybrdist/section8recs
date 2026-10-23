@@ -30,3 +30,14 @@ time; audio streams from the label CDN; three.js loads from jsDelivr.
 
 The Queue panel exports JSON (`section8-queue/1`): track order, per-track scenes, start/end markers and tracks marked for
 deletion. The default queue lives in `DEFAULT_CONFIG` at the top of `site/src/v4-queue.js`.
+
+## Responsive check
+
+`site/tests/responsive.cjs` loads the built page at 20 sizes (phones from 320 px, landscape phones, Galaxy Fold cover
+and unfolded, Z Flip, Pixel Fold, Surface Duo, tablets in both orientations), opens each state (home, playing, scene
+menu, search, queue, archive) and reports horizontal overflow, controls off-screen or clipped, overlapping interface
+groups, cut-off text and touch targets under 30 px. It writes screenshots, `report.json` and one contact sheet per state
+to `site/tests/out/`.
+
+    python3 -m http.server 8765 --directory site/dist &
+    NODE_PATH=<dir containing playwright-core> CHROME=<chromium binary> node site/tests/responsive.cjs

@@ -20,6 +20,7 @@ CSS=Path(__file__).with_name('ff.css').read_text()+'''
 #enterSound{background:#f1efe9;color:#050506;border-color:#f1efe9}#enterSound:hover{background:#fff}
 .f-st{margin:16px 0 0;color:rgba(236,235,230,.4);font-size:9.5px}
 @media (max-width:760px){.f-top{font-size:8.5px;letter-spacing:.2em;top:18px}.i-wire{height:min(42vh,380px)}.i-name{letter-spacing:.45em;padding-left:.45em}.f-l{margin-top:18px}.f-c{margin-top:22px}}
+@media (max-height:500px) and (orientation:landscape){.f-k{display:none}.f-top{top:12px}.i-wire{height:min(40vh,300px);margin-top:0}.f-mid{padding-top:26px}.f-l{margin-top:8px}.f-c{margin-top:12px}.f-st{margin-top:8px}}
 '''
 HTML='''<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gT">
   <div class="ff-imgw"><img class="ff-img" src="{slug}/forest.jpg" srcset="{slug}/forest-1280.jpg 1280w, {slug}/forest.jpg 2560w" sizes="100vw" alt="Spruce forest standing in backlit fog at night" fetchpriority="high" decoding="async"></div>

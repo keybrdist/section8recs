@@ -6,9 +6,9 @@
   dist/index.html                   redirects to the J page
 
 Both pages are single self-contained HTML files (release data inlined); each reads its images from a sibling folder of
-the same name. Optional: site/canonical.json maps an output name to a <link rel="canonical"> URL (kept out of git).
+the same name. With S8_CANONICAL=1, site/canonical.json (kept out of git) maps an output name to a <link rel="canonical"> URL.
 """
-import json, re, runpy, shutil, html as _h
+import json, os, re, runpy, shutil, html as _h
 from pathlib import Path
 
 S = Path(__file__).resolve().parent
@@ -71,7 +71,8 @@ base = page[:i0] + '\n' + module + '\n' + page[i1:]
 
 data = (S / 'data' / 'data.json').read_text().replace('</', '<\\/')
 canon_file = S / 'canonical.json'
-canon = json.loads(canon_file.read_text()) if canon_file.exists() else {}
+# only for publishing previews (S8_CANONICAL=1); committed builds carry no canonical link
+canon = json.loads(canon_file.read_text()) if canon_file.exists() and os.environ.get('S8_CANONICAL') else {}
 link = lambda slug: f'<link rel="canonical" href="{canon[slug]}">' if slug in canon else ''
 
 def write(slug, s):

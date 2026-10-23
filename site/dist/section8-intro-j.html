@@ -208,6 +208,7 @@ body.gated .note{opacity:0}
 #enterSound{background:#f1efe9;color:#050506;border-color:#f1efe9}#enterSound:hover{background:#fff}
 .f-st{margin:16px 0 0;color:rgba(236,235,230,.4);font-size:9.5px}
 @media (max-width:760px){.f-top{font-size:8.5px;letter-spacing:.2em;top:18px}.i-wire{height:min(42vh,380px)}.i-name{letter-spacing:.45em;padding-left:.45em}.f-l{margin-top:18px}.f-c{margin-top:22px}}
+@media (max-height:500px) and (orientation:landscape){.f-k{display:none}.f-top{top:12px}.i-wire{height:min(40vh,300px);margin-top:0}.f-mid{padding-top:26px}.f-l{margin-top:8px}.f-c{margin-top:12px}.f-st{margin-top:8px}}
 
 body.gated .chrome,body.gated .vside,body.gated .reg{opacity:0;pointer-events:none}
 
@@ -350,11 +351,44 @@ body.gated .tape{opacity:0}
   .tnav .tb:not(#ixBtn){padding:0 9px}
   .time{min-width:0;font-size:9.5px}
   .bot-2 span:nth-child(3){display:none}
-  #ixBtn span{display:none}
+  #ixBtn .ixn{display:none}
   .tnav{gap:4px}
   #driftBtn,#cutBtn{display:none}
 }
 @media (prefers-reduced-motion:reduce){.scan{animation:none}.roll{display:none}}
+/* responsive pass: header words give way to icons, touch targets grow, short landscape screens rearrange */
+.tb .ti{width:13px;height:13px;flex:none;display:none}
+@media (max-width:1200px){
+  #qBtn .ti,#ixBtn .ti{display:block}#qBtn .lbl-w,#ixBtn .lbl-w{display:none}
+  .brand small{display:none}
+  #qBtn,#ixBtn{gap:6px}
+}
+@media (max-width:560px){#sceneBtn .lbl-w{display:none}}
+@media (max-width:700px){#driftBtn,#cutBtn{display:none}}
+@media (max-width:400px){.ix-h{padding:16px 14px 12px}}
+#qExtra{max-height:30vh;overflow:auto;scrollbar-width:thin}
+/* phones and short screens: the whole queue panel scrolls as one page instead of squeezing the track list */
+@media (max-width:560px),(max-height:700px){
+  #qpanel{display:block;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+  #qList,#qExtra{overflow:visible;max-height:none}
+  .qp-h{padding:14px 16px 10px}.qp-h h2{font-size:30px}.qp-a{padding:10px 16px}
+  .qp-f{display:none}
+}
+@media (max-width:389px){.brand .bw{display:none}.brand{gap:8px}.tnav .tb:not(#ixBtn){padding:0 8px}}
+@media (pointer:coarse){
+  .tb{height:36px}
+  .seek::after{content:"";position:absolute;left:0;right:0;top:-8px;bottom:-8px}
+  .qb button,.qx button{min-width:36px;min-height:36px}
+  .qx{grid-template-columns:minmax(0,1fr) auto 36px}
+}
+@media (max-height:500px) and (orientation:landscape){
+  .note{left:auto;right:var(--pad);max-width:42vw;top:calc(var(--top) + 14px)}
+  .note p{margin-left:auto}
+  body.tape-on .note{top:calc(var(--top) + 48px)}
+  .np{max-width:50vw;bottom:calc(var(--bot) + 12px)}
+  .np-tags{display:none}
+  .sigil{width:34px;height:54px}
+}
 </style>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/"}}</script>
 </head>
@@ -366,18 +400,18 @@ body.gated .tape{opacity:0}
 <div class="ir" id="ir" aria-hidden="true"><span class="rec">● REC</span><span id="irClock">CAM 08 · 03:33:07</span><span>MOTION DETECTED</span><span class="ir-b">IR · 940NM · SECTOR 8</span></div>
 
 <header class="top chrome">
-  <div class="brand"><i aria-hidden="true"></i><span>Section <span class="r">8</span></span><small>Recordings</small></div>
+  <div class="brand"><i aria-hidden="true"></i><span><span class="bw">Section </span><span class="r">8</span></span><small>Recordings</small></div>
   <p class="readout mono" id="readout" aria-hidden="true"></p>
   <nav class="tnav" aria-label="Controls">
     <span class="en mono" id="energy" title="Loud passage: scenes cut on the beat">CUT</span>
     <div class="meters" aria-hidden="true"><i id="mL"></i><i id="mM"></i><i id="mH"></i></div>
-    <button class="tb mono scn" id="sceneBtn" aria-haspopup="menu" aria-expanded="false" aria-controls="sceneMenu" title="Scenes ([ and ])">Scene <b id="scNo">01</b> <span class="scn-n" id="scName">The treeline</span></button>
+    <button class="tb mono scn" id="sceneBtn" aria-haspopup="menu" aria-expanded="false" aria-controls="sceneMenu" title="Scenes ([ and ])"><span class="lbl-w">Scene </span><b id="scNo">01</b> <span class="scn-n" id="scName">The treeline</span></button>
     <button class="tb mono" id="cutBtn" aria-pressed="false" title="Auto-cut: switch scenes on the beat during loud passages (C)"><span class="dot"></span>Auto-cut</button>
     <button class="tb mono" id="driftBtn" aria-pressed="true" title="Shuffle through the archive (D)"><span class="dot"></span>Drift</button>
     <button class="tb mono" id="fxBtn" aria-pressed="true" title="Glitch effects (F)"><span class="dot"></span>FX <span class="lbl-s" id="fxLbl">Full</span></button>
     <button class="tb mono" id="sBtn" aria-haspopup="dialog" aria-controls="srch" title="Search tracks (S or Ctrl/⌘+K)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2"/></svg><span class="lbl-s">Search</span></button>
-    <button class="tb mono" id="qBtn" aria-expanded="false" aria-controls="qpanel" title="Queue (Shift+Q)">Queue <span id="qCount" style="color:var(--acc)">0</span></button>
-    <button class="tb mono" id="ixBtn" aria-expanded="false" aria-controls="index" title="Archive (I)">Archive <span style="color:var(--sub)">139</span></button>
+    <button class="tb mono" id="qBtn" aria-expanded="false" aria-controls="qpanel" title="Queue (Shift+Q)" aria-label="Queue"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h9M2 8h9M2 12h6M13 10v5M10.5 12.5h5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lbl-w">Queue</span> <span id="qCount" style="color:var(--acc)">0</span></button>
+    <button class="tb mono" id="ixBtn" aria-expanded="false" aria-controls="index" title="Archive (I)" aria-label="Archive"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3h12v3H2zM3 6v7h10V6M6.5 9h3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lbl-w">Archive</span> <span class="ixn" style="color:var(--sub)">139</span></button>
   </nav>
 </header>
 
