@@ -52,7 +52,15 @@ s = s.replace('<!--APP_CSS-->', `<link rel="stylesheet" href="${cssName}">`)
   .replace('<!--INTRO_JS-->', `<script src="${introName}"></script>`);
 // pages live at any depth (/cat/<CAT>), so the hero images are referenced from the root
 s = s.replace(/(["\s])assets\//g, '$1/assets/');
-const head = s.slice(s.indexOf('<head>') + 6, s.indexOf('</head>'));
+// the page head minus its metadata (each page writes its own, src/components/Seo.astro), split after the viewport tag so
+// charset and viewport stay first; the body split where each page renders its gate (src/components/Gate.astro)
+let head = s.slice(s.indexOf('<head>') + 6, s.indexOf('</head>'));
+head = head.replace(/^<(title>.*<\/title|meta name="description"[^>]*|meta property="og:[^>]*|meta name="twitter:[^>]*|link rel="canonical"[^>]*)>\n/gm, '');
+if (/<title>|og:|twitter:|rel="canonical"/.test(head)) throw new Error('page metadata left in the shared head');
+const vp = head.indexOf('\n', head.indexOf('<meta name="viewport"')) + 1;
 const body = s.slice(s.indexOf('<body class="gated">') + 20, s.indexOf('</body>'));
-writeFileSync(GEN + 'shell.json', JSON.stringify({ head, body }));
-console.log(Object.entries(out).map(([n, t]) => `${n} ${t.length}`).join('\n'), `\nshell ${head.length + body.length}`);
+const g = body.indexOf('<!--GATE-->\n');
+if (g < 0) throw new Error('no gate marker in the page body');
+const shell = { headTop: head.slice(0, vp), head: head.slice(vp), bodyStart: body.slice(0, g), bodyEnd: body.slice(g + 12) };
+writeFileSync(GEN + 'shell.json', JSON.stringify(shell));
+console.log(Object.entries(out).map(([n, t]) => `${n} ${t.length}`).join('\n'), `\nshell ${Object.values(shell).join('').length}`);

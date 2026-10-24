@@ -1,0 +1,13 @@
+# Preview deployments and about.section8recs.com (staging until section8recs.com moves here) stay out of search results.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
+https://about.section8recs.com/*
+  X-Robots-Tag: noindex
+
+# app files and social cards change name when their content changes
+/app/*
+  Cache-Control: public, max-age=31536000, immutable
+/og/*
+  Cache-Control: public, max-age=31536000, immutable

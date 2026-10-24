@@ -1,0 +1,18 @@
+---
+// Unknown addresses answer 404 with this page (Cloudflare Pages serves 404.html), so nothing is mistaken for a page.
+import Experience from '../layouts/Experience.astro';
+import { figures } from '../lib/catalog.mjs';
+---
+<Experience
+  seo={{ title: 'Not found · Section 8 Recordings', path: '/404', noindex: true,
+    description: 'There is nothing at this address. The archive holds every Section 8 release.' }}
+  route={{ view: 'home' }}
+  gate={{ kicker: 'Signal lost · 404', lede: `Nothing on file at this address. ${figures.releases} recordings are in the archive.`, cue: 'Archive', cueHref: '#lost' }}>
+  <section class="g-sec" id="lost" aria-label="Not found">
+    <div class="g-lw">
+      <p class="g-lk">404 · Off the path</p>
+      <h2 class="s">This page is not in the archive</h2>
+      <p class="g-by"><a href="/releases">Browse all {figures.releases} releases</a> or <a href="/">go back to the forest</a>.</p>
+    </div>
+  </section>
+</Experience>

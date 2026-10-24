@@ -2,7 +2,7 @@
 // and the two labels the site covers.
 import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { cardName } from './og-cards.mjs';
+import { cardName } from './lib/cards.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const text = readFileSync(ROOT + 'site/data/catalog.json', 'utf8');

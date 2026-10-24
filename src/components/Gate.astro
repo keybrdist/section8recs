@@ -1,0 +1,67 @@
+---
+// The home page gate (intro J): the forest hero with the wireframe logo and the enter buttons, then whatever the page
+// shows below it (a release, an artist, the release list), then the label's links. Every page opens on it; entering
+// hands over to the experience.
+import { figures, labels } from '../lib/catalog.mjs';
+
+interface Props {
+  kicker?: string;      // the small line above the logo
+  lede?: string;        // the sentence under the name
+  enter?: string;       // the enter-with-sound button
+  cue?: string;         // the scroll cue: label and target
+  cueHref?: string;
+  nameIsHeading?: boolean;  // false when the page's own content carries the h1
+}
+const {
+  kicker = `Field recordings · ${figures.years}`,
+  lede = `The darkest drum & bass, jungle, and breakbeat-oriented music. ${figures.releases} recordings recovered. Headphones on. Stay on the path.`,
+  enter = 'Enter with sound', cue = 'Links', cueHref = '#links', nameIsHeading = true,
+} = Astro.props;
+const Name = nameIsHeading ? 'h1' : 'p';
+const year = new Date().getFullYear();
+const social = [
+  ['SoundCloud', 'https://soundcloud.com/section8recordings', 'soundcloud.com/section8recordings'],
+  ['Bandcamp', 'https://section8recordings.bandcamp.com/', 'section8recordings.bandcamp.com'],
+  ['YouTube', 'https://www.youtube.com/user/Section8DNB', 'youtube.com/user/Section8DNB'],
+  ['Instagram', 'https://www.instagram.com/section8recs/', '@section8recs'],
+  ['Twitter', 'https://twitter.com/section8recs', '@section8recs'],
+  ['Facebook', 'https://www.facebook.com/section8recs', 'facebook.com/section8recs'],
+];
+---
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gT">
+<div class="g-hero">
+  <div class="ff-imgw"><img class="ff-img" src="/assets/forest.jpg" srcset="/assets/forest-1280.jpg 1280w, /assets/forest.jpg 2560w" sizes="100vw" alt="Spruce forest standing in backlit fog at night" fetchpriority="high" decoding="async"></div>
+  <div class="ff-shade f-shade"></div><div class="ff-grain"></div>
+  <p class="f-top mono ff-fade"><b>S8</b> &nbsp;·&nbsp; Est. 2007 &nbsp;·&nbsp; The Dark Project</p>
+  <div class="f-mid">
+    <p class="f-k mono ff-in">{kicker}</p>
+    <div class="i-wire ff-fade"><canvas id="wire" role="img" aria-label="Section 8 logo drawn as a rotating isometric wireframe"></canvas></div>
+    <Name class="i-name ff-in ff-d1" id={nameIsHeading ? 'gT' : undefined}>Section <span class="r">8</span> Recordings</Name>
+    <p class="f-l ff-in ff-d2">{lede}</p>
+    <div class="f-c ff-in ff-d3"><button class="f-b" id="enterSound">{enter}</button><button class="f-b" id="enterQuiet">Enter silently</button></div>
+    <p class="f-st mono ff-in ff-d4" id="gSt">Signal acquired<span class="cursor"></span></p>
+  </div>
+  <a class="g-cue" href={cueHref}><span>{cue}</span><i aria-hidden="true"></i></a>
+</div>
+<slot />
+<section class="g-links" id="links" aria-labelledby="gLinksH">
+  <div class="g-lw">
+    <p class="g-lk">Elsewhere · Off the path</p>
+    <h2 class="g-lh" id="gLinksH">Find <b>Section 8</b> where the music lives. Releases, mixes and news.</h2>
+    <ul class="g-grid">
+      {social.map(([name, href, handle], i) => (
+        <li><a href={href} target="_blank" rel="noopener"><span class="n">{String(i + 1).padStart(2, '0')}</span><span><span class="t">{name}</span><span class="h">{handle}</span></span><span class="ar" aria-hidden="true">→</span></a></li>
+      ))}
+    </ul>
+    <div class="g-ct">
+      <div>
+        <p class="k">Inquiries, collaborations, demos</p>
+        <a class="g-mail" href="mailto:team@section8recs.com">team@section8recs.com</a>
+        <p class="g-ad">{labels.map(l => l.name).join(' · ')} · c/o Mike Shoebox · <a href="/releases">All releases</a></p>
+      </div>
+      <button class="g-top" type="button" id="gTop">Back to the forest ↑</button>
+    </div>
+    <div class="g-fb"><span>© 2007 — {year} Section <b>8</b> Recordings</span><span>Darkstep · Hardstep · Technoid · Jungle</span><span>Stay on the path</span></div>
+  </div>
+</section>
+</div>

@@ -1,0 +1,34 @@
+---
+// Per-page title, description, canonical address and link-preview tags. Link previews (X, Facebook, Discord, Slack,
+// iMessage) read these from the HTML and never run the page's scripts.
+import { SITE } from '../lib/catalog.mjs';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;                 // canonical path, e.g. /cat/SECTION8116
+  image?: string;               // absolute URL of a 1200×630 card
+  imageAlt?: string;
+  type?: string;                // og:type
+  noindex?: boolean;
+}
+const { title, description, path, image = `${SITE}/assets/og.jpg`, imageAlt = 'Section 8 Recordings: a spruce forest in fog at night',
+  type = 'website', noindex = false } = Astro.props;
+const url = SITE + path;
+---
+<title>{title}</title>
+<meta name="description" content={description}>
+{noindex ? <meta name="robots" content="noindex"> : <link rel="canonical" href={url}>}
+<meta property="og:type" content={type}>
+<meta property="og:site_name" content="Section 8 Recordings">
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:url" content={url}>
+<meta property="og:image" content={image}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content={imageAlt}>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@section8recs">
+<meta name="twitter:image" content={image}>
+<meta name="twitter:image:alt" content={imageAlt}>

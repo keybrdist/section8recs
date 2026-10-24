@@ -1,0 +1,61 @@
+---
+// One page per release at its catalogue number, the URL section8recs.com has always used.
+import Experience from '../../layouts/Experience.astro';
+import { around, artistUrl, artistsOf, cardUrl, coverUrl, labelOf, longDate, releases, releaseUrl, STORE_NAMES, summary } from '../../lib/catalog.mjs';
+
+export function getStaticPaths() {
+  return releases.map(r => ({ params: { cat: r.cat }, props: { r } }));
+}
+const { r } = Astro.props;
+const label = labelOf(r);
+const main = artistsOf(r).filter(a => a.role !== 'FeaturedArtist');
+const { older, newer } = around(r);
+const n = r.tracks.length;
+const by = (t) => t.artist && t.artist !== r.artist ? t.artist : '';
+---
+<Experience
+  seo={{ title: `${r.title} by ${r.artist} [${r.cat}] · ${label.name}`, description: summary(r), path: releaseUrl(r),
+    image: cardUrl(r), imageAlt: `${r.title} by ${r.artist}: cover art`, type: 'music.album' }}
+  route={{ view: 'release', c: r.cat }}
+  gate={{ kicker: `${r.cat} · ${label.name}`, lede: `${r.title}, ${r.artist}. ${n} track${n > 1 ? 's' : ''}, ${r.date.slice(0, 4)}.`,
+    enter: 'Play with sound', cue: 'Release', cueHref: '#release', nameIsHeading: false }}>
+  <section class="g-sec" id="release" aria-labelledby="gT">
+    <div class="g-lw">
+      <p class="g-lk">{r.cat} · {label.name}</p>
+      <div class="r-grid">
+        <img class="r-cover" src={coverUrl(r, 800)} width="800" height="800" alt={`${r.title} by ${r.artist}: cover art`} decoding="async">
+        <div>
+          <h1 id="gT">{r.title}</h1>
+          <p class="g-by">by {main.map((a, i) => <>{i ? (i === main.length - 1 ? ' & ' : ', ') : ''}<a href={artistUrl(a)}>{a.name}</a></>)}</p>
+          <dl class="r-facts">
+            <dt>Released</dt><dd><time datetime={r.date}>{longDate(r.date)}</time></dd>
+            <dt>Label</dt><dd>{label.name}</dd>
+            <dt>Catalogue</dt><dd>{r.cat}</dd>
+            {r.genres.length > 0 && <><dt>Genre</dt><dd>{r.genres.join(' / ')}</dd></>}
+            <dt>Tracks</dt><dd>{n}</dd>
+          </dl>
+          {r.description && <p class="r-desc">{r.description}</p>}
+          <ol class="r-trk" aria-label="Tracklist">
+            {r.tracks.map((t, i) => (
+              <li><button type="button" data-play={`${r.cat}:${i}`}>
+                <span class="i">{String(t.n).padStart(2, '0')}</span>
+                <span class="t">{t.title}{by(t) && <span class="x"> · {by(t)}</span>}</span>
+                <span class="p">Play</span>
+              </button></li>
+            ))}
+          </ol>
+          {Object.keys(r.links).length > 0 && (
+            <ul class="r-st" aria-label="Buy or stream">
+              {Object.entries(r.links).map(([k, href]) => <li><a href={href} target="_blank" rel="noopener">{STORE_NAMES[k] || k}</a></li>)}
+            </ul>
+          )}
+        </div>
+      </div>
+      <nav class="r-nav" aria-label="Archive">
+        {older ? <a href={releaseUrl(older)} rel="prev">← {older.cat} · {older.title}</a> : <span></span>}
+        <a href="/releases">All releases</a>
+        {newer ? <a href={releaseUrl(newer)} rel="next">{newer.cat} · {newer.title} →</a> : <span></span>}
+      </nav>
+    </div>
+  </section>
+</Experience>

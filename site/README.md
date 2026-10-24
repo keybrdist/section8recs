@@ -35,7 +35,20 @@ previous about page) live in `static/`.
   written by the sync; `tombstones.json` lists releases that left the catalogue, `overrides.json` (optional) holds
   editorial fixes
 - `static/og/`: one 1200×630 social card per release, made by `scripts/og-cards.mjs`
-- `src/pages/`: the Astro pages
+- `src/pages/`: the pages. Every page is the experience (`src/layouts/Experience.astro`) with its own metadata
+  (`src/components/Seo.astro`) and gate content (`src/components/Gate.astro`):
+  - `/`: home, with the latest releases
+  - `/releases`: every release by year, filterable by label
+  - `/cat/<CAT>`: one page per release, at the catalogue number section8recs.com has always used
+  - `/artist/<slug>`: one page per artist
+  - `404.html`: unknown addresses answer 404
+- `src/lib/catalog.mjs`: the catalogue as the pages use it (artists and slugs, covers, descriptions)
+
+Each page names what it shows in `<script id="s8-route">`; entering plays it (`site/src/v4-route.js`), and the address
+follows the release on air. `scripts/redirects.mjs` writes `_redirects` at build time: lgsites' `/r/<slug>/<id>`
+addresses, the archived ones in `site/data/legacy-urls.json`, lowercase catalogue numbers and lgsites' player and
+checkout paths all 301 to the release page. `static/_headers` keeps previews and about.section8recs.com out of search
+results.
 
 ## Catalogue sync
 
@@ -51,8 +64,9 @@ The token (`section8recs-static-site-sync-v2`) expires on 2027-10-24; the workfl
 
 ## Checks
 
-    npm run check                     # catalogue: public fields only, both labels, a card per release
-    node scripts/smoke.mjs <url>...   # headless Chromium: the page boots, WebGL renders, the gate enters
+    npm run check                          # catalogue and built site: fields, pages, metadata, redirects
+    node scripts/smoke.mjs <url>...        # headless Chromium: the page boots, WebGL renders, the gate enters
+    node scripts/check-urls.mjs --base <url>   # a deployment: every page 200, old addresses 301, unknown ones 404
 
 ## Queue settings
 

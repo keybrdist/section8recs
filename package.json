@@ -8,11 +8,11 @@
   "scripts": {
     "bundle": "node scripts/bundle-app.mjs",
     "dev": "npm run bundle && astro dev",
-    "build": "npm run bundle && astro build",
+    "build": "npm run bundle && node scripts/redirects.mjs && astro build",
     "preview": "astro preview",
     "smoke": "node scripts/smoke.mjs",
     "sync": "node scripts/sync.mjs && node scripts/og-cards.mjs",
-    "check": "node scripts/check-catalog.mjs"
+    "check": "node scripts/check-catalog.mjs && node scripts/check-site.mjs"
   },
   "devDependencies": {
     "astro": "^7.4.2",

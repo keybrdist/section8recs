@@ -1,0 +1,29 @@
+---
+// Every page is the immersive experience: the page's own metadata and gate content around the shared app
+// (static/app/, built by scripts/bundle-app.mjs). The route tells the app what the page shows, so entering plays it.
+import shell from '../generated/shell.json';
+import Gate from '../components/Gate.astro';
+import Seo from '../components/Seo.astro';
+
+interface Props {
+  seo: { title: string; description: string; path: string; image?: string; imageAlt?: string; type?: string; noindex?: boolean };
+  route: { view: 'home' | 'release' | 'artist' | 'releases'; c?: string };
+  gate?: Record<string, unknown>;
+}
+const { seo, route, gate = {} } = Astro.props;
+const routeJson = JSON.stringify(route).replace(/</g, '\\u003c');
+---
+<html lang="en">
+<head>
+<Fragment set:html={shell.headTop} />
+<Seo {...seo} />
+<Fragment set:html={shell.head} />
+<script is:inline type="application/json" id="s8-route" set:html={routeJson}></script>
+<slot name="head" />
+</head>
+<body class="gated">
+<Fragment set:html={shell.bodyStart} />
+<Gate {...gate}><slot /></Gate>
+<Fragment set:html={shell.bodyEnd} />
+</body>
+</html>
