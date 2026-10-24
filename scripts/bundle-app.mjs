@@ -28,7 +28,13 @@ const config = JSON.parse(readFileSync(ROOT + 'site/src/v4-queue.js', 'utf8').ma
 const lost = [...(config.queue || []), ...Object.keys(config.scenes || {}), ...Object.keys(config.marks || {}), ...(config.del || [])].filter(f => !files.has(f));
 if (lost.length) throw new Error(`DEFAULT_CONFIG names ${lost.length} track(s) the catalogue no longer has: ${lost.slice(0, 5).join(', ')}`);
 
-const page = assemble({ releases });
+// outlet links per release, fetched by the heart dialog the first time it opens
+const linksText = JSON.stringify(Object.fromEntries(catalog.releases.filter(r => Object.keys(r.links).length).map(r => [r.cat, r.links])));
+const linksName = `links.${createHash('sha256').update(linksText).digest('hex').slice(0, 10)}.json`;
+
+let page = assemble({ releases });
+if (!page.includes("'/*__LINKS__*/'")) throw new Error('no links placeholder in the module');
+page = page.replace("'/*__LINKS__*/'", JSON.stringify('/app/' + linksName));
 
 // cut one block out of the page, leaving a marker in its place
 const cut = (s, open, close, mark) => {
@@ -45,6 +51,7 @@ const hash = t => createHash('sha256').update(t).digest('hex').slice(0, 10);
 const out = { [`app.${hash(mod)}.js`]: mod, [`app.${hash(css)}.css`]: css, [`intro.${hash(intro)}.js`]: intro };
 rmSync(APP, { recursive: true, force: true }); mkdirSync(APP, { recursive: true }); mkdirSync(GEN, { recursive: true });
 for (const [name, text] of Object.entries(out)) writeFileSync(APP + name, text);
+writeFileSync(APP + linksName, linksText);
 const [js, cssName, introName] = Object.keys(out).map(n => '/app/' + n);
 
 // fetch three.js and its add-ons alongside the app instead of after it has been parsed. A plain preload only fetches:

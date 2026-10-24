@@ -70,6 +70,14 @@ The token (`section8recs-static-site-sync-v2`) expires on 2027-10-24; the workfl
     node scripts/smoke.mjs <url>...        # headless Chromium: the page boots, WebGL renders, the gate enters
     node scripts/check-urls.mjs --base <url>   # a deployment: every page 200, old addresses 301, unknown ones 404
 
+## Phones
+
+On a phone the now-playing block shows four lines; the 8 sigil at its left (or the Section 8 mark at the top left)
+shows the rest. Swiping up skips to the next track and down to the previous one (a deliberate flick only). The heart
+opens the track's outlets and a Favorite toggle; favourites are kept in this browser (`s8.favorites.v1`, apart from
+the queue). In the looking-up scenes, craft stay above the bottom third of a phone screen (`site/src/v4-mobile.js`).
+The lock screen gets the Section 8 mark and stays in sync with playback (`site/src/v4-media.js`).
+
 ## Queue settings
 
 The Queue panel exports JSON (`section8-queue/1`): track order, per-track scenes, start/end markers and tracks marked for

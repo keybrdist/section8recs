@@ -125,7 +125,7 @@ function setNow(){
   $('#npTags').textContent=r.s.join(' / ');
   document.title=`${tn} · ${ta||r.a} · Section 8`;
   if('mediaSession' in navigator)navigator.mediaSession.metadata=new MediaMetadata({title:tn,artist:ta||r.a,album:`${r.t} [${r.c}]`,artwork:ART});
-  markIndex();
+  markIndex();favMark();
 }
 function load(c,i,auto=true){
   const r=BY[c];if(!r)return;const first=!cur.r,changed=first||cur.r.c!==c;cur={r,i};
@@ -160,8 +160,9 @@ function next(){
   for(let n=0;n<60&&isDel(fileOf(...t));n++)t=nextAfter(...t);
   load(...t);
 }
-function prev(){
-  if(!cur.r)return;const st=markOf(curFile()).in??0;if(au.currentTime>st+4){au.currentTime=st;MK.last=st;return}
+// force: go to the previous track even when well into this one (a swipe), rather than back to its start
+function prev(force){
+  if(!cur.r)return;const st=markOf(curFile()).in??0;if(force!==true&&au.currentTime>st+4){au.currentTime=st;MK.last=st;return}
   const qp=qPrev();if(qp)return load(...qp);
   if(cur.i>0)return load(cur.r.c,cur.i-1);
   const r=D[(D.indexOf(cur.r)-1+D.length)%D.length];load(r.c,r.tr.length-1);
