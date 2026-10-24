@@ -1,5 +1,5 @@
 // Check a deployed site answers every address the way the plan says: each release, artist and index page 200, every
-// old address 301 to its page, unknown and retired addresses 404, trailing slashes 308 to the clean URL.
+// old address 301 to its page, unknown and retired addresses 404, trailing slashes to the clean URL.
 //   node scripts/check-urls.mjs --base https://<branch>.section8recs.pages.dev
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -19,7 +19,8 @@ const r0 = releases.find(r => r.cat === 'SECTION8116') || releases[0];
 expect.push(
   [`/player/cat/${r0.cat}`, 301, `/cat/${r0.cat}`], [`/cat/${r0.cat}/thanks`, 301, `/cat/${r0.cat}`], [`/section8recs/cat/${r0.cat}`, 301, `/cat/${r0.cat}`],
   ['/r/some-release/123/thanks', 301, '/releases'],
-  [`/cat/${r0.cat}/`, 308, `/cat/${r0.cat}`], [`/cat/${r0.cat}.html`, 308, `/cat/${r0.cat}`],
+  [`/cat/${r0.cat}/`, 301, `/cat/${r0.cat}`],   // the /cat/:cat/* rule answers before Pages' own 308
+  [`/cat/${r0.cat}.html`, 308, `/cat/${r0.cat}`],
   ['/this-does-not-exist', 404], ['/cat/NOT-A-RELEASE', 404], ['/cat/SECTION8FREE01', 404], ['/podcast-rss', 404], ['/podcast', 404], ['/dropbox', 404],
 );
 
