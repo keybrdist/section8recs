@@ -72,4 +72,4 @@ body.load-lost .g-load::after{animation:none}
 @media (prefers-reduced-motion:reduce){.g-load::after{animation:none}}
 @media (max-height:500px) and (orientation:landscape){.g-load{margin-top:10px}}
 /* on the shortest portrait screens the hero content reaches the bottom edge, so the scroll cue would sit on the status line */
-@media (max-height:600px) and (orientation:portrait){.g-cue{display:none}}
+@media (max-height:600px) and (orientation:portrait){.g-cue{display:none}.i-wire{height:min(36vh,380px)}}
