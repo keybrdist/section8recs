@@ -1,13 +1,16 @@
 ---
 import Experience from '../layouts/Experience.astro';
 import ReleaseCards from '../components/ReleaseCards.astro';
+import JsonLd from '../components/JsonLd.astro';
 import { figures, releases } from '../lib/catalog.mjs';
+import { home } from '../lib/schema.mjs';
 ---
 <Experience
   seo={{ title: 'Section 8 Recordings', path: '/',
-    description: `Section 8 Recordings: the darkest drum & bass, jungle and bass music since 2007. An immersive listening experience across ${figures.releases} releases from Section 8 Recordings and Section 8 Bass.` }}
+    description: `The darkest drum & bass, jungle and bass music since 2007: ${figures.releases} releases from Section 8 Recordings and Section 8 Bass, in an immersive listening experience.` }}
   route={{ view: 'home' }}
   gate={{ cue: 'Latest', cueHref: '#latest' }}>
+  <JsonLd slot="head" data={home()} />
   <section class="g-sec" id="latest" aria-labelledby="latestH">
     <div class="g-lw">
       <p class="g-lk">Latest from the archive</p>
