@@ -1,5 +1,5 @@
 // Load a built page in headless Chromium and check the experience boots: no script errors, the forest renders,
-// and entering from the gate works. Usage: node scripts/smoke.mjs <url> [<url>...]
+// and entering from the gate works. Each page is loaded twice, since a reload starts from cached files. Usage: node scripts/smoke.mjs <url> [<url>...]
 // A URL may end in =<status> when it should answer something else, e.g. https://…/nope=404.
 // CHROME=<chromium binary> overrides the browser path.
 import { chromium } from 'playwright-core';
@@ -15,11 +15,14 @@ for (const arg of urls) {
   page.on('pageerror', e => errors.push(`pageerror: ${e.message}`));
   page.on('console', m => { if (m.type() === 'error' && !(want !== '200' && m.text().includes(`status of ${want}`))) errors.push(`console: ${m.text()}`); });
   page.on('requestfailed', r => { if (!/fonts\.g|\.mp3/.test(r.url())) errors.push(`requestfailed: ${r.url()} ${r.failure()?.errorText}`); });
-  const res = await page.goto(url, { waitUntil: 'load' });
-  await page.waitForTimeout(2500);
+  await page.goto(url, { waitUntil: 'load' });
+  await page.waitForFunction(() => document.getElementById('enterSound')?.onclick, null, { timeout: 30000 }).catch(() => errors.push('first load: the app never started'));
+  const res = await page.reload({ waitUntil: 'load' });
+  await page.waitForFunction(() => document.getElementById('enterSound')?.onclick, null, { timeout: 30000 }).catch(() => errors.push('reload: the app never started'));
+  await page.waitForTimeout(1000);
   const before = await page.evaluate(() => ({ gated: document.body.classList.contains('gated'), nogl: document.body.classList.contains('nogl'),
     world: !!document.querySelector('#world'), enter: !!document.querySelector('#enterQuiet'), title: document.title }));
-  if (before.enter) { await page.click('#enterQuiet'); await page.waitForTimeout(2500); }
+  if (before.enter) { await page.click('#enterQuiet', { timeout: 15000 }).catch(() => errors.push('the enter button never woke')); await page.waitForTimeout(2500); }
   // a page that names a release starts on it: entering silently cues it without playing
   const after = await page.evaluate(() => { const r = JSON.parse(document.querySelector('#s8-route')?.textContent || '{}');
     return { gated: document.body.classList.contains('gated'), route: r, cued: !r.c || document.querySelector('#npT').textContent.trim() !== 'Section 8' }; });
