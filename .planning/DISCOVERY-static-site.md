@@ -421,6 +421,7 @@ None yet. The operator's answers to D1–D7 lock them.
 | Whether lgapi tokens support read-only abilities | Low: affects token blast radius only | D5 / P2 |
 | Release `content_type` and whether singles/EPs/LPs need distinct schema | Low | P3 |
 | How Google has indexed `/r/` versus `/cat/` (no GSC access in this session) | Medium: affects how long to watch redirects | P5: check GSC Page indexing before and after |
+| Whether a heartbeat commit pushed by `GITHUB_TOKEN` counts as repository activity for GitHub's 60-day rule (the docs don't say) | Medium: the cron could still lapse | P2: if not confirmed, trigger `workflow_dispatch` from a Cloudflare Worker cron instead (5 free crons) |
 | Whether Pages auto-replaces the apex A record in the custom-domain flow, or needs it removed first (community reports only) | Low: either way it's one record | P5 dry-run in the dashboard |
 
 ## Risks
