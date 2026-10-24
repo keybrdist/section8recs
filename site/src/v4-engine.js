@@ -76,7 +76,7 @@ class Engine{
       this.gain=this.ctx.createGain();src.connect(this.an);this.an.connect(this.gain);this.gain.connect(this.ctx.destination);
       this.fd=new Float32Array(this.an.frequencyBinCount);
       this.bands=new Bands(this.ctx.sampleRate,2048);this.energy=new Energy();
-      this.binHz=this.ctx.sampleRate/2048}
+      this.binHz=this.ctx.sampleRate/2048;this.ctx.onstatechange=()=>this.onstate&&this.onstate()}
     catch(e){this.ctx=null}
   }
   resume(){if(this.ctx&&this.ctx.state!=='running')this.ctx.resume()}

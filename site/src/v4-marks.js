@@ -62,7 +62,7 @@ setInterval(()=>{
     if(t<m.out&&t>=m.out-fl)g=Math.min(g,curveOut((m.out-t)/fl));
     const xs=m.out-Math.min(XF,fl);
     if(t>=xs-6&&t<xs)tailPrep(f,Math.max(0,xs));
-    if(TL.ready&&TL.file===f&&!TL.on&&t>=xs&&t<m.out&&MK.last<xs&&natural){
+    if(TL.ready&&TL.file===f&&!TL.on&&!document.hidden&&t>=xs&&t<m.out&&MK.last<xs&&natural){
       TL.on=true;TL.out=m.out;TL.fl=fl;tailGain(curveOut((m.out-TL.el.currentTime)/fl));TL.el.play().catch(()=>tailStop());
       MK.last=t;MK.xin=true;setGain(0);next();return}
     if(t>=m.out&&MK.last<m.out&&natural){MK.last=t;setGain(0);next();return}}

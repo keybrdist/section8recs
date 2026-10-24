@@ -124,7 +124,7 @@ function setNow(){
   $('#npS').innerHTML=`${esc(ta||r.a)} <em>— ${esc(r.t)} · ${pad(cur.i+1)} / ${pad(r.tr.length)}</em>`;
   $('#npTags').textContent=r.s.join(' / ');
   document.title=`${tn} · ${ta||r.a} · Section 8`;
-  if('mediaSession' in navigator)navigator.mediaSession.metadata=new MediaMetadata({title:tn,artist:ta||r.a,album:`${r.t} [${r.c}]`});
+  if('mediaSession' in navigator)navigator.mediaSession.metadata=new MediaMetadata({title:tn,artist:ta||r.a,album:`${r.t} [${r.c}]`,artwork:ART});
   markIndex();
 }
 function load(c,i,auto=true){
