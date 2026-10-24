@@ -1,0 +1,62 @@
+{
+  "_note": {
+    "source": "Extracted from window.__NUXT__ SSR state in public HTML (https://section8recs.com/, fetched 2026-10-24 UTC). Direct API calls return 401 without the lgsites service token, so this is the payload as stored by lgsites after its own projection, not the raw API response.",
+    "api_endpoint": "No podcast endpoint exists; podcast episodes are ordinary releases whose cat contains POD, served in the same releases list",
+    "count": 1
+  },
+  "data": [
+    {
+      "id": 9579,
+      "public_id": "01K7J279H99BJ3FYVPDX97FN86",
+      "cat": "SECTION8POD13",
+      "title": "Section 8 Podcast #13",
+      "mix_version": "",
+      "description_long": "Pareidolia brings a new Podcast Episode for us amidst his new release on Section 8. Grab the new release by Pareidolia on our website and on all streaming/download sites.\r\n\r\nNew Pareidolia release:\r\nhttps://www.section8recs.com/cat/SECTION8099D\r\nhttps://www.section8recs.com\r\nhttps://soundcloud.com/pareidoliadnb\r\nhttps://soundcloud.com/section8recordings\r\n\r\nMix Tracklist:\r\nPareidolia _ Promo\r\nPareidolia _ Promo\r\nPareidolia _ Deadbody (Nickbee rmx ) _ Modulate Rec\r\nPareidolia _ Bells of Delusion _ Modulate Rec\r\nPareidolia _ Darkdrones _ Modulate Rec\r\nPareidolia _ Smart Control _ Modulate Rec\r\nPareidolia _ Promo\r\nPareidolia _ Lift _ Modulate Rec\r\nPareidolia _ Promo\r\nPareidolia _ Buffer Error _ Section 8 Rec\r\nPareidolia _ Helmet _ Section 8 Rec\r\nPareidolia _ Promo\r\nPareidolia _ Promo\r\nPareidolia _ Black Russian _ Section 8 Rec\r\nPareidolia _ Life ends at midnite _ Section 8 Rec\r\nPareidolia _ Promo\r\nPareidolia _ Monday Fucking",
+      "default_display_artist": "Pareidolia",
+      "release_date": "2018-08-03T00:00:00+00:00",
+      "cline": "2018 Section 8 Recordings",
+      "pline": "2018 Section 8 Recordings",
+      "barcode_number": "673681890989",
+      "spotify_url": "https://open.spotify.com/album/61xLuQedUCpV1os2OUMPcK",
+      "applemusic_url": "",
+      "itunes_url": "",
+      "youtubemusic_url": null,
+      "youtube_url": "",
+      "deezer_url": "",
+      "tidal_url": "https://www.tidal.com/album/93329307",
+      "amazon_url": "",
+      "beatport_url": "",
+      "juno_url": "",
+      "pandora_url": "",
+      "bandcamp_url": "",
+      "soundcloud_url": "",
+      "short_url": "https://lbl.gr/Baq2P8",
+      "front_cover": {
+        "url": "https://cdn-prod-1.labelgrid.com/cdn-cgi/image/width=800/labels/section8recs/img/SECTION8POD13.jpg?ts=1791670694"
+      },
+      "content_type": null,
+      "label": {
+        "slug": "section8recs"
+      },
+      "primary_genre": {
+        "name": "Darkstep"
+      },
+      "secondary_genre": {
+        "name": "Drum & Bass"
+      },
+      "tracks": [
+        {
+          "id": 32218,
+          "track_num": 1,
+          "title": "Section 8 Podcast #13",
+          "mix_version": "Original Mix",
+          "default_display_artist": "Pareidolia",
+          "default_display_title": "Section 8 Podcast #13",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8POD13-1-Pareidolia-Section_8_Podcast_13.mp3"
+          }
+        }
+      ]
+    }
+  ]
+}

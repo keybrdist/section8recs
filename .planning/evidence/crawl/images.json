@@ -1,0 +1,44 @@
+[
+ {
+  "url": "https://cdn-prod-1.labelgrid.com/cdn-cgi/image/width=800/labels/section8recs/img/SECTION8116.jpg?ts=1783726384",
+  "final": "https://cdn-prod-1.labelgrid.com/cdn-cgi/image/width=800/labels/section8recs/img/SECTION8116.jpg?ts=1783726384",
+  "status": 200,
+  "content_type": "image/jpeg",
+  "bytes": 237766,
+  "dims": [
+   800,
+   800
+  ],
+  "cache_control": "max-age=14400",
+  "server": "cloudflare",
+  "cf_resized": "internal=ok/m q=0 n=541+1 c=99+208 v=2026.10.5 l=237766 f=false c2=4 wv=2026.9.1"
+ },
+ {
+  "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/img/SECTION8116.jpg?ts=1783726384",
+  "final": "https://cdn-prod-1.labelgrid.com/labels/section8recs/img/SECTION8116.jpg?ts=1783726384",
+  "status": 200,
+  "content_type": "image/jpeg",
+  "bytes": 5945751,
+  "dims": [
+   3000,
+   3000
+  ],
+  "cache_control": "max-age=14400",
+  "server": "cloudflare",
+  "cf_resized": null
+ },
+ {
+  "url": "https://cdn-prod-1.labelgrid.com/cdn-cgi/image/width=800/labels/section8recs/img/SECTION8001D.jpg?ts=1783017449",
+  "final": "https://cdn-prod-1.labelgrid.com/cdn-cgi/image/width=800/labels/section8recs/img/SECTION8001D.jpg?ts=1783017449",
+  "status": 200,
+  "content_type": "image/jpeg",
+  "bytes": 485482,
+  "dims": [
+   800,
+   800
+  ],
+  "cache_control": "max-age=14400",
+  "server": "cloudflare",
+  "cf_resized": "internal=ok/m q=0 n=288+0 c=19+1 v=2026.10.5 l=485482 f=false c2=0 wv=2026.9.1"
+ }
+]

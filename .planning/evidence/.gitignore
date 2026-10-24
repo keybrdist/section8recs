@@ -1,0 +1,9 @@
+# raw captures: large, and the lgsites state embeds the label's private fields
+crawl/nuxt/
+crawl/samples/
+crawl/home.nuxt.json
+crawl/home.html
+crawl/*.response.html
+crawl/wayback-cdx.json
+crawl/run*.log
+crawl/.reqcount

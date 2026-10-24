@@ -1,0 +1,91 @@
+{
+  "_note": {
+    "source": "Extracted from window.__NUXT__ SSR state in public HTML (https://section8recs.com/, fetched 2026-10-24 UTC). Direct API calls return 401 without the lgsites service token, so this is the payload as stored by lgsites after its own projection, not the raw API response.",
+    "api_endpoint": "GET /api/public/site-settings/{labelId}"
+  },
+  "response": {
+    "data": {
+      "id": 1,
+      "data": {
+        "id": "default",
+        "pages": [
+          {
+            "nav": {
+              "css": {
+                "top": "25vh",
+                "left": "45vw",
+                "margin": "auto",
+                "position": "fixed",
+                "textAlign": "center"
+              },
+              "links": [
+                {
+                  "uri": "/releases",
+                  "size": "large",
+                  "type": "nuxt-link",
+                  "iconClass": "fad fa-waveform",
+                  "buttonText": "Music"
+                },
+                {
+                  "uri": "/latest",
+                  "size": "large",
+                  "type": "nuxt-link",
+                  "iconClass": "fad fa-album",
+                  "buttonText": "Latest"
+                },
+                {
+                  "uri": "/dropbox",
+                  "size": "large",
+                  "type": "nuxt-link",
+                  "iconClass": "fab fa-dropbox",
+                  "buttonText": "Dropbox"
+                }
+              ]
+            },
+            "uri": "home",
+            "type": "splash",
+            "images": [
+              {
+                "css": {
+                  "large": {
+                    "left": "-320px",
+                    "maxWidth": "450px"
+                  },
+                  "small": {
+                    "left": "-50px",
+                    "maxWidth": "170px",
+                    "marginTop": "-50px"
+                  }
+                },
+                "uri": "logo",
+                "context": "splash",
+                "transform": {
+                  "large": "c_scale,w_450",
+                  "small": "c_scale,w_170"
+                },
+                "orientation": "vertical"
+              }
+            ]
+          }
+        ],
+        "global": {
+          "style": {
+            "link": {
+              "color": "rgb(255 255 255)"
+            },
+            "button": {
+              "color": "rgb(255 255 255)",
+              "borderColor": "hsl(0deg 0% 15% / 60%)",
+              "borderWidth": "3px",
+              "backgroundColor": "#000"
+            },
+            "secondaryLink": {
+              "color": "#96fdd0"
+            }
+          },
+          "defaultPage": "releases"
+        }
+      }
+    }
+  }
+}

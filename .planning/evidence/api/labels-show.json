@@ -1,0 +1,70 @@
+{
+  "_note": {
+    "source": "Extracted from window.__NUXT__ SSR state in public HTML (https://section8recs.com/, fetched 2026-10-24 UTC). Direct API calls return 401 without the lgsites service token, so this is the payload as stored by lgsites after its own projection, not the raw API response.",
+    "api_endpoint": "GET /api/public/labels/{labelId} (LabelData, stored unprojected in store labels.selected)",
+    "redactions": "default_email, support_email, default_label_share, isrc_base, fb_pixel_id values redacted"
+  },
+  "response": {
+    "id": 1,
+    "slug": "section8recs",
+    "name": "Section 8 Recordings",
+    "active": true,
+    "default_email": "<redacted-email>",
+    "support_email": "<redacted-email>",
+    "image": {
+      "filename": "section8-sq-logo2-transparency-700.png",
+      "url": "https://cdn-prod-1.labelgrid.com/uploads/section8-sq-logo2-transparency-700.png",
+      "filesize": null,
+      "status": null
+    },
+    "image_dark": {
+      "filename": "label-image_dark-b62b6b5573bb984303c205051ccc0c1e.png",
+      "url": "https://cdn-prod-1.labelgrid.com/uploads/label-image_dark-b62b6b5573bb984303c205051ccc0c1e.png",
+      "filesize": null,
+      "status": null
+    },
+    "shop_bg_image": {
+      "filename": "section8bg21.jpg",
+      "url": "https://cdn-prod-1.labelgrid.com/uploads/section8bg21.jpg",
+      "filesize": null,
+      "status": null
+    },
+    "isrc_base": "<redacted>",
+    "default_copyright_name_p_line": "Section 8 Recordings",
+    "default_copyright_name_c_line": "Section 8 Recordings",
+    "default_clip_start": "auto",
+    "default_clip_length": null,
+    "default_label_share": "<redacted>",
+    "enable_website": true,
+    "enable_demos_inbox": false,
+    "enable_email_optin_form": false,
+    "fb_pixel_id": "<redacted>",
+    "instagram_url": "https://instagram.com/section8recs",
+    "facebook_url": "https://facebook.com/section8recs",
+    "twitter_url": "https://x.com/section8recs",
+    "discord_url": null,
+    "twitch_url": null,
+    "podcast_url": "http://section8recs.com/podcast",
+    "website_url": "https://section8recs.com",
+    "juno_url": "https://www.junodownload.com/labels/Section+8/?order=date_down",
+    "bandcamp_url": "https://section8recordings.bandcamp.com",
+    "soundcloud_url": "https://soundcloud.com/section8recordings",
+    "youtube_url": "https://www.youtube.com/section8dnb",
+    "beatport_url": "https://www.beatport.com/label/section-8/15549",
+    "itunes_url": "",
+    "applemusic_url": null,
+    "spotify_url": null,
+    "enabled_ai_outlets": [],
+    "youtubemusic_enabled": false,
+    "youtube_monetization_enabled": true,
+    "soundcloud_monetization_enabled": false,
+    "acrcloud_enabled": true,
+    "audiblemagic_enabled": true,
+    "audiblemagic_licensing_enabled": false,
+    "beatport_enabled": false,
+    "created_at": null,
+    "updated_at": null,
+    "bridge_backfilled_at": "2026-10-24T03:02:07Z",
+    "analytics_readiness": "ready"
+  }
+}

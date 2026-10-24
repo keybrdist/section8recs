@@ -1,0 +1,46 @@
+{
+ "ts": "20160412093810",
+ "status": 301,
+ "chain": [
+  {
+   "url": "https://web.archive.org/web/20160412093810id_/http://section8recs.com/podcast-rss",
+   "status": 301,
+   "location": "https://web.archive.org/web/20160412093810id_/http://feeds.feedburner.com/section8-podcast"
+  }
+ ],
+ "headers": {
+  "Server": "nginx",
+  "Date": "Sat, 24 Oct 2026 05:39:12 GMT",
+  "Content-Type": "text/html; charset=iso-8859-1",
+  "Content-Length": "333",
+  "Connection": "keep-alive",
+  "x-archive-orig-date": "Tue, 12 Apr 2016 09:38:10 GMT",
+  "x-archive-orig-server": "Apache/2.4.7 (Ubuntu)",
+  "location": "https://web.archive.org/web/20160412093810id_/http://feeds.feedburner.com/section8-podcast",
+  "x-archive-orig-cache-control": "max-age=172800",
+  "x-archive-orig-expires": "Thu, 14 Apr 2016 09:38:10 GMT",
+  "x-archive-orig-content-length": "333",
+  "x-archive-orig-connection": "close",
+  "cache-control": "max-age=1800, private",
+  "accept-ranges": "bytes",
+  "memento-datetime": "Tue, 12 Apr 2016 09:38:10 GMT",
+  "link": "<http://section8recs.com/podcast-rss>; rel=\"original\", <https://web.archive.org/web/timemap/link/http://section8recs.com/podcast-rss>; rel=\"timemap\"; type=\"application/link-format\", <https://web.archive.org/web/http://section8recs.com/podcast-rss>; rel=\"timegate\"",
+  "content-security-policy": "default-src 'self' 'unsafe-eval' 'unsafe-inline' data: blob: archive.org web.archive.org web-static.archive.org wayback-api.archive.org athena.archive.org analytics.archive.org pragma.archivelab.org wwwb-events.archive.org",
+  "x-archive-src": "WIDE-20160412084339-crawl801/WIDE-20160412092853-01851.warc.gz",
+  "server-timing": "captures_list;dur=0.347249, exclusion.robots;dur=0.032310, exclusion.robots.policy;dur=0.024618, esindex;dur=0.005491, cdx.remote;dur=11.483955, LoadShardBlock;dur=124.221889, PetaboxLoader3.datanode;dur=84.421335, PetaboxLoader3.resolve;dur=70.194177, load_resource;dur=107.042558, TR;dur=0,Tw;dur=0,Tc;dur=1, MISS",
+  "x-app-server": "wwwb-app265-dc8",
+  "x-ts": "301",
+  "x-tr": "257",
+  "set-cookie": "wb-p-SERVER=wwwb-app265; path=/",
+  "X-location": "All",
+  "X-AS": "7922",
+  "X-RL": "0",
+  "X-NA": "0",
+  "X-Page-Cache": "MISS",
+  "X-NID": "COMCAST-7922",
+  "Referrer-Policy": "no-referrer-when-downgrade",
+  "Permissions-Policy": "interest-cohort=()",
+  "X-sd": "0"
+ },
+ "body_head": "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>301 Moved Permanently</title>\n</head><body>\n<h1>Moved Permanently</h1>\n<p>The document has moved <a href=\"http://feeds.feedburner.com/section8-podcast\">here</a>.</p>\n<hr>\n<address>Apache/2.4.7 (Ubuntu) Server at section8recs.com Port 80</address>\n</body></html>\n"
+}
