@@ -43,6 +43,8 @@ previous about page) live in `static/`.
   - `/artist/<slug>`: one page per artist
   - `404.html`: unknown addresses answer 404
 - `src/lib/catalog.mjs`: the catalogue as the pages use it (artists and slugs, covers, descriptions)
+- `src/lib/schema.mjs`: schema.org structured data (MusicAlbum, MusicGroup, the label); `src/pages/sitemap.xml.js`
+  lists every page with each release's cover; `static/robots.txt` points at it
 
 Each page names what it shows in `<script id="s8-route">`; entering plays it (`site/src/v4-route.js`), and the address
 follows the release on air. `scripts/redirects.mjs` writes `_redirects` at build time: lgsites' `/r/<slug>/<id>`

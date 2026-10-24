@@ -1,6 +1,8 @@
 ---
 // One page per release at its catalogue number, the URL section8recs.com has always used.
 import Experience from '../../layouts/Experience.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import { release } from '../../lib/schema.mjs';
 import { around, artistUrl, artistsOf, cardUrl, coverUrl, labelOf, longDate, releases, releaseUrl, STORE_NAMES, summary } from '../../lib/catalog.mjs';
 
 export function getStaticPaths() {
@@ -19,6 +21,7 @@ const by = (t) => t.artist && t.artist !== r.artist ? t.artist : '';
   route={{ view: 'release', c: r.cat }}
   gate={{ kicker: `${r.cat} · ${label.name}`, lede: `${r.title}, ${r.artist}. ${n} track${n > 1 ? 's' : ''}, ${r.date.slice(0, 4)}.`,
     enter: 'Play with sound', cue: 'Release', cueHref: '#release', nameIsHeading: false }}>
+  <JsonLd slot="head" data={release(r)} />
   <section class="g-sec" id="release" aria-labelledby="gT">
     <div class="g-lw">
       <p class="g-lk">{r.cat} · {label.name}</p>

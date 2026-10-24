@@ -53,8 +53,10 @@ export function summary(r) {
     return end > 80 ? cut.slice(0, end + 1) : cut.replace(/\s+\S*$/, '') + '…';
   }
   const n = r.tracks.length, genres = r.genres.length ? ` of ${r.genres.join(' and ').toLowerCase()}` : '';
-  return `${r.title} by ${r.artist}: ${n} track${n > 1 ? 's' : ''}${genres}, released ${longDate(r.date)} on ${labelOf(r).name} [${r.cat}].`;
+  return clip(`${r.title} by ${r.artist}: ${n} track${n > 1 ? 's' : ''}${genres}, ${r.date.slice(0, 4)}, ${labelOf(r).name} [${r.cat}].`);
 }
+// search results show about 160 characters
+export const clip = (s, n = 160) => s.length <= n ? s : s.slice(0, n - 1).replace(/[\s,;:]+\S*$/, '') + '…';
 
 export const STORE_NAMES = { spotify: 'Spotify', applemusic: 'Apple Music', bandcamp: 'Bandcamp', beatport: 'Beatport', deezer: 'Deezer',
   tidal: 'Tidal', amazon: 'Amazon', juno: 'Juno', soundcloud: 'SoundCloud', youtubemusic: 'YouTube Music', youtube: 'YouTube', pandora: 'Pandora' };
