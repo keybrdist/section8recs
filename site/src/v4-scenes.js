@@ -209,6 +209,7 @@ function tickCraft(dt,t){
       break}
     default:{for(let i=0;i<n;i++)steer(i,cx+rx*.8*wob(t,.02+i*.01,i*4),cy+ry*.7*wob(t,.025+i*.008,i*2+1),.3)}
   }
+  for(let i=0;i<n;i++)upClamp(CR.P[i]);
   for(let i=0;i<8;i++){
     if(i<n){CR.I[i]+=((It[i]??1)-CR.I[i])*Math.min(1,dt*1.5);U.uC.value[i].set(CR.P[i][0],CR.P[i][1],Sz[i],CR.I[i])}else U.uC.value[i].w=0;
   }

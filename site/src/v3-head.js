@@ -13,6 +13,8 @@ const yieldFrame=()=>new Promise(r=>{requestAnimationFrame(()=>setTimeout(r,0));
 S8L.stage('app');await yieldFrame();
 const D=/*__DATA__*/[];
 const MP3='https://cdn-prod-1.labelgrid.com/labels/';
+// every release's outlet links, loaded when the heart dialog first opens (scripts/bundle-app.mjs fills in the file)
+const LINKS_URL='/*__LINKS__*/';
 const BY=Object.fromEntries(D.map(r=>[r.c,r]));
 const CHRON=[...D].sort((a,b)=>a.d.localeCompare(b.d)||a.c.localeCompare(b.c));
 const RANK=Object.fromEntries(CHRON.map((r,i)=>[r.c,i+1]));

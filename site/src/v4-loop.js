@@ -154,7 +154,7 @@ function frame(now){
   if(R&&(!gated||gateFrames<4)){
     const U=R.U;U.uTime.value=t;U.uLow.value=A.low;U.uMid.value=A.mid;U.uHigh.value=A.high;U.uKick.value=A.kick;U.uLevel.value=A.level;
     U.uAccent.value.copy(accNow);U.uMouse.value.set(S.mx,S.my);U.uFog.value=S.fog;U.uDensity.value=S.density;U.uClear.value=S.clear;U.uZoom.value=S.zoom+A.kick*.026*(calm?.3:1);U.uSnare.value=A.snare;
-    U.uPhenA.value=S.phA;U.uAmtA.value=S.amtA;U.uPhenB.value=S.phB;U.uAmtB.value=S.amtB;U.uLight.value.set(S.lx,S.ly);
+    U.uPhenA.value=S.phA;U.uAmtA.value=S.amtA;U.uPhenB.value=S.phB;U.uAmtB.value=S.amtB;{const L=[S.lx,S.ly];upClamp(L);S.lx=L[0];S.ly=L[1]}U.uLight.value.set(S.lx,S.ly);
     U.uApp.value=S.app;U.uAppX.value=S.lx*.4+.03;U.uEyes.value=S.eyes;U.uFlash.value=S.flash;
     U.uCamT.value=CAM.walkT;U.uSpec.value=SPEC.v;U.uSpecSeed.value=SPEC.seed;
     const shk=running?1.6:1;
