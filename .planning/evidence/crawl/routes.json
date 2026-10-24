@@ -1,0 +1,74 @@
+{
+ "bundles": [
+  "/_nuxt/202de13.js",
+  "/_nuxt/21f7ff0.js",
+  "/_nuxt/3b234ab.js",
+  "/_nuxt/6bb5c39.js",
+  "/_nuxt/802b37d.js",
+  "/_nuxt/9165909.js",
+  "/_nuxt/ab985e8.js",
+  "/_nuxt/d2efa10.js"
+ ],
+ "routes": {
+  "/cat": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/checkout": [
+   "/_nuxt/3b234ab.js",
+   "/_nuxt/3b234ab.js"
+  ],
+  "/dropbox": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/releases": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/cat/cancelled": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/cat/thanks": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/": [
+   "/_nuxt/3b234ab.js",
+   "/_nuxt/802b37d.js",
+   "/_nuxt/802b37d.js"
+  ],
+  "/player/:cat?": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/:slug?/releases": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/:slug?/latest": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/:slug?/dropbox": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/:slug?": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/:slug?/cat/:cat?": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/:slug?/r/:albumSlug?/:id?": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/:slug?/cat/:cat?/thanks": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/:slug?/cat/:cat?/cancelled": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/:slug?/r/:albumSlug?/:id?/thanks": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/:slug?/r/:albumSlug?/:id?/cancelled": [
+   "/_nuxt/3b234ab.js"
+  ],
+  "/:slug?/player/cat/:cat?": [
+   "/_nuxt/3b234ab.js"
+  ]
+ }
+}

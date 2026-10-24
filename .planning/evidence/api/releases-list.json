@@ -1,0 +1,322 @@
+{
+  "_note": {
+    "source": "Extracted from window.__NUXT__ SSR state in public HTML (https://section8recs.com/, fetched 2026-10-24 UTC). Direct API calls return 401 without the lgsites service token, so this is the payload as stored by lgsites after its own projection, not the raw API response.",
+    "api_endpoint": "GET /api/public/releases?filter[public_site]=1&filter[label_id]={labelId}&per_page=100&page=N&cached=1&cache_seconds=600 (all pages merged, then utils/public-release.js projection)",
+    "total_items_in_state": 139,
+    "truncated_to": 3,
+    "pagination": "lgsites strips meta/links; raw API returns Spatie PaginatedDataCollection with meta.last_page"
+  },
+  "data": [
+    {
+      "id": 10650,
+      "public_id": "01K7J27QEPA7EFS62C25N3C7SJ",
+      "cat": "SECTION8116",
+      "title": "Riders LP",
+      "mix_version": "",
+      "description_long": "Produced by: Caleb BIOBIRD [NZ] ..... Future Bass, Leftfield Bass, DnB",
+      "default_display_artist": "Biobird",
+      "release_date": "2020-06-19T00:00:00+00:00",
+      "cline": "2020 Section 8 Recordings",
+      "pline": "2020 Section 8 Recordings",
+      "barcode_number": "673681894598",
+      "spotify_url": "https://open.spotify.com/album/7zDNPlyU1vtrQLvE9JVAyA",
+      "applemusic_url": "https://music.apple.com/us/album/riders-lp/1512772439?uo=4",
+      "itunes_url": "https://music.apple.com/us/album/riders-lp/1512772439?uo=4",
+      "youtubemusic_url": null,
+      "youtube_url": "",
+      "deezer_url": "http://www.deezer.com/album/147617512",
+      "tidal_url": "https://www.tidal.com/album/141100926",
+      "amazon_url": "",
+      "beatport_url": "https://beatport.com/release/riders-lp/2963585",
+      "juno_url": "https://www.junodownload.com/products/biobird-riders-lp/4576035-02/?track_number=1",
+      "pandora_url": "",
+      "bandcamp_url": "https://section8recordings.bandcamp.com/album/riders-lp",
+      "soundcloud_url": "",
+      "short_url": "https://lbl.gr/7cDTwu",
+      "front_cover": {
+        "url": "https://cdn-prod-1.labelgrid.com/cdn-cgi/image/width=800/labels/section8recs/img/SECTION8116.jpg?ts=1783726384"
+      },
+      "content_type": null,
+      "label": {
+        "slug": "section8recs"
+      },
+      "primary_genre": {
+        "name": "Drum & Bass"
+      },
+      "secondary_genre": {
+        "name": "Leftfield Bass"
+      },
+      "tracks": [
+        {
+          "id": 36015,
+          "track_num": 1,
+          "title": "Riders",
+          "mix_version": "",
+          "default_display_artist": "Biobird",
+          "default_display_title": "Riders",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8116-1-Biobird-Riders.mp3"
+          }
+        },
+        {
+          "id": 36016,
+          "track_num": 2,
+          "title": "Surge",
+          "mix_version": "",
+          "default_display_artist": "Biobird",
+          "default_display_title": "Surge",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8116-2-Biobird-Surge.mp3"
+          }
+        },
+        {
+          "id": 36017,
+          "track_num": 3,
+          "title": "Questions Ignored",
+          "mix_version": "",
+          "default_display_artist": "Biobird",
+          "default_display_title": "Questions Ignored",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8116-3-Biobird-Questions_Ignored.mp3"
+          }
+        },
+        {
+          "id": 36018,
+          "track_num": 4,
+          "title": "R.E.A.V.E.",
+          "mix_version": "",
+          "default_display_artist": "Biobird",
+          "default_display_title": "R.E.A.V.E.",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8116-4-Biobird-R.E.A.V.E..mp3"
+          }
+        },
+        {
+          "id": 36019,
+          "track_num": 5,
+          "title": "Change of Heart",
+          "mix_version": "",
+          "default_display_artist": "Biobird",
+          "default_display_title": "Change of Heart",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8116-5-Biobird-Change_of_Heart.mp3"
+          }
+        },
+        {
+          "id": 36020,
+          "track_num": 6,
+          "title": "Extra Ordinary",
+          "mix_version": "",
+          "default_display_artist": "Biobird",
+          "default_display_title": "Extra Ordinary",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8116-6-Biobird-Extra_Ordinary.mp3"
+          }
+        },
+        {
+          "id": 36021,
+          "track_num": 7,
+          "title": "Abstraction",
+          "mix_version": "",
+          "default_display_artist": "Biobird",
+          "default_display_title": "Abstraction",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8116-7-Biobird-Abstraction.mp3"
+          }
+        },
+        {
+          "id": 36024,
+          "track_num": 8,
+          "title": "A Thousand Days",
+          "mix_version": "",
+          "default_display_artist": "Biobird",
+          "default_display_title": "A Thousand Days",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8116-8-Biobird-A_Thousand_Days.mp3"
+          }
+        },
+        {
+          "id": 36023,
+          "track_num": 9,
+          "title": "The Predicament",
+          "mix_version": "",
+          "default_display_artist": "Biobird",
+          "default_display_title": "The Predicament",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8116-9-Biobird-The_Predicament.mp3"
+          }
+        },
+        {
+          "id": 36022,
+          "track_num": 10,
+          "title": "Fretters",
+          "mix_version": "",
+          "default_display_artist": "Biobird",
+          "default_display_title": "Fretters",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8116-10-Biobird-Fretters.mp3"
+          }
+        },
+        {
+          "id": 36025,
+          "track_num": 11,
+          "title": "Yearning",
+          "mix_version": "",
+          "default_display_artist": "Biobird",
+          "default_display_title": "Yearning",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8116-11-Biobird-Yearning.mp3"
+          }
+        },
+        {
+          "id": 36026,
+          "track_num": 12,
+          "title": "Two Sides of the Same Coin",
+          "mix_version": "",
+          "default_display_artist": "Biobird",
+          "default_display_title": "Two Sides of the Same Coin",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8116-12-Biobird-Two_Sides_of_the_Same_Coin.mp3"
+          }
+        }
+      ]
+    },
+    {
+      "id": 10655,
+      "public_id": "01K7J27QHXPZ83NM9GQB39P9A9",
+      "cat": "SECTION8116S5",
+      "title": "Fretters",
+      "mix_version": "",
+      "description_long": "Produced by: Caleb BIOBIRD [NZ] ..... Future Bass, Leftfield Bass, DnB",
+      "default_display_artist": "Biobird",
+      "release_date": "2020-06-11T00:00:00+00:00",
+      "cline": "2020 Section 8 Recordings",
+      "pline": "2020 Section 8 Recordings",
+      "barcode_number": "673681894635",
+      "spotify_url": "https://open.spotify.com/album/0pvxXjeZYIcyBkkUVWKFKW",
+      "applemusic_url": "https://itunes.apple.com/us/album/fretters/id1512775914",
+      "itunes_url": "https://itunes.apple.com/us/album/fretters/id1512775914",
+      "youtubemusic_url": null,
+      "youtube_url": "",
+      "deezer_url": "http://www.deezer.com/album/147623072",
+      "tidal_url": "https://www.tidal.com/album/141101019",
+      "amazon_url": "https://music.amazon.com/albums/B0F5HY4B1X",
+      "beatport_url": "https://beatport.com/release/fretters/2963465",
+      "juno_url": "https://www.junodownload.com/products/biobird-fretters/4576034-02/?track_number=1",
+      "pandora_url": "",
+      "bandcamp_url": "https://section8recordings.bandcamp.com/album/fretters",
+      "soundcloud_url": "",
+      "short_url": "https://lbl.gr/4-aMuy",
+      "front_cover": {
+        "url": "https://cdn-prod-1.labelgrid.com/cdn-cgi/image/width=800/labels/section8recs/img/SECTION8116S5.jpg?ts=1783726385"
+      },
+      "content_type": null,
+      "label": {
+        "slug": "section8recs"
+      },
+      "primary_genre": {
+        "name": "Future Bass"
+      },
+      "secondary_genre": {
+        "name": "Drum & Bass"
+      },
+      "tracks": [
+        {
+          "id": 36031,
+          "track_num": 1,
+          "title": "Fretters",
+          "mix_version": "",
+          "default_display_artist": "Biobird",
+          "default_display_title": "Fretters",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8116S5-1-Biobird-Fretters.mp3"
+          }
+        }
+      ]
+    },
+    {
+      "id": 10657,
+      "public_id": "01K7J27QJZPCM6XJYCY127SDFZ",
+      "cat": "SECTION8117",
+      "title": "You Know EP",
+      "mix_version": "",
+      "description_long": "",
+      "default_display_artist": "Sick Cycle",
+      "release_date": "2020-06-08T00:00:00+00:00",
+      "cline": "2020 Section 8 Recordings",
+      "pline": "2020 Section 8 Recordings",
+      "barcode_number": "673681894574",
+      "spotify_url": "",
+      "applemusic_url": "https://itunes.apple.com/us/album/you-know-ep/id1512770147",
+      "itunes_url": "https://itunes.apple.com/us/album/you-know-ep/id1512770147",
+      "youtubemusic_url": null,
+      "youtube_url": "",
+      "deezer_url": "",
+      "tidal_url": "",
+      "amazon_url": "",
+      "beatport_url": "https://beatport.com/release/you-know-ep/2963394",
+      "juno_url": "",
+      "pandora_url": "",
+      "bandcamp_url": "https://section8recordings.bandcamp.com/album/you-know-ep",
+      "soundcloud_url": "",
+      "short_url": "https://lbl.gr/ZucG47",
+      "front_cover": {
+        "url": "https://cdn-prod-1.labelgrid.com/cdn-cgi/image/width=800/labels/section8recs/img/SECTION8117.jpg?ts=1783017449"
+      },
+      "content_type": null,
+      "label": {
+        "slug": "section8recs"
+      },
+      "primary_genre": {
+        "name": "Jungle"
+      },
+      "secondary_genre": null,
+      "tracks": [
+        {
+          "id": 36033,
+          "track_num": 1,
+          "title": "You Know",
+          "mix_version": "",
+          "default_display_artist": "Sick Cycle",
+          "default_display_title": "You Know",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8117-1-Sick_Cycle__Sick_Cycle-You_Know.mp3"
+          }
+        },
+        {
+          "id": 36035,
+          "track_num": 2,
+          "title": "The Young One",
+          "mix_version": "",
+          "default_display_artist": "Sick Cycle",
+          "default_display_title": "The Young One",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8117-2-Sick_Cycle__Sick_Cycle-The_Young_One.mp3"
+          }
+        },
+        {
+          "id": 36034,
+          "track_num": 3,
+          "title": "Push Back",
+          "mix_version": "",
+          "default_display_artist": "Sick Cycle",
+          "default_display_title": "Push Back",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8117-3-Sick_Cycle__Sick_Cycle-Push_Back.mp3"
+          }
+        },
+        {
+          "id": 36036,
+          "track_num": 4,
+          "title": "All Will",
+          "mix_version": "",
+          "default_display_artist": "Sick Cycle",
+          "default_display_title": "All Will",
+          "preview_file": {
+            "url": "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/SECTION8117-4-Sick_Cycle__Sick_Cycle-All_Will.mp3"
+          }
+        }
+      ]
+    }
+  ]
+}

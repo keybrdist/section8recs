@@ -1,0 +1,2689 @@
+{
+ "query_strings": {
+  "https://www.junodownload.com/labels/Section+8/": [
+   "order=date_down"
+  ],
+  "https://music.apple.com/us/album/riders-lp/1512772439": [
+   "uo=4"
+  ],
+  "https://www.junodownload.com/products/biobird-riders-lp/4576035-02/": [
+   "track_number=1",
+   "track_number=12"
+  ],
+  "https://www.junodownload.com/products/biobird-fretters/4576034-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-push-back/4575834-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/biobird-r-e-a-v-e/4572082-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-you-know/4557210-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/biobird-extra-ordinary/4559320-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-all-will/4555717-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/biobird-a-thousand-days/4552764-02/": [
+   "track_number=1"
+  ],
+  "https://music.apple.com/us/album/big-brother-ep/1510196196": [
+   "uo=4"
+  ],
+  "https://www.junodownload.com/products/design-big-brother-ep/4539245-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-the-hack-ep/4335994-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-shine-on-i-miss-you/4303623-02/": [
+   "track_number=1"
+  ],
+  "https://www.youtube.com/watch": [
+   "v=A5JQI51SZvk",
+   "v=BwD2crkfYic",
+   "v=O9Vcdr30Jas",
+   "v=Ou-AnohlSKg",
+   "v=TJJICGHoKMM",
+   "v=fIkJgrJXj_o",
+   "v=nGoLGAAVOJE",
+   "v=vXmINN7uwEM",
+   "v=vloSUkAJ3FM",
+   "v=yKQ2eCkabPQ"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-762-wanted/4318025-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-no-exit/4303621-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-the-hack/4303051-02/": [
+   "track_number=1"
+  ],
+  "https://music.apple.com/us/album/count-to-ten-ep/1472497568": [
+   "uo=4"
+  ],
+  "https://www.junodownload.com/products/biobird-count-to-ten-ep/4211872-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/the-mind-malbolge/4185261-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/recall-crimson-tide/4083771-02/": [
+   "track_number=1"
+  ],
+  "https://itunes.apple.com/us/album/drop-it-woofshaker-single/1446449028": [
+   "uo=4"
+  ],
+  "https://itunes.apple.com/us/album/lazy-bloody-eyes-ep/1439684611": [
+   "uo=4"
+  ],
+  "https://www.junodownload.com/products/sinecore-lazy-bloody-eyes/4008958-02/": [
+   "track_number=1"
+  ],
+  "https://itunes.apple.com/us/album/the-joker-amped-up-single/1438098828": [
+   "uo=4"
+  ],
+  "https://itunes.apple.com/us/album/pressure-sequence-predicaments-feat-x-ts-emcee-single/1408630009": [
+   "uo=4"
+  ],
+  "https://itunes.apple.com/us/album/we-might-be-monsters/1398166848": [
+   "uo=4"
+  ],
+  "https://itunes.apple.com/us/album/smart-control-buffer-error-single/1388851826": [
+   "uo=4"
+  ],
+  "https://itunes.apple.com/us/album/hammered-feat-jabz-mc-woody/1371520379": [
+   "uo=4"
+  ],
+  "https://www.junodownload.com/products/unsub-goosebreeder-selftitled/3450728-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/kryzys-gorebug-i-choose-the-hard-drum/3149506-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/m1ch3l-p-schyzo-beterror-demons-inside-me/3072219-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/unsub-fingerbang-ep/3056779-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/pareidolia-life-ends-at-midnight-black-russian/3017416-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/pareidolia-monday-fucking-helmet/2824843-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/coresplittaz-coronal-mass-ejection-vacuum/2753914-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/arklove-ez-breaks-storm/2753913-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/brainpain-barbarians-chosen-one/2709617-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/brainpain-sekai-no-owari/2645949-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/coresplittaz-the-realness-critical-mass/2625986-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-criss-hathaway-birth-of-trungle/2617895-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/emmeeji-contraflow-context/2597857-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/ishe-goreteks-badman-tick-tick/2595601-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/korostyle-sai-sai/2581164-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/coresplittaz-consciousness/2561273-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/redcell-tenno/2566673-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/barbican-the-prologue-ep/2505011-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/ruffian-the-crypt/2461326-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/flammable-materials-compilation/2439867-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/ruffian-benmatrix-coil-burn/2421610-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/unsub-dark-places/2391745-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/noistek-the-assassinator-hard/2391744-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/xiar-firetouch-acheron/2336719-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/betacut-zero-point/2317008-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/762-shadow-conspiracy-the-spice-floppy-sausage/2271683-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/sickorwell-all-i-see-is-darkness-waydo/2209134-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/proton-kid-no-sleep/2209135-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/goreteks-bad-poetry/2183574-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/filthy-rhythms-3/2139998-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/coresplittaz-the-forgotten-hope/2101368-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/self-definition-bushi-ep/2029269-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/brainpain-full-throttle-ep/1971306-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/tech-treatment-compilation-2/1904555-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/critical-waves-insatek-taos-sickorwell-mind-pollution/1860795-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/hostage-goats-head/1830575-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/zeal-litta-dark-shadows/1817660-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/filthy-rhythms-vol2/1810845-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/pinkerator-exactly/1784695-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/xpander-heavy-gear/1753342-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/brainpain-system-overload/1726263-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/fortitude-the-realm/1716802-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/dj-darrel-mind-killa-bionick-last-chance/1695373-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/tech-treatment-11-block-dodger/1688574-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/valkyr-romance-contortion/1679118-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/tech-treatment-9-hostage/1671507-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/tech-treatment-6-forbidden-society/1637329-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/tech-treatment-5-genetic-killers/1630240-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/tech-treatment-4-kr4y/1629450-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/bad-logik-adrenalina/1624677-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/current-value-edge-of-dreams/1549454-02/": [
+   "track_number=1"
+  ],
+  "https://www.junodownload.com/products/savage-rehab-tech-treatment-ep/1413961-02/": [
+   "track_number=1"
+  ]
+ },
+ "external_links": {
+  "http://open.spotify.com/album/0mL820u6eB6xSNfxn8GvJY": [
+   "/cat/SECTION8111"
+  ],
+  "http://open.spotify.com/album/1Cw5FmJKHPjSLB4yr6cZXg": [
+   "/cat/SECTION8103"
+  ],
+  "http://open.spotify.com/album/1Wyxg3kU04fVhfh1uE5gGz": [
+   "/cat/SECTION8104"
+  ],
+  "http://open.spotify.com/album/2yuUde9nJkVEuQ4sk75RSj": [
+   "/cat/SECTION8099D"
+  ],
+  "http://open.spotify.com/album/3Steqqkp5OzyGDKkBWrf2t": [
+   "/cat/SECTION8106"
+  ],
+  "http://open.spotify.com/album/3f7svzu8fHizglLCM72tcy": [
+   "/cat/SECTION8110"
+  ],
+  "http://open.spotify.com/album/4H58W5nQjm4s8fl2vJ1MX7": [
+   "/cat/SECTION8100"
+  ],
+  "http://open.spotify.com/album/4I5iTGaEq4GqDcY1vWxiJQ": [
+   "/cat/SECTION8107"
+  ],
+  "http://open.spotify.com/album/50ThVQFhHGnpm56wVEQl8M": [
+   "/cat/SECTION8115"
+  ],
+  "http://open.spotify.com/album/5DKbDOIcBrkW3Bjja7seHL": [
+   "/cat/SECTION8101"
+  ],
+  "http://open.spotify.com/album/5u4NWYx7WLmFVnewChcLQw": [
+   "/cat/SECTION8098D"
+  ],
+  "http://open.spotify.com/album/60OvlAsGO7pBZRhqnuayOx": [
+   "/cat/SECTION8105"
+  ],
+  "http://open.spotify.com/album/6hKQCn0qxluVG1mI710u1j": [
+   "/cat/SECTION8102"
+  ],
+  "http://www.deezer.com/album/100766102": [
+   "/cat/SECTION8112"
+  ],
+  "http://www.deezer.com/album/103250242": [
+   "/cat/SECTION8113"
+  ],
+  "http://www.deezer.com/album/10656618": [
+   "/cat/SECTION8085D"
+  ],
+  "http://www.deezer.com/album/113373792": [
+   "/cat/SECTION8114S1"
+  ],
+  "http://www.deezer.com/album/113392632": [
+   "/cat/SECTION8114S2"
+  ],
+  "http://www.deezer.com/album/113392652": [
+   "/cat/SECTION8114S4"
+  ],
+  "http://www.deezer.com/album/113392662": [
+   "/cat/SECTION8114S3"
+  ],
+  "http://www.deezer.com/album/115425882": [
+   "/cat/SECTION8114"
+  ],
+  "http://www.deezer.com/album/12410966": [
+   "/cat/SECTION8089D"
+  ],
+  "http://www.deezer.com/album/12410972": [
+   "/cat/SECTION8088D"
+  ],
+  "http://www.deezer.com/album/12672590": [
+   "/cat/SECTION8087D"
+  ],
+  "http://www.deezer.com/album/12673322": [
+   "/cat/SECTION8BASS021"
+  ],
+  "http://www.deezer.com/album/12673382": [
+   "/cat/SECTION8LP2"
+  ],
+  "http://www.deezer.com/album/12673754": [
+   "/cat/SECTION8074D"
+  ],
+  "http://www.deezer.com/album/12673756": [
+   "/cat/SECTION8028D"
+  ],
+  "http://www.deezer.com/album/12673758": [
+   "/cat/SECTION8029D"
+  ],
+  "http://www.deezer.com/album/12673814": [
+   "/cat/SECTION8027D"
+  ],
+  "http://www.deezer.com/album/12673816": [
+   "/cat/SECTION8026D"
+  ],
+  "http://www.deezer.com/album/12673818": [
+   "/cat/SECTION8023D"
+  ],
+  "http://www.deezer.com/album/12673820": [
+   "/cat/SECTION8025D"
+  ],
+  "http://www.deezer.com/album/12673822": [
+   "/cat/SECTION8021D"
+  ],
+  "http://www.deezer.com/album/12673824": [
+   "/cat/SECTION8FILTH001D"
+  ],
+  "http://www.deezer.com/album/12673902": [
+   "/cat/SECTION8005D"
+  ],
+  "http://www.deezer.com/album/12673904": [
+   "/cat/SECTION8TTC01"
+  ],
+  "http://www.deezer.com/album/12673908": [
+   "/cat/SECTION8006D"
+  ],
+  "http://www.deezer.com/album/12673958": [
+   "/cat/SECTION8007D",
+   "/cat/SECTION8083D"
+  ],
+  "http://www.deezer.com/album/12673960": [
+   "/cat/SECTION8016D"
+  ],
+  "http://www.deezer.com/album/12673962": [
+   "/cat/SECTION8014D"
+  ],
+  "http://www.deezer.com/album/12673964": [
+   "/cat/SECTION8015D"
+  ],
+  "http://www.deezer.com/album/12673966": [
+   "/cat/SECTION8017D"
+  ],
+  "http://www.deezer.com/album/12673968": [
+   "/cat/SECTION8018D"
+  ],
+  "http://www.deezer.com/album/12673978": [
+   "/cat/SECTION8022D"
+  ],
+  "http://www.deezer.com/album/12673980": [
+   "/cat/SECTION8019D"
+  ],
+  "http://www.deezer.com/album/12673982": [
+   "/cat/SECTION8012D"
+  ],
+  "http://www.deezer.com/album/12673984": [
+   "/cat/SECTION8037D"
+  ],
+  "http://www.deezer.com/album/12673996": [
+   "/cat/SECTION8033D"
+  ],
+  "http://www.deezer.com/album/12673998": [
+   "/cat/SECTION8036D"
+  ],
+  "http://www.deezer.com/album/12674000": [
+   "/cat/SECTION8034D"
+  ],
+  "http://www.deezer.com/album/12674002": [
+   "/cat/SECTION8035D"
+  ],
+  "http://www.deezer.com/album/12674016": [
+   "/cat/SECTION8031D"
+  ],
+  "http://www.deezer.com/album/12674018": [
+   "/cat/SECTION8030D"
+  ],
+  "http://www.deezer.com/album/12674020": [
+   "/cat/SECTION8032D"
+  ],
+  "http://www.deezer.com/album/12674024": [
+   "/cat/SECTION8FILTH002D"
+  ],
+  "http://www.deezer.com/album/12674056": [
+   "/cat/SECTION8039D"
+  ],
+  "http://www.deezer.com/album/12674058": [
+   "/cat/SECTION8042D"
+  ],
+  "http://www.deezer.com/album/12674062": [
+   "/cat/SECTION8038D"
+  ],
+  "http://www.deezer.com/album/12674080": [
+   "/cat/SECTION8053D"
+  ],
+  "http://www.deezer.com/album/12750152": [
+   "/cat/SECTION8090D"
+  ],
+  "http://www.deezer.com/album/12891098": [
+   "/cat/SECTION8091D"
+  ],
+  "http://www.deezer.com/album/13587893": [
+   "/cat/SECTION8093D"
+  ],
+  "http://www.deezer.com/album/13927458": [
+   "/cat/SECTION8096D"
+  ],
+  "http://www.deezer.com/album/14164204": [
+   "/cat/SECTION8FREE003"
+  ],
+  "http://www.deezer.com/album/142648482": [
+   "/cat/SECTION8115",
+   "/cat/SECTION8115S1"
+  ],
+  "http://www.deezer.com/album/144577422": [
+   "/cat/SECTION8116S1"
+  ],
+  "http://www.deezer.com/album/144869402": [
+   "/cat/SECTION8117S1"
+  ],
+  "http://www.deezer.com/album/145179822": [
+   "/cat/SECTION8117S2"
+  ],
+  "http://www.deezer.com/album/145431922": [
+   "/cat/SECTION8116S2A"
+  ],
+  "http://www.deezer.com/album/146946182": [
+   "/cat/SECTION8116S3"
+  ],
+  "http://www.deezer.com/album/147588612": [
+   "/cat/SECTION8117S3"
+  ],
+  "http://www.deezer.com/album/147617502": [
+   "/cat/SECTION8116S4"
+  ],
+  "http://www.deezer.com/album/147617512": [
+   "/cat/SECTION8116"
+  ],
+  "http://www.deezer.com/album/147623072": [
+   "/cat/SECTION8116S5"
+  ],
+  "http://www.deezer.com/album/15434072": [
+   "/cat/SECTION8095D"
+  ],
+  "http://www.deezer.com/album/42848611": [
+   "/cat/SECTION8097D"
+  ],
+  "http://www.deezer.com/album/5639541": [
+   "/cat/SECTION8040D"
+  ],
+  "http://www.deezer.com/album/5878611": [
+   "/cat/SECTION8041D"
+  ],
+  "http://www.deezer.com/album/5971520": [
+   "/cat/SECTION8043D"
+  ],
+  "http://www.deezer.com/album/6181694": [
+   "/cat/SECTION8045D"
+  ],
+  "http://www.deezer.com/album/6181698": [
+   "/cat/SECTION8046D"
+  ],
+  "http://www.deezer.com/album/6308619": [
+   "/cat/SECTION8047D"
+  ],
+  "http://www.deezer.com/album/6349271": [
+   "/cat/SECTION8048D"
+  ],
+  "http://www.deezer.com/album/6468637": [
+   "/cat/SECTION8049D"
+  ],
+  "http://www.deezer.com/album/6525747": [
+   "/cat/SECTION8050D"
+  ],
+  "http://www.deezer.com/album/6597006": [
+   "/cat/SECTION8052D"
+  ],
+  "http://www.deezer.com/album/6597007": [
+   "/cat/SECTION8051D"
+  ],
+  "http://www.deezer.com/album/6665311": [
+   "/cat/SECTION8055D"
+  ],
+  "http://www.deezer.com/album/6908521": [
+   "/cat/SECTION8058D"
+  ],
+  "http://www.deezer.com/album/7024183": [
+   "/cat/SECTION8009D"
+  ],
+  "http://www.deezer.com/album/7024184": [
+   "/cat/SECTION8008D"
+  ],
+  "http://www.deezer.com/album/7024186": [
+   "/cat/SECTION8004D"
+  ],
+  "http://www.deezer.com/album/7024187": [
+   "/cat/SECTION8003D"
+  ],
+  "http://www.deezer.com/album/7024193": [
+   "/cat/SECTION8060D"
+  ],
+  "http://www.deezer.com/album/7042571": [
+   "/cat/SECTION8002D"
+  ],
+  "http://www.deezer.com/album/7143510": [
+   "/cat/SECTION8061D"
+  ],
+  "http://www.deezer.com/album/7143511": [
+   "/cat/SECTION8062D"
+  ],
+  "http://www.deezer.com/album/7335805": [
+   "/cat/SECTION8064D"
+  ],
+  "http://www.deezer.com/album/7356991": [
+   "/cat/SECTION8065D"
+  ],
+  "http://www.deezer.com/album/7379350": [
+   "/cat/SECTION8066D"
+  ],
+  "http://www.deezer.com/album/7493784": [
+   "/cat/SECTION8068D"
+  ],
+  "http://www.deezer.com/album/7532634": [
+   "/cat/SECTION8067D"
+  ],
+  "http://www.deezer.com/album/7723052": [
+   "/cat/SECTION8069D"
+  ],
+  "http://www.deezer.com/album/7740457": [
+   "/cat/SECTION8071D"
+  ],
+  "http://www.deezer.com/album/7967796": [
+   "/cat/SECTION8070DB"
+  ],
+  "http://www.deezer.com/album/8249120": [
+   "/cat/SECTION8072D"
+  ],
+  "http://www.deezer.com/album/8440665": [
+   "/cat/SECTION8073D"
+  ],
+  "http://www.deezer.com/album/8541991": [
+   "/cat/SECTION8075D"
+  ],
+  "http://www.deezer.com/album/86071072": [
+   "/cat/SECTION8109"
+  ],
+  "http://www.deezer.com/album/8665179": [
+   "/cat/SECTION8007"
+  ],
+  "http://www.deezer.com/album/8878083": [
+   "/cat/SECTION8077D"
+  ],
+  "http://www.deezer.com/album/90462422": [
+   "/cat/SECTION8111"
+  ],
+  "http://www.deezer.com/album/9097515": [
+   "/cat/SECTION8080D"
+  ],
+  "http://www.trackitdown.net/recordlabel/114183/section-8.html": [
+   "/",
+   "/cat/SECTION8001D",
+   "/cat/SECTION8002D",
+   "/cat/SECTION8003D",
+   "/cat/SECTION8004D",
+   "...+136"
+  ],
+  "https://beatport.com/release/a-thousand-days/2944072": [
+   "/cat/SECTION8116S1"
+  ],
+  "https://beatport.com/release/abbatoir-blues-specter/1718192": [
+   "/cat/SECTION8088D"
+  ],
+  "https://beatport.com/release/airstrike-original-mix/2319080": [
+   "/cat/SECTION8100"
+  ],
+  "https://beatport.com/release/all-will/2947088": [
+   "/cat/SECTION8117S1"
+  ],
+  "https://beatport.com/release/android-dreams-goddess/1711542": [
+   "/cat/SECTION8087D"
+  ],
+  "https://beatport.com/release/apex-ep/1842856": [
+   "/cat/SECTION8096D"
+  ],
+  "https://beatport.com/release/assist-you-what-have-you-done/1232467": [
+   "/cat/SECTION8063D"
+  ],
+  "https://beatport.com/release/badman-original-mix/1375643": [
+   "/cat/SECTION8075D"
+  ],
+  "https://beatport.com/release/barbarians-original-mix/1472893": [
+   "/cat/SECTION8082D"
+  ],
+  "https://beatport.com/release/beware-of-me-original-mix/1760282": [
+   "/cat/SECTION8092D"
+  ],
+  "https://beatport.com/release/big-brother-ep/2933836": [
+   "/cat/SECTION8115"
+  ],
+  "https://beatport.com/release/black-touch-original-mix/341969": [
+   "/cat/SECTION8025D"
+  ],
+  "https://beatport.com/release/blesser-au-lesprit-original-mix/1067703": [
+   "/cat/SECTION8049D"
+  ],
+  "https://beatport.com/release/bloodbath-original-mix/2360445": [
+   "/cat/SECTION8103"
+  ],
+  "https://beatport.com/release/coil-burn-original-mix/1258961": [
+   "/cat/SECTION8068D"
+  ],
+  "https://beatport.com/release/consciousness/1373751": [
+   "/cat/SECTION8073D"
+  ],
+  "https://beatport.com/release/contraflow-original-mix/1397902": [
+   "/cat/SECTION8077D"
+  ],
+  "https://beatport.com/release/coronal-mass-ejection-vacuum/1512602": [
+   "/cat/SECTION8084D"
+  ],
+  "https://beatport.com/release/crimson-tide-original-mix/2542096": [
+   "/cat/SECTION8111"
+  ],
+  "https://beatport.com/release/dark-places/1236874": [
+   "/cat/SECTION8065D"
+  ],
+  "https://beatport.com/release/death-sentence-original-mix/851127": [
+   "/cat/SECTION8036D"
+  ],
+  "https://beatport.com/release/demons-inside-me-original-mix/1749202": [
+   "/cat/SECTION8091D"
+  ],
+  "https://beatport.com/release/destroyed-hold-your-breath-original-mix/2322050": [
+   "/cat/SECTION8101"
+  ],
+  "https://beatport.com/release/district-9-original-mix/365710": [
+   "/cat/SECTION8FILTH001D"
+  ],
+  "https://beatport.com/release/double-ducker-original-mix/974485": [
+   "/cat/SECTION8042D"
+  ],
+  "https://beatport.com/release/dragonborn-original-mix/1397859": [
+   "/cat/SECTION8078D"
+  ],
+  "https://beatport.com/release/dreamscape-silent-alarm/1156185": [
+   "/cat/SECTION8058D"
+  ],
+  "https://beatport.com/release/drop-it-original-mix/2464605": [
+   "/cat/SECTION8110"
+  ],
+  "https://beatport.com/release/edge-of-dreams-original-mix/1180055": [
+   "/cat/SECTION8009D"
+  ],
+  "https://beatport.com/release/euro-party-original-mix/1180065": [
+   "/cat/SECTION8003D"
+  ],
+  "https://beatport.com/release/exactly/385791": [
+   "/cat/SECTION8030D"
+  ],
+  "https://beatport.com/release/extra-ordinary-original-mix/2949061": [
+   "/cat/SECTION8116S2A"
+  ],
+  "https://beatport.com/release/fatality-original-mix/1198831": [
+   "/cat/SECTION8061D"
+  ],
+  "https://beatport.com/release/feel-the-flow-original-mix/2656077": [
+   "/cat/SECTION8113"
+  ],
+  "https://beatport.com/release/firetouch-original-mix/1198822": [
+   "/cat/SECTION8062D"
+  ],
+  "https://beatport.com/release/first-enemy-original-mix/395410": [
+   "/cat/SECTION8FILTH002D"
+  ],
+  "https://beatport.com/release/flammable-materials-compilation/1268631": [
+   "/cat/SECTION8067D"
+  ],
+  "https://beatport.com/release/fretters/2963465": [
+   "/cat/SECTION8116S5"
+  ],
+  "https://beatport.com/release/full-throttle-remixes/1079752": [
+   "/cat/SECTION8050D"
+  ],
+  "https://beatport.com/release/globetrotter-original-mix/961451": [
+   "/cat/SECTION8040D"
+  ],
+  "https://beatport.com/release/goats-head/653200": [
+   "/cat/SECTION8032D"
+  ],
+  "https://beatport.com/release/gravity-original-mix/1015081": [
+   "/cat/SECTION8046D"
+  ],
+  "https://beatport.com/release/gravity-original-mix/977173": [
+   "/cat/SECTION8044D"
+  ],
+  "https://beatport.com/release/groef-lateral-clique/376812": [
+   "/cat/SECTION8029D"
+  ],
+  "https://beatport.com/release/gut-wrench-original-mix/1036912": [
+   "/cat/SECTION8047D"
+  ],
+  "https://beatport.com/release/half-soul-all-i-see-is-darkness-original-mix/1094297": [
+   "/cat/SECTION8052D"
+  ],
+  "https://beatport.com/release/hardcore-vibes-original-mix/888856": [
+   "/cat/SECTION8037D"
+  ],
+  "https://beatport.com/release/heavy-gear/365691": [
+   "/cat/SECTION8028D"
+  ],
+  "https://beatport.com/release/hydra-original-mix/2372267": [
+   "/cat/SECTION8104"
+  ],
+  "https://beatport.com/release/impulses-hell-hath-no-fury/977159": [
+   "/cat/SECTION8043D"
+  ],
+  "https://beatport.com/release/incarnate-original-mix/966563": [
+   "/cat/SECTION8041D"
+  ],
+  "https://beatport.com/release/knowledge-feat-ol-e-mac-original-mix/1044421": [
+   "/cat/SECTION8048D"
+  ],
+  "https://beatport.com/release/last-chance-original-mix/324848": [
+   "/cat/SECTION8023D"
+  ],
+  "https://beatport.com/release/lazy-bloody-eyes-original-mix/2420524": [
+   "/cat/SECTION8107"
+  ],
+  "https://beatport.com/release/life-ends-at-midnight-black-russian/1713653": [
+   "/cat/SECTION8089D"
+  ],
+  "https://beatport.com/release/malbolge-original-mix/2640909": [
+   "/cat/SECTION8112"
+  ],
+  "https://beatport.com/release/manslaughter-original-mix/916235": [
+   "/cat/SECTION8038D"
+  ],
+  "https://beatport.com/release/mind-pollution/827106": [
+   "/cat/SECTION8033D"
+  ],
+  "https://beatport.com/release/mitochondrion-original-mix/1015560": [
+   "/cat/SECTION8045D"
+  ],
+  "https://beatport.com/release/monatomic-gold-oblivion/2459317": [
+   "/cat/SECTION8109"
+  ],
+  "https://beatport.com/release/monday-fucking-helmet/1557167": [
+   "/cat/SECTION8085D"
+  ],
+  "https://beatport.com/release/no-exit-original-mix/2733010": [
+   "/cat/SECTION8114S2"
+  ],
+  "https://beatport.com/release/no-peace-original-mix/1180066": [
+   "/cat/SECTION8008D"
+  ],
+  "https://beatport.com/release/no-sleep-hardlogik-remix/1040662": [
+   "/cat/SECTION8LP3"
+  ],
+  "https://beatport.com/release/no-sleep-hardlogik-remix/1094323": [
+   "/cat/SECTION8051D"
+  ],
+  "https://beatport.com/release/part-of-me-feat-stray-theories-original-mix/1164594": [
+   "/cat/SECTION8059D"
+  ],
+  "https://beatport.com/release/partition-original-mix/436956": [
+   "/cat/SECTION8031D"
+  ],
+  "https://beatport.com/release/phoenix-original-mix/2268345": [
+   "/cat/SECTION8098D"
+  ],
+  "https://beatport.com/release/phoenix/1389018": [
+   "/cat/SECTION8074D"
+  ],
+  "https://beatport.com/release/pressure-sequence-original-mix/2338127": [
+   "/cat/SECTION8102"
+  ],
+  "https://beatport.com/release/psyche-original-mix/1180057": [
+   "/cat/SECTION8004D"
+  ],
+  "https://beatport.com/release/push-back/2963534": [
+   "/cat/SECTION8117S3"
+  ],
+  "https://beatport.com/release/r-e-a-v-e/2960269": [
+   "/cat/SECTION8116S3"
+  ],
+  "https://beatport.com/release/riders-lp/2963585": [
+   "/cat/SECTION8116"
+  ],
+  "https://beatport.com/release/rift-original-mix/1745495": [
+   "/cat/SECTION8090D"
+  ],
+  "https://beatport.com/release/sai-sai-original-mix/1384326": [
+   "/cat/SECTION8007"
+  ],
+  "https://beatport.com/release/section-8-": [
+   "/cat/SECTION8BP01"
+  ],
+  "https://beatport.com/release/sekai-no-owari-original-mix/1429648": [
+   "/cat/SECTION8081D"
+  ],
+  "https://beatport.com/release/shine-on-i-miss-you-original-mix/2732962": [
+   "/cat/SECTION8114S4"
+  ],
+  "https://beatport.com/release/smart-control-original-mix/2301649": [
+   "/cat/SECTION8099D"
+  ],
+  "https://beatport.com/release/southern-hemisphere-original-mix/1350516": [
+   "/cat/SECTION8072D"
+  ],
+  "https://beatport.com/release/southside-trunglist-original-mix/1406758": [
+   "/cat/SECTION8079D"
+  ],
+  "https://beatport.com/release/sphere-unknown-dark-storm/280184": [
+   "/cat/SECTION8007D"
+  ],
+  "https://beatport.com/release/storm-original-mix/1502198": [
+   "/cat/SECTION8083D"
+  ],
+  "https://beatport.com/release/system-error-unending-passion/948720": [
+   "/cat/SECTION8039D"
+  ],
+  "https://beatport.com/release/system-overload-drumstep-version/348010": [
+   "/cat/SECTION8027D"
+  ],
+  "https://beatport.com/release/taste-of-blood-ep/1291682": [
+   "/cat/SECTION8069D"
+  ],
+  "https://beatport.com/release/tech-treatment-11-block-dodger/2235954": [
+   "/cat/SECTION8021D"
+  ],
+  "https://beatport.com/release/tech-treatment-2:-taos/289402": [
+   "/cat/SECTION8010D"
+  ],
+  "https://beatport.com/release/tech-treatment-3:-sin-city-the-spot/289403": [
+   "/cat/SECTION8011D"
+  ],
+  "https://beatport.com/release/tech-treatment-4:-kr4y/289685": [
+   "/cat/SECTION8014D"
+  ],
+  "https://beatport.com/release/tech-treatment-6-forbidden-society/2235917": [
+   "/cat/SECTION8016D"
+  ],
+  "https://beatport.com/release/tech-treatment-7-the-dizphonics/2237233": [
+   "/cat/SECTION8017D"
+  ],
+  "https://beatport.com/release/tech-treatment-8-b-h/2235916": [
+   "/cat/SECTION8018D"
+  ],
+  "https://beatport.com/release/tech-treatment-9-hostage/2236061": [
+   "/cat/SECTION8019D"
+  ],
+  "https://beatport.com/release/tech-treatment-compilation-1/318539": [
+   "/cat/SECTION8TTC01"
+  ],
+  "https://beatport.com/release/tech-treatment-compilation-2/858618": [
+   "/cat/SECTION8LP2"
+  ],
+  "https://beatport.com/release/the-assassinator-hard/1232513": [
+   "/cat/SECTION8064D"
+  ],
+  "https://beatport.com/release/the-crypt-original-mix/1296121": [
+   "/cat/SECTION8071D"
+  ],
+  "https://beatport.com/release/the-dark-junglist-original-mix/1107058": [
+   "/cat/SECTION8054D"
+  ],
+  "https://beatport.com/release/the-hack-original-mix/2762128": [
+   "/cat/SECTION8114"
+  ],
+  "https://beatport.com/release/the-joker-original-mix/2405096": [
+   "/cat/SECTION8105"
+  ],
+  "https://beatport.com/release/the-mad-lands-dicrylium-escaped-in-a-h-e-v-suit/854656": [
+   "/cat/SECTION8034D"
+  ],
+  "https://beatport.com/release/the-power-unleashed/362476": [
+   "/cat/SECTION8002D"
+  ],
+  "https://beatport.com/release/the-prologue-ep/1329917": [
+   "/cat/SECTION8070DB"
+  ],
+  "https://beatport.com/release/the-realm-original-mix/336860": [
+   "/cat/SECTION8024D"
+  ],
+  "https://beatport.com/release/the-realness-original-mix/1415430": [
+   "/cat/SECTION8080D"
+  ],
+  "https://beatport.com/release/the-signal-original-mix/2409517": [
+   "/cat/SECTION8106"
+  ],
+  "https://beatport.com/release/the-spice-original-mix/1133892": [
+   "/cat/SECTION8056D"
+  ],
+  "https://beatport.com/release/through-her-eyes-ep/852457": [
+   "/cat/SECTION8035D"
+  ],
+  "https://beatport.com/release/true-ninja-vip-original-mix/1240458": [
+   "/cat/SECTION8066D"
+  ],
+  "https://beatport.com/release/two-sides-of-the-same-coin/2963506": [
+   "/cat/SECTION8116S4"
+  ],
+  "https://beatport.com/release/wake-up-original-mix/1106990": [
+   "/cat/SECTION8055D"
+  ],
+  "https://beatport.com/release/walker-original-mix/1146439": [
+   "/cat/SECTION8057D"
+  ],
+  "https://beatport.com/release/wanted-original-mix/2733034": [
+   "/cat/SECTION8114S3"
+  ],
+  "https://beatport.com/release/wolf-break-it-down/1814514": [
+   "/cat/SECTION8093D"
+  ],
+  "https://beatport.com/release/wonderland-vip-original-mix/979468": [
+   "/cat/SECTION8001D"
+  ],
+  "https://beatport.com/release/worlds-demise-original-mix/1102788": [
+   "/cat/SECTION8053D"
+  ],
+  "https://beatport.com/release/you-know-ep/2963394": [
+   "/cat/SECTION8117"
+  ],
+  "https://beatport.com/release/you-know/2947106": [
+   "/cat/SECTION8117S2"
+  ],
+  "https://beatport.com/release/your-eyes-ready-for-darkness/1963525": [
+   "/cat/SECTION8095D"
+  ],
+  "https://beatport.com/release/youre-not-alone-against-crossbreed-original-mix/1805198": [
+   "/cat/SECTION8094D"
+  ],
+  "https://beatport.com/release/zero-point/1180063": [
+   "/cat/SECTION8060D"
+  ],
+  "https://itunes.apple.com/us/album/2-steps-forward-nwo-bundle/id1158737856": [
+   "/cat/SECTION8086D"
+  ],
+  "https://itunes.apple.com/us/album/a-thousand-days/id1510250436": [
+   "/cat/SECTION8116S1"
+  ],
+  "https://itunes.apple.com/us/album/abbatoir-blues--specter/id1084229809": [
+   "/cat/SECTION8088D"
+  ],
+  "https://itunes.apple.com/us/album/acid-rape/id1063543615": [
+   "/cat/SECTION8BASS021"
+  ],
+  "https://itunes.apple.com/us/album/adrenalina/id805968510": [
+   "/cat/SECTION8012D"
+  ],
+  "https://itunes.apple.com/us/album/agari-tachi--mitochondrion/id587158069": [
+   "/cat/SECTION8045D"
+  ],
+  "https://itunes.apple.com/us/album/all-i-see-is-darkness-waydo-tribute/id649069722": [
+   "/cat/SECTION8052D"
+  ],
+  "https://itunes.apple.com/us/album/all-will/id1510519721": [
+   "/cat/SECTION8117S1"
+  ],
+  "https://itunes.apple.com/us/album/android-dreams--goddess/id1084230826": [
+   "/cat/SECTION8087D"
+  ],
+  "https://itunes.apple.com/us/album/apex-ep/id1149057948": [
+   "/cat/SECTION8096D"
+  ],
+  "https://itunes.apple.com/us/album/assist-you--what-have-you-done/id793782885": [
+   "/cat/SECTION8063D"
+  ],
+  "https://itunes.apple.com/us/album/asylum--signal/id1438375180": [
+   "/cat/SECTION8106"
+  ],
+  "https://itunes.apple.com/us/album/bad-poetry/id627544047": [
+   "/cat/SECTION8049D"
+  ],
+  "https://itunes.apple.com/us/album/badman/id926325216": [
+   "/cat/SECTION8075D"
+  ],
+  "https://itunes.apple.com/us/album/barbarians--chosen-one/id966511480": [
+   "/cat/SECTION8082D"
+  ],
+  "https://itunes.apple.com/us/album/beware-of-me--future-wars/id1158740988": [
+   "/cat/SECTION8092D"
+  ],
+  "https://itunes.apple.com/us/album/big-step-forward--double-ducker/id555806103": [
+   "/cat/SECTION8042D"
+  ],
+  "https://itunes.apple.com/us/album/birth-of-trungle/id934403947": [
+   "/cat/SECTION8079D"
+  ],
+  "https://itunes.apple.com/us/album/bushi-ep/id555849997": [
+   "/cat/SECTION8040D"
+  ],
+  "https://itunes.apple.com/us/album/coil-burn/id834033136": [
+   "/cat/SECTION8068D"
+  ],
+  "https://itunes.apple.com/us/album/consciousness/id911119755": [
+   "/cat/SECTION8073D"
+  ],
+  "https://itunes.apple.com/us/album/contraflow--context/id926601314": [
+   "/cat/SECTION8077D"
+  ],
+  "https://itunes.apple.com/us/album/coronal-mass-ejection--vacuum/id980479383": [
+   "/cat/SECTION8084D"
+  ],
+  "https://itunes.apple.com/us/album/crimson-tide/id1456369233": [
+   "/cat/SECTION8111"
+  ],
+  "https://itunes.apple.com/us/album/crown--walker/id685815378": [
+   "/cat/SECTION8057D"
+  ],
+  "https://itunes.apple.com/us/album/cthulhu/id1399932599": [
+   "/cat/SECTION8101"
+  ],
+  "https://itunes.apple.com/us/album/dark-places/id805922987": [
+   "/cat/SECTION8065D"
+  ],
+  "https://itunes.apple.com/us/album/dark-shadows/id1158721099": [
+   "/cat/SECTION8031D"
+  ],
+  "https://itunes.apple.com/us/album/demons-inside-me/id1102590202": [
+   "/cat/SECTION8091D"
+  ],
+  "https://itunes.apple.com/us/album/dragonborn--spearhead/id927645824": [
+   "/cat/SECTION8078D"
+  ],
+  "https://itunes.apple.com/us/album/dreamscape--silent-alarm/id695575204": [
+   "/cat/SECTION8058D"
+  ],
+  "https://itunes.apple.com/us/album/drop-it-woofshaker-single/1446449028": [
+   "/cat/SECTION8110"
+  ],
+  "https://itunes.apple.com/us/album/edge-of-dreams/id805923256": [
+   "/cat/SECTION8009D"
+  ],
+  "https://itunes.apple.com/us/album/exactly/id1158696673": [
+   "/cat/SECTION8030D"
+  ],
+  "https://itunes.apple.com/us/album/extra-ordinary/id1510944355": [
+   "/cat/SECTION8116S2A"
+  ],
+  "https://itunes.apple.com/us/album/fatality/id739620413": [
+   "/cat/SECTION8061D"
+  ],
+  "https://itunes.apple.com/us/album/filthy-rhythms-3/id600548982": [
+   "/cat/SECTION8LP3"
+  ],
+  "https://itunes.apple.com/us/album/filthy-rhythms-vol1/id1161397829": [
+   "/cat/SECTION8FILTH001D"
+  ],
+  "https://itunes.apple.com/us/album/filthy-rhythms-vol2/id1158688595": [
+   "/cat/SECTION8FILTH002D"
+  ],
+  "https://itunes.apple.com/us/album/fingerbang-ep/id1098301199": [
+   "/cat/SECTION8090D"
+  ],
+  "https://itunes.apple.com/us/album/firetouch--acheron/id739620414": [
+   "/cat/SECTION8062D"
+  ],
+  "https://itunes.apple.com/us/album/flammable-materials-compilation/id838739001": [
+   "/cat/SECTION8067D"
+  ],
+  "https://itunes.apple.com/us/album/fretters/id1512775914": [
+   "/cat/SECTION8116S5"
+  ],
+  "https://itunes.apple.com/us/album/full-throttle-ep/id805968447": [
+   "/cat/SECTION8038D"
+  ],
+  "https://itunes.apple.com/us/album/full-throttle-remixes/id648294712": [
+   "/cat/SECTION8050D"
+  ],
+  "https://itunes.apple.com/us/album/goats-head/id1158679986": [
+   "/cat/SECTION8032D"
+  ],
+  "https://itunes.apple.com/us/album/goosebreeder--selftitled/id1253417102": [
+   "/cat/SECTION8097D"
+  ],
+  "https://itunes.apple.com/us/album/groef--lateral-clique/id1158706345": [
+   "/cat/SECTION8029D"
+  ],
+  "https://itunes.apple.com/us/album/hammered-feat-jabz-mc-woody/1371520379": [
+   "/cat/SECTION8098D"
+  ],
+  "https://itunes.apple.com/us/album/hardcore-vibes/id805972992": [
+   "/cat/SECTION8037D"
+  ],
+  "https://itunes.apple.com/us/album/haunted-ep-2012-pt1/id566990708": [
+   "/cat/SECTION8044D"
+  ],
+  "https://itunes.apple.com/us/album/heavy-gear/id804674082": [
+   "/cat/SECTION8028D"
+  ],
+  "https://itunes.apple.com/us/album/heroes-villiains-and-fugitives/id805973228": [
+   "/cat/SECTION8036D"
+  ],
+  "https://itunes.apple.com/us/album/hydra--strange-tales/id1434648025": [
+   "/cat/SECTION8104"
+  ],
+  "https://itunes.apple.com/us/album/i-choose-the-hard-drum-ep/idid1131303048": [
+   "/cat/SECTION8094D"
+  ],
+  "https://itunes.apple.com/us/album/impulses--hell-hath-no-fury/id565902409": [
+   "/cat/SECTION8043D"
+  ],
+  "https://itunes.apple.com/us/album/knowledge-ep/id611730193": [
+   "/cat/SECTION8048D"
+  ],
+  "https://itunes.apple.com/us/album/last-chance/id807797892": [
+   "/cat/SECTION8023D"
+  ],
+  "https://itunes.apple.com/us/album/lazy-bloody-eyes-ep/1439684611": [
+   "/cat/SECTION8107"
+  ],
+  "https://itunes.apple.com/us/album/life-ends-at-midnight--black-russian/id1084228832": [
+   "/cat/SECTION8089D"
+  ],
+  "https://itunes.apple.com/us/album/machines--gut-wrench/id597781867": [
+   "/cat/SECTION8047D"
+  ],
+  "https://itunes.apple.com/us/album/magnitude--worlds-demise/id655922510": [
+   "/cat/SECTION8053D"
+  ],
+  "https://itunes.apple.com/us/album/mind-pollution/id841343883": [
+   "/cat/SECTION8033D"
+  ],
+  "https://itunes.apple.com/us/album/monatomic-gold--oblivion/id1445662326": [
+   "/cat/SECTION8109"
+  ],
+  "https://itunes.apple.com/us/album/monday-fucking--helmet/id1009107357": [
+   "/cat/SECTION8085D"
+  ],
+  "https://itunes.apple.com/us/album/nemesis--sweet-girl/id805921600": [
+   "/cat/SECTION8006D"
+  ],
+  "https://itunes.apple.com/us/album/night-city--panic-attack/id807796888": [
+   "/cat/SECTION8026D"
+  ],
+  "https://itunes.apple.com/us/album/no-exit/id1482103504": [
+   "/cat/SECTION8114S2"
+  ],
+  "https://itunes.apple.com/us/album/no-sleep/id649071404": [
+   "/cat/SECTION8051D"
+  ],
+  "https://itunes.apple.com/us/album/part-of-me--billys-song/id723068488": [
+   "/cat/SECTION8059D"
+  ],
+  "https://itunes.apple.com/us/album/phoenix/id926469784": [
+   "/cat/SECTION8074D"
+  ],
+  "https://itunes.apple.com/us/album/pressure-sequence-predicaments-feat-x-ts-emcee-single/1408630009": [
+   "/cat/SECTION8102"
+  ],
+  "https://itunes.apple.com/us/album/purple-world/id807796527": [
+   "/cat/SECTION8025D"
+  ],
+  "https://itunes.apple.com/us/album/push-back/id1512750434": [
+   "/cat/SECTION8117S3"
+  ],
+  "https://itunes.apple.com/us/album/reave/id1512237122": [
+   "/cat/SECTION8116S3"
+  ],
+  "https://itunes.apple.com/us/album/romance-contortion/id862248014": [
+   "/cat/SECTION8022D"
+  ],
+  "https://itunes.apple.com/us/album/sai-sai/id919693964": [
+   "/cat/SECTION8007"
+  ],
+  "https://itunes.apple.com/us/album/section-8-beatportdecade-drum--bass/id1158718727": [
+   "/cat/SECTION8BP01"
+  ],
+  "https://itunes.apple.com/us/album/sekai-no-owari/id945852047": [
+   "/cat/SECTION8081D"
+  ],
+  "https://itunes.apple.com/us/album/shine-on-i-miss-you/id1482675702": [
+   "/cat/SECTION8114S4"
+  ],
+  "https://itunes.apple.com/us/album/smart-control-buffer-error-single/1388851826": [
+   "/cat/SECTION8099D"
+  ],
+  "https://itunes.apple.com/us/album/southern-hemisphere--thalweg/id902690042": [
+   "/cat/SECTION8072D"
+  ],
+  "https://itunes.apple.com/us/album/sphere-unknown--dark-storm/id805922327": [
+   "/cat/SECTION8007D"
+  ],
+  "https://itunes.apple.com/us/album/storm/id980479207": [
+   "/cat/SECTION8083D"
+  ],
+  "https://itunes.apple.com/us/album/subsonic-new-world-order/id1158743317": [
+   "/cat/SECTION8008"
+  ],
+  "https://itunes.apple.com/us/album/system-error--unending-passion/id550949033": [
+   "/cat/SECTION8039D"
+  ],
+  "https://itunes.apple.com/us/album/system-overload/id1158681080": [
+   "/cat/SECTION8027D"
+  ],
+  "https://itunes.apple.com/us/album/taste-of-blood-ep/id859420513": [
+   "/cat/SECTION8069D"
+  ],
+  "https://itunes.apple.com/us/album/tech-treatment-11-block-dodger/id805972899": [
+   "/cat/SECTION8021D"
+  ],
+  "https://itunes.apple.com/us/album/tech-treatment-2-taos/id805922329": [
+   "/cat/SECTION8010D"
+  ],
+  "https://itunes.apple.com/us/album/tech-treatment-3-sin-citythe-spot/id805923297": [
+   "/cat/SECTION8011D"
+  ],
+  "https://itunes.apple.com/us/album/tech-treatment-4-kr4y/id805968551": [
+   "/cat/SECTION8014D"
+  ],
+  "https://itunes.apple.com/us/album/tech-treatment-5-genetic-killers/id805968591": [
+   "/cat/SECTION8015D"
+  ],
+  "https://itunes.apple.com/us/album/tech-treatment-6-forbidden-society/id805968672": [
+   "/cat/SECTION8016D"
+  ],
+  "https://itunes.apple.com/us/album/tech-treatment-7-the-dizphonics/id805969073": [
+   "/cat/SECTION8017D"
+  ],
+  "https://itunes.apple.com/us/album/tech-treatment-8-bh/id805967520": [
+   "/cat/SECTION8018D"
+  ],
+  "https://itunes.apple.com/us/album/tech-treatment-9-hostage/id805971925": [
+   "/cat/SECTION8019D"
+  ],
+  "https://itunes.apple.com/us/album/tech-treatment-compilation-1/id896765635": [
+   "/cat/SECTION8TTC01"
+  ],
+  "https://itunes.apple.com/us/album/tech-treatment-compilation-2/id862224920": [
+   "/cat/SECTION8LP2"
+  ],
+  "https://itunes.apple.com/us/album/tech-treatment-ep/id807796901": [
+   "/cat/SECTION8003D"
+  ],
+  "https://itunes.apple.com/us/album/tenno/id1158697254": [
+   "/cat/SECTION8FREE003"
+  ],
+  "https://itunes.apple.com/us/album/the-abyss/id1489146350": [
+   "/cat/SECTION8103"
+  ],
+  "https://itunes.apple.com/us/album/the-assassinator--hard/id805921206": [
+   "/cat/SECTION8064D"
+  ],
+  "https://itunes.apple.com/us/album/the-collaboration-ep/id805922400": [
+   "/cat/SECTION8008D"
+  ],
+  "https://itunes.apple.com/us/album/the-crypt/id864219598": [
+   "/cat/SECTION8071D"
+  ],
+  "https://itunes.apple.com/us/album/the-dark-junglist--untouchable/id658335533": [
+   "/cat/SECTION8054D"
+  ],
+  "https://itunes.apple.com/us/album/the-forgotten-hope/id587169285": [
+   "/cat/SECTION8046D"
+  ],
+  "https://itunes.apple.com/us/album/the-hack/id1482093006": [
+   "/cat/SECTION8114S1"
+  ],
+  "https://itunes.apple.com/us/album/the-joker-amped-up-single/1438098828": [
+   "/cat/SECTION8105"
+  ],
+  "https://itunes.apple.com/us/album/the-mad-lands/id805973294": [
+   "/cat/SECTION8034D"
+  ],
+  "https://itunes.apple.com/us/album/the-powerunleashed/id807796276": [
+   "/cat/SECTION8002D"
+  ],
+  "https://itunes.apple.com/us/album/the-prologue-ep/id878667934": [
+   "/cat/SECTION8070DB"
+  ],
+  "https://itunes.apple.com/us/album/the-realm/id807798260": [
+   "/cat/SECTION8024D"
+  ],
+  "https://itunes.apple.com/us/album/the-realness--critical-mass/id937929350": [
+   "/cat/SECTION8080D"
+  ],
+  "https://itunes.apple.com/us/album/three--incarnate/id565909002": [
+   "/cat/SECTION8041D"
+  ],
+  "https://itunes.apple.com/us/album/through-her-eyes-ep/id807797146": [
+   "/cat/SECTION8035D"
+  ],
+  "https://itunes.apple.com/us/album/true-ninja-vip--twitch/id844625857": [
+   "/cat/SECTION8066D"
+  ],
+  "https://itunes.apple.com/us/album/two-sides-of-the-same-coin/id1512773264": [
+   "/cat/SECTION8116S4"
+  ],
+  "https://itunes.apple.com/us/album/under-fire-ep/id643195965": [
+   "/cat/SECTION8004D"
+  ],
+  "https://itunes.apple.com/us/album/valkyriebroken/id805921492": [
+   "/cat/SECTION8005D"
+  ],
+  "https://itunes.apple.com/us/album/wake-up--world-never-changes/id658336408": [
+   "/cat/SECTION8055D"
+  ],
+  "https://itunes.apple.com/us/album/wanted/id1482803306": [
+   "/cat/SECTION8114S3"
+  ],
+  "https://itunes.apple.com/us/album/we-might-be-monsters/1398166848": [
+   "/cat/SECTION8100"
+  ],
+  "https://itunes.apple.com/us/album/wolfbreak-it-down/id1134841394": [
+   "/cat/SECTION8093D"
+  ],
+  "https://itunes.apple.com/us/album/wonderland-vipthe-persecutor/id552343958": [
+   "/cat/SECTION8001D"
+  ],
+  "https://itunes.apple.com/us/album/you-know-ep/id1512770147": [
+   "/cat/SECTION8117"
+  ],
+  "https://itunes.apple.com/us/album/you-know/id1510747937": [
+   "/cat/SECTION8117S2"
+  ],
+  "https://itunes.apple.com/us/album/your-eyes--ready-for-darkness/id1208461775": [
+   "/cat/SECTION8095D"
+  ],
+  "https://itunes.apple.com/us/album/zero-point/id723071967": [
+   "/cat/SECTION8060D"
+  ],
+  "https://labelgrid.com/": [
+   "/",
+   "/cat/0",
+   "/cat/SECTION8001D",
+   "/cat/SECTION8002D",
+   "/cat/SECTION8003D",
+   "...+139"
+  ],
+  "https://music.apple.com/us/album/big-brother-ep/1510196196": [
+   "/cat/SECTION8115"
+  ],
+  "https://music.apple.com/us/album/count-to-ten-ep/1472497568": [
+   "/cat/SECTION8113"
+  ],
+  "https://music.apple.com/us/album/malbolge-single/1469157405": [
+   "/cat/SECTION8112"
+  ],
+  "https://music.apple.com/us/album/riders-lp/1512772439": [
+   "/cat/SECTION8116"
+  ],
+  "https://music.apple.com/us/album/the-hack-ep/1484025821": [
+   "/cat/SECTION8114"
+  ],
+  "https://music.apple.com/us/album/the-spice-floppy-sausage/685630908": [
+   "/cat/SECTION8056D"
+  ],
+  "https://open.spotify.com/album/00lgaDKO9SFx2XmZqkoPIq": [
+   "/cat/SECTION8016D"
+  ],
+  "https://open.spotify.com/album/0AY9HoHEKxD3DSya9FT36a": [
+   "/cat/SECTION8070DB"
+  ],
+  "https://open.spotify.com/album/0Bwn3ErGpyBLG0sir06MtI": [
+   "/cat/SECTION8088D"
+  ],
+  "https://open.spotify.com/album/0ENw1Apu5KvTduosXVr4W3": [
+   "/cat/SECTION8115S2"
+  ],
+  "https://open.spotify.com/album/0FIxyiNavfswsqJWp3dqP5": [
+   "/cat/SECTION8064D"
+  ],
+  "https://open.spotify.com/album/0IdkqoggC08EhKnxNDIh6A": [
+   "/cat/SECTION8084D"
+  ],
+  "https://open.spotify.com/album/0J0FYLSFmvB4AlzKDz8wRd": [
+   "/cat/SECTION8069D"
+  ],
+  "https://open.spotify.com/album/0Kya1npQSRb4zbZJwO581p": [
+   "/cat/SECTION8095D"
+  ],
+  "https://open.spotify.com/album/0RkHv0U4HPvEUII4bNWIac": [
+   "/cat/SECTION8029D"
+  ],
+  "https://open.spotify.com/album/0XZFjibzPqsddFWJF0vkea": [
+   "/cat/SECTION8066D"
+  ],
+  "https://open.spotify.com/album/0c2n9rdDKPrQkKz0K5afpw": [
+   "/cat/SECTION8006D"
+  ],
+  "https://open.spotify.com/album/0eYevHfyFW031hTpfNJtxL": [
+   "/cat/SECTION8TTC01"
+  ],
+  "https://open.spotify.com/album/0gzIhBtWM119DSHW2PWNI5": [
+   "/cat/SECTION8056D"
+  ],
+  "https://open.spotify.com/album/0hRdNe1wu2xxwNL1BAHjbu": [
+   "/cat/SECTION8018D"
+  ],
+  "https://open.spotify.com/album/0pvxXjeZYIcyBkkUVWKFKW": [
+   "/cat/SECTION8116S5"
+  ],
+  "https://open.spotify.com/album/0sn9cYRdd4vq3SqnHvkeDP": [
+   "/cat/SECTION8035D"
+  ],
+  "https://open.spotify.com/album/0v4FDT8ouhpmTJnrknEptm": [
+   "/cat/SECTION8065D"
+  ],
+  "https://open.spotify.com/album/11rMKaRylaAqv2wM9nnOaf": [
+   "/cat/SECTION8025D"
+  ],
+  "https://open.spotify.com/album/126gZZMhU2BWG6XXdzIpnA": [
+   "/cat/SECTION8005D"
+  ],
+  "https://open.spotify.com/album/12VwKv6HCN3xQckgpttKlc": [
+   "/cat/SECTION8087D"
+  ],
+  "https://open.spotify.com/album/13jlN6WVba00XGkT0a9rcl": [
+   "/cat/SECTION8032D"
+  ],
+  "https://open.spotify.com/album/178Ro568BJOaFedvRnLG2U": [
+   "/cat/SECTION8053D"
+  ],
+  "https://open.spotify.com/album/18EvcWBS5EWojS8BBi5T21": [
+   "/cat/SECTION8041D"
+  ],
+  "https://open.spotify.com/album/1GH55qvUjdQX1n2uuRtGEv": [
+   "/cat/SECTION8116S2A"
+  ],
+  "https://open.spotify.com/album/1KGGqmi304bBWO6lTFppy9": [
+   "/cat/SECTION8097D"
+  ],
+  "https://open.spotify.com/album/1MTn11mDh8LqzO7DdNem0K": [
+   "/cat/SECTION8071D"
+  ],
+  "https://open.spotify.com/album/1OZyGfQAReKqxfEYyA2iu6": [
+   "/cat/SECTION8114"
+  ],
+  "https://open.spotify.com/album/1Q5WvtHrAPWET9AbfNuwZb": [
+   "/cat/SECTION8050D"
+  ],
+  "https://open.spotify.com/album/1ReN0CAVBtE4OuRRAdag3m": [
+   "/cat/SECTION8073D"
+  ],
+  "https://open.spotify.com/album/1XDyNk7c0ugU5cu3ZZWCNu": [
+   "/cat/SECTION8FILTH001D"
+  ],
+  "https://open.spotify.com/album/1hG1zgMrchEln1mf8oj9La": [
+   "/cat/SECTION8LP3"
+  ],
+  "https://open.spotify.com/album/1m1jd6Egioi8VPV8icBm5x": [
+   "/cat/SECTION8061D"
+  ],
+  "https://open.spotify.com/album/1oxbFO8MwZoTXepvqjcuWT": [
+   "/cat/SECTION8047D"
+  ],
+  "https://open.spotify.com/album/1x2Pxvc61asx8RNAhxRwvs": [
+   "/cat/SECTION8059D"
+  ],
+  "https://open.spotify.com/album/1y55k81S4XSszpp5FpAkHF": [
+   "/cat/SECTION8072D"
+  ],
+  "https://open.spotify.com/album/1zu4AjGDd4RjgFjJ3SWY6T": [
+   "/cat/SECTION8057D"
+  ],
+  "https://open.spotify.com/album/21yEGlvOBo35eqsSGX2jXD": [
+   "/cat/SECTION8077D"
+  ],
+  "https://open.spotify.com/album/26rAxPl4hmyNj6twXvS75C": [
+   "/cat/SECTION8022D"
+  ],
+  "https://open.spotify.com/album/29gzQJKQ3i5uB2v2wdMDKH": [
+   "/cat/SECTION8114S2"
+  ],
+  "https://open.spotify.com/album/2HrLutslg58EYDj6a261YK": [
+   "/cat/SECTION8093D"
+  ],
+  "https://open.spotify.com/album/2I2fbOFxc5iGwz63kdQrE8": [
+   "/cat/SECTION8BASS021"
+  ],
+  "https://open.spotify.com/album/2VfrbR7Ub4tBA4bEcHpyWb": [
+   "/cat/SECTION8081D"
+  ],
+  "https://open.spotify.com/album/2asD6AvjB0Qv4LHM1o4ip4": [
+   "/cat/SECTION8019D"
+  ],
+  "https://open.spotify.com/album/2bO1aiDn3MRTAQSpexy3eq": [
+   "/cat/SECTION8011D"
+  ],
+  "https://open.spotify.com/album/2f2meJ1fi4FBoPkV9fQxdc": [
+   "/cat/SECTION8048D"
+  ],
+  "https://open.spotify.com/album/2kCGmnP5unkXHB0kLbXC5G": [
+   "/cat/SECTION8FILTH002D"
+  ],
+  "https://open.spotify.com/album/2lkLTGHDim47MhVDZGMScq": [
+   "/cat/SECTION8091D"
+  ],
+  "https://open.spotify.com/album/2m7QKLYpmKjuuYKxJkJ8ao": [
+   "/cat/SECTION8040D"
+  ],
+  "https://open.spotify.com/album/2qqjfm0coUtWpB5w9aob81": [
+   "/cat/SECTION8014D"
+  ],
+  "https://open.spotify.com/album/2utPweDJsOPrLbibu0ycv0": [
+   "/cat/SECTION8090D"
+  ],
+  "https://open.spotify.com/album/301kf8RK40a0bkaI1Zaz4O": [
+   "/cat/SECTION8078D"
+  ],
+  "https://open.spotify.com/album/32TdNzcidm86OOTJ7NxFJj": [
+   "/cat/SECTION8096D"
+  ],
+  "https://open.spotify.com/album/36bMp0N26Fgf6sqWsKykRp": [
+   "/cat/SECTION8067D"
+  ],
+  "https://open.spotify.com/album/3AgRuz9F3GO1S7OoskvNzq": [
+   "/cat/SECTION8BP01"
+  ],
+  "https://open.spotify.com/album/3EAzu3rKhLh05TMnGnQ3p6": [
+   "/cat/SECTION8015D"
+  ],
+  "https://open.spotify.com/album/3JenCaGgpENJhdjtvhJl9T": [
+   "/cat/SECTION8074D"
+  ],
+  "https://open.spotify.com/album/3W8Cz1cxgVjGAwBN5oDAou": [
+   "/cat/SECTION8112"
+  ],
+  "https://open.spotify.com/album/3Yq3vw29GIpq13QfqiaMiy": [
+   "/cat/SECTION8079D"
+  ],
+  "https://open.spotify.com/album/3cpK62UN0KIuIQMYL02FYG": [
+   "/cat/SECTION8042D"
+  ],
+  "https://open.spotify.com/album/3eDzPoSn3JTHMoWvVmVc0n": [
+   "/cat/SECTION8003D"
+  ],
+  "https://open.spotify.com/album/3h1vqcCQ9stjUr6ADIOOMB": [
+   "/cat/SECTION8116S4"
+  ],
+  "https://open.spotify.com/album/3nPNLZvRWUoA0BDqPiWWB2": [
+   "/cat/SECTION8002D"
+  ],
+  "https://open.spotify.com/album/45KMQgHyLRpOi2xsaaMq7W": [
+   "/cat/SECTION8045D"
+  ],
+  "https://open.spotify.com/album/460eFdWOD9ZBsnwHUWFSfp": [
+   "/cat/SECTION8051D"
+  ],
+  "https://open.spotify.com/album/4L7t4lAlUpU86ABngM11uj": [
+   "/cat/SECTION8094D"
+  ],
+  "https://open.spotify.com/album/4P9tnOPcrhDKfmhfO3d5GF": [
+   "/cat/SECTION8114S4"
+  ],
+  "https://open.spotify.com/album/4dAgfOk7ZMH6xgijfhN1ys": [
+   "/cat/SECTION8037D"
+  ],
+  "https://open.spotify.com/album/4f1Co5qkAYfkVcaQDmeZfc": [
+   "/cat/SECTION8001D"
+  ],
+  "https://open.spotify.com/album/4g8hb6hH2jN08HKa1dsZJS": [
+   "/cat/SECTION8023D"
+  ],
+  "https://open.spotify.com/album/4gJGlAaKkCW6c6HZFENqxn": [
+   "/cat/SECTION8027D"
+  ],
+  "https://open.spotify.com/album/4h2FtYV07EAESZ7DdGEG6d": [
+   "/cat/SECTION8033D"
+  ],
+  "https://open.spotify.com/album/4pZ0DJLANME518s6kj2Ajz": [
+   "/cat/SECTION8FREE002"
+  ],
+  "https://open.spotify.com/album/4yPl0zK7ZjcuxuOG8fixV7": [
+   "/cat/SECTION8007D"
+  ],
+  "https://open.spotify.com/album/4zICZ0bQr9nqikQBytGP47": [
+   "/cat/SECTION8004D"
+  ],
+  "https://open.spotify.com/album/4zLAyWq5Hyd9azeAv6XXRN": [
+   "/cat/SECTION8080D"
+  ],
+  "https://open.spotify.com/album/5Bqy7NHsmdAiwu1Uxwwy4v": [
+   "/cat/SECTION8LP2"
+  ],
+  "https://open.spotify.com/album/5CNw4QznczuduPs04Qz75H": [
+   "/cat/SECTION8FREE003"
+  ],
+  "https://open.spotify.com/album/5Ew5zSEA8BkSoc04QQ4N66": [
+   "/cat/SECTION8008D"
+  ],
+  "https://open.spotify.com/album/5G620UMY0DVk2lfIvODz9E": [
+   "/cat/SECTION8017D"
+  ],
+  "https://open.spotify.com/album/5MiAznZWKWNHFOMNwrYyhk": [
+   "/cat/SECTION8117S1"
+  ],
+  "https://open.spotify.com/album/5TXF5KsYvYsklnA7sqfE8s": [
+   "/cat/SECTION8038D"
+  ],
+  "https://open.spotify.com/album/5UPx65Bgz9gBoukLK8YHMz": [
+   "/cat/SECTION8060D"
+  ],
+  "https://open.spotify.com/album/5VsCas9ruk8I1ewisfpXct": [
+   "/cat/SECTION8114S1"
+  ],
+  "https://open.spotify.com/album/5Z4NgWX31wbQK03LIZO7G3": [
+   "/cat/SECTION8082D"
+  ],
+  "https://open.spotify.com/album/5cvvrZs8IUP4bOOCo6gmRH": [
+   "/cat/SECTION8046D"
+  ],
+  "https://open.spotify.com/album/5fRzZnNdy9aWBblqKPgPEh": [
+   "/cat/SECTION8010D"
+  ],
+  "https://open.spotify.com/album/5iWL3XE8qA3CmF6cfCezY8": [
+   "/cat/SECTION8036D"
+  ],
+  "https://open.spotify.com/album/5lcGzEI8X1ZH8wgriLEyrC": [
+   "/cat/SECTION8028D"
+  ],
+  "https://open.spotify.com/album/5p3Hq53NYVwERD8sEGh7zu": [
+   "/cat/SECTION8063D"
+  ],
+  "https://open.spotify.com/album/5qKE4EQwsnOHd7mLAMhkey": [
+   "/cat/SECTION8068D"
+  ],
+  "https://open.spotify.com/album/5wMP7JOJvdIuZMAhm44kgy": [
+   "/cat/SECTION8116S1"
+  ],
+  "https://open.spotify.com/album/60TbaMuxHBGclwr2pqemTm": [
+   "/cat/SECTION8024D"
+  ],
+  "https://open.spotify.com/album/61F5C17uiCPivsBkgDiZKL": [
+   "/cat/SECTION8043D"
+  ],
+  "https://open.spotify.com/album/61xLuQedUCpV1os2OUMPcK": [
+   "/cat/SECTION8POD13"
+  ],
+  "https://open.spotify.com/album/6I97NNGnI2eYwZ6C6TrB2V": [
+   "/cat/SECTION8092D"
+  ],
+  "https://open.spotify.com/album/6M3gVqLPacsLl57VnZ6Nlw": [
+   "/cat/SECTION8062D"
+  ],
+  "https://open.spotify.com/album/6QAXzNmwkgi7QgnM2YCOrg": [
+   "/cat/SECTION8044D"
+  ],
+  "https://open.spotify.com/album/6Sx3wuBlY4OSRjICC62WQo": [
+   "/cat/SECTION8007"
+  ],
+  "https://open.spotify.com/album/6Wkp0CPYS8K1cwOL13dgFb": [
+   "/cat/SECTION8115S1"
+  ],
+  "https://open.spotify.com/album/6WpK66lqk2Z6Bveo1EJlRV": [
+   "/cat/SECTION8055D"
+  ],
+  "https://open.spotify.com/album/6hysqByhs5kalwkBV4itgL": [
+   "/cat/SECTION8075D"
+  ],
+  "https://open.spotify.com/album/6imKXRmWxh269irK0qEPgs": [
+   "/cat/SECTION8109"
+  ],
+  "https://open.spotify.com/album/6jOLkOEhxukqJWNuOYdiwN": [
+   "/cat/SECTION8083D"
+  ],
+  "https://open.spotify.com/album/6mXdeoYl4itcEJy0S7L9cP": [
+   "/cat/SECTION8031D"
+  ],
+  "https://open.spotify.com/album/6pfl4v9cAN13pdLkyvvQOQ": [
+   "/cat/SECTION8052D"
+  ],
+  "https://open.spotify.com/album/6qDcvj86KGg7Pr2bj39xB3": [
+   "/cat/SECTION8085D"
+  ],
+  "https://open.spotify.com/album/6ucgjKuiT9yV7MbCey884J": [
+   "/cat/SECTION8054D"
+  ],
+  "https://open.spotify.com/album/6vePVVE2rIXhT9k5I1vjnw": [
+   "/cat/SECTION8049D"
+  ],
+  "https://open.spotify.com/album/6wYzIAHOIWlVKnkUXbT9co": [
+   "/cat/SECTION8117S2"
+  ],
+  "https://open.spotify.com/album/70bocwd4okJpQu4yOxMGPC": [
+   "/cat/SECTION8086D"
+  ],
+  "https://open.spotify.com/album/710b9UvFj7ntVTxyYybdy4": [
+   "/cat/SECTION8009D"
+  ],
+  "https://open.spotify.com/album/74ODt4BXP8fmF4ypX5ALfW": [
+   "/cat/SECTION8012D"
+  ],
+  "https://open.spotify.com/album/7C06daZAWJ6Vw2cCcOvlwC": [
+   "/cat/SECTION8089D"
+  ],
+  "https://open.spotify.com/album/7G4gnTCut4PJRJ6wzADYU9": [
+   "/cat/SECTION8114S3"
+  ],
+  "https://open.spotify.com/album/7JLHbWwYFzAxMBMdocqQIK": [
+   "/cat/SECTION8117S3"
+  ],
+  "https://open.spotify.com/album/7LEmeeEJADqFOD8FH3BhSn": [
+   "/cat/SECTION8034D"
+  ],
+  "https://open.spotify.com/album/7dISPgYwNAk1tr2BJK0ZBq": [
+   "/cat/SECTION8008"
+  ],
+  "https://open.spotify.com/album/7dQR7YvH8twuhXRduqdFrO": [
+   "/cat/SECTION8030D"
+  ],
+  "https://open.spotify.com/album/7hceVmhoaNPIrS7yJXZz5g": [
+   "/cat/SECTION8039D"
+  ],
+  "https://open.spotify.com/album/7iHU0VUl6J8Y1SVEYQYdS3": [
+   "/cat/SECTION8113"
+  ],
+  "https://open.spotify.com/album/7rphmJHBg4lrCy67vgKo0N": [
+   "/cat/SECTION8026D"
+  ],
+  "https://open.spotify.com/album/7tF3G9RS6W641GxENUcyO2": [
+   "/cat/SECTION8116S3"
+  ],
+  "https://open.spotify.com/album/7wuyog9WDFJy2SwWT0OGco": [
+   "/cat/SECTION8021D"
+  ],
+  "https://open.spotify.com/album/7yLxemh6W8YyUieSGDhplG": [
+   "/cat/SECTION8058D"
+  ],
+  "https://open.spotify.com/album/7zDNPlyU1vtrQLvE9JVAyA": [
+   "/cat/SECTION8116"
+  ],
+  "https://plush.bandcamp.com/album/r-e-a-v-e": [
+   "/cat/SECTION8116S3"
+  ],
+  "https://section8recordings.bandcamp.com/": [
+   "/",
+   "/cat/SECTION8001D",
+   "/cat/SECTION8002D",
+   "/cat/SECTION8003D",
+   "/cat/SECTION8004D",
+   "...+136"
+  ],
+  "https://section8recordings.bandcamp.com/album/2-steps-forward": [
+   "/cat/SECTION8086D"
+  ],
+  "https://section8recordings.bandcamp.com/album/a-thousand-days": [
+   "/cat/SECTION8116S1"
+  ],
+  "https://section8recordings.bandcamp.com/album/abbatoir-blues-specter": [
+   "/cat/SECTION8088D"
+  ],
+  "https://section8recordings.bandcamp.com/album/adrenalina": [
+   "/cat/SECTION8012D"
+  ],
+  "https://section8recordings.bandcamp.com/album/all-will": [
+   "/cat/SECTION8117S1"
+  ],
+  "https://section8recordings.bandcamp.com/album/android-dreams-goddess": [
+   "/cat/SECTION8087D"
+  ],
+  "https://section8recordings.bandcamp.com/album/apex-ep": [
+   "/cat/SECTION8096D"
+  ],
+  "https://section8recordings.bandcamp.com/album/assist-you-what-have-you-done": [
+   "/cat/SECTION8063D"
+  ],
+  "https://section8recordings.bandcamp.com/album/asylum-ep": [
+   "/cat/SECTION8106"
+  ],
+  "https://section8recordings.bandcamp.com/album/barbarians-chosen-one": [
+   "/cat/SECTION8082D"
+  ],
+  "https://section8recordings.bandcamp.com/album/beware-of-me-future-wars": [
+   "/cat/SECTION8092D"
+  ],
+  "https://section8recordings.bandcamp.com/album/big-brother": [
+   "/cat/SECTION8115S1"
+  ],
+  "https://section8recordings.bandcamp.com/album/big-brother-ep": [
+   "/cat/SECTION8115"
+  ],
+  "https://section8recordings.bandcamp.com/album/birth-of-trungle-2": [
+   "/cat/SECTION8079D"
+  ],
+  "https://section8recordings.bandcamp.com/album/bushi-ep": [
+   "/cat/SECTION8040D"
+  ],
+  "https://section8recordings.bandcamp.com/album/coil-burn": [
+   "/cat/SECTION8068D"
+  ],
+  "https://section8recordings.bandcamp.com/album/consciousness": [
+   "/cat/SECTION8073D"
+  ],
+  "https://section8recordings.bandcamp.com/album/contraflow-context": [
+   "/cat/SECTION8077D"
+  ],
+  "https://section8recordings.bandcamp.com/album/coronal-mass-ejection-vacuum": [
+   "/cat/SECTION8084D"
+  ],
+  "https://section8recordings.bandcamp.com/album/count-to-ten-ep": [
+   "/cat/SECTION8113"
+  ],
+  "https://section8recordings.bandcamp.com/album/crimson-tide": [
+   "/cat/SECTION8111"
+  ],
+  "https://section8recordings.bandcamp.com/album/crown-walker": [
+   "/cat/SECTION8057D"
+  ],
+  "https://section8recordings.bandcamp.com/album/cthulhu": [
+   "/cat/SECTION8101"
+  ],
+  "https://section8recordings.bandcamp.com/album/dark-places": [
+   "/cat/SECTION8065D"
+  ],
+  "https://section8recordings.bandcamp.com/album/dark-shadows": [
+   "/cat/SECTION8031D"
+  ],
+  "https://section8recordings.bandcamp.com/album/demons-inside-me": [
+   "/cat/SECTION8091D"
+  ],
+  "https://section8recordings.bandcamp.com/album/drop-it-woofershaker": [
+   "/cat/SECTION8110"
+  ],
+  "https://section8recordings.bandcamp.com/album/edge-of-dreams": [
+   "/cat/SECTION8009D"
+  ],
+  "https://section8recordings.bandcamp.com/album/exactly": [
+   "/cat/SECTION8030D"
+  ],
+  "https://section8recordings.bandcamp.com/album/extra-ordinary": [
+   "/cat/SECTION8116S2A"
+  ],
+  "https://section8recordings.bandcamp.com/album/fatality": [
+   "/cat/SECTION8061D"
+  ],
+  "https://section8recordings.bandcamp.com/album/filthy-rhythms-vol2": [
+   "/cat/SECTION8FILTH002D"
+  ],
+  "https://section8recordings.bandcamp.com/album/fingerbang-ep": [
+   "/cat/SECTION8090D"
+  ],
+  "https://section8recordings.bandcamp.com/album/firetouch-acheron": [
+   "/cat/SECTION8062D"
+  ],
+  "https://section8recordings.bandcamp.com/album/flammable-materials-compilation": [
+   "/cat/SECTION8067D"
+  ],
+  "https://section8recordings.bandcamp.com/album/fretters": [
+   "/cat/SECTION8116S5"
+  ],
+  "https://section8recordings.bandcamp.com/album/goosebreeder-selftitled": [
+   "/cat/SECTION8097D"
+  ],
+  "https://section8recordings.bandcamp.com/album/groef-lateral-clique-2": [
+   "/cat/SECTION8029D"
+  ],
+  "https://section8recordings.bandcamp.com/album/hammered": [
+   "/cat/SECTION8098D"
+  ],
+  "https://section8recordings.bandcamp.com/album/hardcore-vibes": [
+   "/cat/SECTION8037D"
+  ],
+  "https://section8recordings.bandcamp.com/album/heavy-gear": [
+   "/cat/SECTION8028D"
+  ],
+  "https://section8recordings.bandcamp.com/album/hydra-strange-tales": [
+   "/cat/SECTION8104"
+  ],
+  "https://section8recordings.bandcamp.com/album/i-choose-the-hard-drum-ep": [
+   "/cat/SECTION8094D"
+  ],
+  "https://section8recordings.bandcamp.com/album/knowledge-ep": [
+   "/cat/SECTION8048D"
+  ],
+  "https://section8recordings.bandcamp.com/album/last-chance": [
+   "/cat/SECTION8023D"
+  ],
+  "https://section8recordings.bandcamp.com/album/lazy-bloody-eyes": [
+   "/cat/SECTION8107"
+  ],
+  "https://section8recordings.bandcamp.com/album/life-ends-at-midnight-black-russian": [
+   "/cat/SECTION8089D"
+  ],
+  "https://section8recordings.bandcamp.com/album/malbolge": [
+   "/cat/SECTION8112"
+  ],
+  "https://section8recordings.bandcamp.com/album/mind-pollution": [
+   "/cat/SECTION8033D"
+  ],
+  "https://section8recordings.bandcamp.com/album/monatomic-gold-oblivion": [
+   "/cat/SECTION8109"
+  ],
+  "https://section8recordings.bandcamp.com/album/monday-fucking-helmet": [
+   "/cat/SECTION8085D"
+  ],
+  "https://section8recordings.bandcamp.com/album/nemesis-sweet-girl": [
+   "/cat/SECTION8006D"
+  ],
+  "https://section8recordings.bandcamp.com/album/night-city-panic-attack": [
+   "/cat/SECTION8026D"
+  ],
+  "https://section8recordings.bandcamp.com/album/no-exit": [
+   "/cat/SECTION8114S2"
+  ],
+  "https://section8recordings.bandcamp.com/album/patch-work": [
+   "/cat/SECTION8115S2"
+  ],
+  "https://section8recordings.bandcamp.com/album/pressure-sequence-predicaments": [
+   "/cat/SECTION8102"
+  ],
+  "https://section8recordings.bandcamp.com/album/purple-world": [
+   "/cat/SECTION8025D"
+  ],
+  "https://section8recordings.bandcamp.com/album/push-back": [
+   "/cat/SECTION8117S3"
+  ],
+  "https://section8recordings.bandcamp.com/album/riders-lp": [
+   "/cat/SECTION8116"
+  ],
+  "https://section8recordings.bandcamp.com/album/sai-sai-22": [
+   "/cat/SECTION8007"
+  ],
+  "https://section8recordings.bandcamp.com/album/sekai-no-owari": [
+   "/cat/SECTION8081D"
+  ],
+  "https://section8recordings.bandcamp.com/album/shine-on-i-miss-you": [
+   "/cat/SECTION8114S4"
+  ],
+  "https://section8recordings.bandcamp.com/album/smart-control-buffer-error": [
+   "/cat/SECTION8099D"
+  ],
+  "https://section8recordings.bandcamp.com/album/southern-hemisphere-thalweg": [
+   "/cat/SECTION8072D"
+  ],
+  "https://section8recordings.bandcamp.com/album/sphere-unknown-dark-storm": [
+   "/cat/SECTION8007D"
+  ],
+  "https://section8recordings.bandcamp.com/album/storm": [
+   "/cat/SECTION8083D"
+  ],
+  "https://section8recordings.bandcamp.com/album/subsonic-new-world-order": [
+   "/cat/SECTION8008"
+  ],
+  "https://section8recordings.bandcamp.com/album/system-overload": [
+   "/cat/SECTION8027D"
+  ],
+  "https://section8recordings.bandcamp.com/album/taste-of-blood-ep": [
+   "/cat/SECTION8069D"
+  ],
+  "https://section8recordings.bandcamp.com/album/tech-treatment-2-taos": [
+   "/cat/SECTION8010D"
+  ],
+  "https://section8recordings.bandcamp.com/album/tech-treatment-3-sin-city-the-spot": [
+   "/cat/SECTION8011D"
+  ],
+  "https://section8recordings.bandcamp.com/album/tech-treatment-4-kr4y": [
+   "/cat/SECTION8014D"
+  ],
+  "https://section8recordings.bandcamp.com/album/tech-treatment-5-genetic-killers": [
+   "/cat/SECTION8015D"
+  ],
+  "https://section8recordings.bandcamp.com/album/tech-treatment-6-forbidden-society": [
+   "/cat/SECTION8016D"
+  ],
+  "https://section8recordings.bandcamp.com/album/tech-treatment-7-the-dizphonics": [
+   "/cat/SECTION8017D"
+  ],
+  "https://section8recordings.bandcamp.com/album/tech-treatment-8-b-h": [
+   "/cat/SECTION8018D"
+  ],
+  "https://section8recordings.bandcamp.com/album/tech-treatment-9-hostage": [
+   "/cat/SECTION8019D"
+  ],
+  "https://section8recordings.bandcamp.com/album/tech-treatment-compilation-1": [
+   "/cat/SECTION8TTC01"
+  ],
+  "https://section8recordings.bandcamp.com/album/tech-treatment-ep-2": [
+   "/cat/SECTION8003D"
+  ],
+  "https://section8recordings.bandcamp.com/album/the-abyss": [
+   "/cat/SECTION8103"
+  ],
+  "https://section8recordings.bandcamp.com/album/the-assassinator-hard": [
+   "/cat/SECTION8064D"
+  ],
+  "https://section8recordings.bandcamp.com/album/the-collaboration-ep": [
+   "/cat/SECTION8008D"
+  ],
+  "https://section8recordings.bandcamp.com/album/the-crypt": [
+   "/cat/SECTION8071D"
+  ],
+  "https://section8recordings.bandcamp.com/album/the-hack-2": [
+   "/cat/SECTION8114S1"
+  ],
+  "https://section8recordings.bandcamp.com/album/the-hack-ep": [
+   "/cat/SECTION8114"
+  ],
+  "https://section8recordings.bandcamp.com/album/the-joker-amped-up": [
+   "/cat/SECTION8105"
+  ],
+  "https://section8recordings.bandcamp.com/album/the-mad-lands": [
+   "/cat/SECTION8034D"
+  ],
+  "https://section8recordings.bandcamp.com/album/the-prologue-ep": [
+   "/cat/SECTION8070DB"
+  ],
+  "https://section8recordings.bandcamp.com/album/the-realm": [
+   "/cat/SECTION8024D"
+  ],
+  "https://section8recordings.bandcamp.com/album/the-realness-critical-mass": [
+   "/cat/SECTION8080D"
+  ],
+  "https://section8recordings.bandcamp.com/album/three-incarnate": [
+   "/cat/SECTION8041D"
+  ],
+  "https://section8recordings.bandcamp.com/album/through-her-eyes-ep": [
+   "/cat/SECTION8035D"
+  ],
+  "https://section8recordings.bandcamp.com/album/true-ninja-vip-twitch": [
+   "/cat/SECTION8066D"
+  ],
+  "https://section8recordings.bandcamp.com/album/two-sides-of-the-same-coin": [
+   "/cat/SECTION8116S4"
+  ],
+  "https://section8recordings.bandcamp.com/album/under-fire-ep-3": [
+   "/cat/SECTION8004D"
+  ],
+  "https://section8recordings.bandcamp.com/album/valkyrie-broken": [
+   "/cat/SECTION8005D"
+  ],
+  "https://section8recordings.bandcamp.com/album/wanted": [
+   "/cat/SECTION8114S3"
+  ],
+  "https://section8recordings.bandcamp.com/album/we-might-be-monsters": [
+   "/cat/SECTION8100"
+  ],
+  "https://section8recordings.bandcamp.com/album/wolf-break-it-down": [
+   "/cat/SECTION8093D"
+  ],
+  "https://section8recordings.bandcamp.com/album/wonderland-vip-the-persecutor": [
+   "/cat/SECTION8001D"
+  ],
+  "https://section8recordings.bandcamp.com/album/you-know": [
+   "/cat/SECTION8117S2"
+  ],
+  "https://section8recordings.bandcamp.com/album/you-know-ep": [
+   "/cat/SECTION8117"
+  ],
+  "https://section8recordings.bandcamp.com/album/zero-point": [
+   "/cat/SECTION8060D"
+  ],
+  "https://soundcloud.com/alexisk": [
+   "/cat/SECTION8065D"
+  ],
+  "https://soundcloud.com/dnbradio/sets/section-8-section8092d": [
+   "/cat/SECTION8092D"
+  ],
+  "https://soundcloud.com/rinseit/sets/machines-gut-wrench-by-flat-t": [
+   "/cat/SECTION8047D"
+  ],
+  "https://soundcloud.com/rinseit/sets/section-8-section8007": [
+   "/cat/SECTION8007"
+  ],
+  "https://soundcloud.com/rinseit/sets/section-8-section8075d": [
+   "/cat/SECTION8075D"
+  ],
+  "https://soundcloud.com/rinseit/sets/section-8-section8077d": [
+   "/cat/SECTION8077D"
+  ],
+  "https://soundcloud.com/rinseit/sets/section-8-section8078d": [
+   "/cat/SECTION8078D"
+  ],
+  "https://soundcloud.com/rinseit/sets/section-8-section8079d": [
+   "/cat/SECTION8079D"
+  ],
+  "https://soundcloud.com/rinseit/sets/section-8-section8082d": [
+   "/cat/SECTION8082D"
+  ],
+  "https://soundcloud.com/section8recordings": [
+   "/",
+   "/cat/SECTION8001D",
+   "/cat/SECTION8002D",
+   "/cat/SECTION8003D",
+   "/cat/SECTION8004D",
+   "...+136"
+  ],
+  "https://soundcloud.com/section8recordings/biobird-a-thousand-days": [
+   "/cat/SECTION8116S1"
+  ],
+  "https://soundcloud.com/section8recordings/sets/762-by-762": [
+   "/cat/SECTION8035D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/agari-tachi-mitochondrion-by-1": [
+   "/cat/SECTION8045D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/coresplittaz-coronal-mass": [
+   "/cat/SECTION8084D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/dark-shadows-by-zeal-litta": [
+   "/cat/SECTION8031D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/design-big-brother-ep-full": [
+   "/cat/SECTION8115"
+  ],
+  "https://soundcloud.com/section8recordings/sets/filthy-rhythms-3-by-various": [
+   "/cat/SECTION8LP3"
+  ],
+  "https://soundcloud.com/section8recordings/sets/filthy-rhythms-vol2-by-various": [
+   "/cat/SECTION8FILTH002D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/goats-head-by-hostage": [
+   "/cat/SECTION8032D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/hardcore-vibes-by-koya-out-2": [
+   "/cat/SECTION8037D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/mind-pollution-by-critical": [
+   "/cat/SECTION8033D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-recordings": [
+   "/cat/SECTION8070DB"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8085d": [
+   "/cat/SECTION8085D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8087d": [
+   "/cat/SECTION8087D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8089d": [
+   "/cat/SECTION8089D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8091d": [
+   "/cat/SECTION8091D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8094d": [
+   "/cat/SECTION8094D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8098d": [
+   "/cat/SECTION8098D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8099d": [
+   "/cat/SECTION8099D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8100": [
+   "/cat/SECTION8100"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8101": [
+   "/cat/SECTION8101"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8102": [
+   "/cat/SECTION8102"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8103": [
+   "/cat/SECTION8103"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8104": [
+   "/cat/SECTION8104"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8105": [
+   "/cat/SECTION8105"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8106": [
+   "/cat/SECTION8106"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8107": [
+   "/cat/SECTION8107"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8109": [
+   "/cat/SECTION8109"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8110": [
+   "/cat/SECTION8110"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8111": [
+   "/cat/SECTION8111"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8112": [
+   "/cat/SECTION8112"
+  ],
+  "https://soundcloud.com/section8recordings/sets/section-8-section8113": [
+   "/cat/SECTION8113"
+  ],
+  "https://soundcloud.com/section8recordings/sets/sick-cycle-the-hack-ep": [
+   "/cat/SECTION8114"
+  ],
+  "https://soundcloud.com/section8recordings/sets/the-forgotten-hope-by": [
+   "/cat/SECTION8046D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/the-mad-lands-by-bad-logik": [
+   "/cat/SECTION8034D"
+  ],
+  "https://soundcloud.com/section8recordings/sets/various-artists-full-throttle": [
+   "/cat/SECTION8050D"
+  ],
+  "https://soundcloud.com/section8recordings/sick-cycle-all-will": [
+   "/cat/SECTION8117S1"
+  ],
+  "https://soundcloud.com/section8recordings/sick-cycle-no-exit": [
+   "/cat/SECTION8114S2"
+  ],
+  "https://soundcloud.com/section8recordings/sick-cycle-the-hack": [
+   "/cat/SECTION8114S1"
+  ],
+  "https://soundcloud.com/sickcyclenz/sick-cycle-feat-unsub-mc-nacre": [
+   "/cat/SECTION8114S4"
+  ],
+  "https://www.beatport.com/label/section-8/15549": [
+   "/",
+   "/cat/SECTION8001D",
+   "/cat/SECTION8002D",
+   "/cat/SECTION8003D",
+   "/cat/SECTION8004D",
+   "...+136"
+  ],
+  "https://www.beatport.com/release/goosebreeder-selftitled/2043613": [
+   "/cat/SECTION8097D"
+  ],
+  "https://www.beatport.com/release/the-hack/2733053": [
+   "/cat/SECTION8114S1"
+  ],
+  "https://www.deezer.com/album/10028188": [
+   "/cat/SECTION8084D"
+  ],
+  "https://www.deezer.com/album/120434952": [
+   "/cat/SECTION8101"
+  ],
+  "https://www.deezer.com/album/5971521": [
+   "/cat/SECTION8044D"
+  ],
+  "https://www.deezer.com/album/6326753": [
+   "/cat/SECTION8LP3"
+  ],
+  "https://www.deezer.com/album/6665310": [
+   "/cat/SECTION8054D"
+  ],
+  "https://www.deezer.com/album/6804896": [
+   "/cat/SECTION8056D"
+  ],
+  "https://www.deezer.com/album/6860283": [
+   "/cat/SECTION8057D"
+  ],
+  "https://www.deezer.com/album/6950829": [
+   "/cat/SECTION8059D"
+  ],
+  "https://www.deezer.com/album/7024189": [
+   "/cat/SECTION8011D"
+  ],
+  "https://www.deezer.com/album/8360648": [
+   "/cat/SECTION8BP01"
+  ],
+  "https://www.deezer.com/album/8878091": [
+   "/cat/SECTION8078D"
+  ],
+  "https://www.deezer.com/album/8983935": [
+   "/cat/SECTION8079D"
+  ],
+  "https://www.deezer.com/album/9257370": [
+   "/cat/SECTION8081D"
+  ],
+  "https://www.deezer.com/album/9684724": [
+   "/cat/SECTION8082D"
+  ],
+  "https://www.deezer.com/us/album/14191546": [
+   "/cat/SECTION8092D"
+  ],
+  "https://www.junodownload.com/labels/Section+8/": [
+   "/",
+   "/cat/SECTION8001D",
+   "/cat/SECTION8002D",
+   "/cat/SECTION8003D",
+   "/cat/SECTION8004D",
+   "...+136"
+  ],
+  "https://www.junodownload.com/products/762-shadow-conspiracy-the-spice-floppy-sausage/2271683-02/": [
+   "/cat/SECTION8056D"
+  ],
+  "https://www.junodownload.com/products/arklove-ez-breaks-storm/2753913-02/": [
+   "/cat/SECTION8083D"
+  ],
+  "https://www.junodownload.com/products/bad-logik-adrenalina/1624677-02/": [
+   "/cat/SECTION8012D"
+  ],
+  "https://www.junodownload.com/products/barbican-the-prologue-ep/2505011-02/": [
+   "/cat/SECTION8070DB"
+  ],
+  "https://www.junodownload.com/products/betacut-zero-point/2317008-02/": [
+   "/cat/SECTION8060D"
+  ],
+  "https://www.junodownload.com/products/biobird-a-thousand-days/4552764-02/": [
+   "/cat/SECTION8116S1"
+  ],
+  "https://www.junodownload.com/products/biobird-count-to-ten-ep/4211872-02/": [
+   "/cat/SECTION8113"
+  ],
+  "https://www.junodownload.com/products/biobird-extra-ordinary/4559320-02/": [
+   "/cat/SECTION8116S2A"
+  ],
+  "https://www.junodownload.com/products/biobird-fretters/4576034-02/": [
+   "/cat/SECTION8116S5"
+  ],
+  "https://www.junodownload.com/products/biobird-r-e-a-v-e/4572082-02/": [
+   "/cat/SECTION8116S3"
+  ],
+  "https://www.junodownload.com/products/biobird-riders-lp/4576035-02/": [
+   "/cat/SECTION8116",
+   "/cat/SECTION8116S4"
+  ],
+  "https://www.junodownload.com/products/brainpain-barbarians-chosen-one/2709617-02/": [
+   "/cat/SECTION8082D"
+  ],
+  "https://www.junodownload.com/products/brainpain-full-throttle-ep/1971306-02/": [
+   "/cat/SECTION8038D"
+  ],
+  "https://www.junodownload.com/products/brainpain-sekai-no-owari/2645949-02/": [
+   "/cat/SECTION8081D"
+  ],
+  "https://www.junodownload.com/products/brainpain-system-overload/1726263-02/": [
+   "/cat/SECTION8027D"
+  ],
+  "https://www.junodownload.com/products/coresplittaz-consciousness/2561273-02/": [
+   "/cat/SECTION8073D"
+  ],
+  "https://www.junodownload.com/products/coresplittaz-coronal-mass-ejection-vacuum/2753914-02/": [
+   "/cat/SECTION8084D"
+  ],
+  "https://www.junodownload.com/products/coresplittaz-the-forgotten-hope/2101368-02/": [
+   "/cat/SECTION8046D"
+  ],
+  "https://www.junodownload.com/products/coresplittaz-the-realness-critical-mass/2625986-02/": [
+   "/cat/SECTION8080D"
+  ],
+  "https://www.junodownload.com/products/critical-waves-insatek-taos-sickorwell-mind-pollution/1860795-02/": [
+   "/cat/SECTION8033D"
+  ],
+  "https://www.junodownload.com/products/current-value-edge-of-dreams/1549454-02/": [
+   "/cat/SECTION8009D"
+  ],
+  "https://www.junodownload.com/products/design-big-brother-ep/4539245-02/": [
+   "/cat/SECTION8115"
+  ],
+  "https://www.junodownload.com/products/dj-darrel-mind-killa-bionick-last-chance/1695373-02/": [
+   "/cat/SECTION8023D"
+  ],
+  "https://www.junodownload.com/products/emmeeji-contraflow-context/2597857-02/": [
+   "/cat/SECTION8077D"
+  ],
+  "https://www.junodownload.com/products/filthy-rhythms-3/2139998-02/": [
+   "/cat/SECTION8LP3"
+  ],
+  "https://www.junodownload.com/products/filthy-rhythms-vol2/1810845-02/": [
+   "/cat/SECTION8FILTH002D"
+  ],
+  "https://www.junodownload.com/products/flammable-materials-compilation/2439867-02/": [
+   "/cat/SECTION8067D"
+  ],
+  "https://www.junodownload.com/products/fortitude-the-realm/1716802-02/": [
+   "/cat/SECTION8024D"
+  ],
+  "https://www.junodownload.com/products/goreteks-bad-poetry/2183574-02/": [
+   "/cat/SECTION8049D"
+  ],
+  "https://www.junodownload.com/products/hostage-goats-head/1830575-02/": [
+   "/cat/SECTION8032D"
+  ],
+  "https://www.junodownload.com/products/ishe-goreteks-badman-tick-tick/2595601-02/": [
+   "/cat/SECTION8075D"
+  ],
+  "https://www.junodownload.com/products/korostyle-sai-sai/2581164-02/": [
+   "/cat/SECTION8007"
+  ],
+  "https://www.junodownload.com/products/kryzys-gorebug-i-choose-the-hard-drum/3149506-02/": [
+   "/cat/SECTION8094D"
+  ],
+  "https://www.junodownload.com/products/m1ch3l-p-schyzo-beterror-demons-inside-me/3072219-02/": [
+   "/cat/SECTION8091D"
+  ],
+  "https://www.junodownload.com/products/noistek-the-assassinator-hard/2391744-02/": [
+   "/cat/SECTION8064D"
+  ],
+  "https://www.junodownload.com/products/pareidolia-life-ends-at-midnight-black-russian/3017416-02/": [
+   "/cat/SECTION8089D"
+  ],
+  "https://www.junodownload.com/products/pareidolia-monday-fucking-helmet/2824843-02/": [
+   "/cat/SECTION8085D"
+  ],
+  "https://www.junodownload.com/products/pinkerator-exactly/1784695-02/": [
+   "/cat/SECTION8030D"
+  ],
+  "https://www.junodownload.com/products/proton-kid-no-sleep/2209135-02/": [
+   "/cat/SECTION8051D"
+  ],
+  "https://www.junodownload.com/products/recall-crimson-tide/4083771-02/": [
+   "/cat/SECTION8111"
+  ],
+  "https://www.junodownload.com/products/redcell-tenno/2566673-02/": [
+   "/cat/SECTION8FREE003"
+  ],
+  "https://www.junodownload.com/products/ruffian-benmatrix-coil-burn/2421610-02/": [
+   "/cat/SECTION8068D"
+  ],
+  "https://www.junodownload.com/products/ruffian-the-crypt/2461326-02/": [
+   "/cat/SECTION8071D"
+  ],
+  "https://www.junodownload.com/products/savage-rehab-tech-treatment-ep/1413961-02/": [
+   "/cat/SECTION8003D"
+  ],
+  "https://www.junodownload.com/products/self-definition-bushi-ep/2029269-02/": [
+   "/cat/SECTION8040D"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-762-wanted/4318025-02/": [
+   "/cat/SECTION8114S3"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-all-will/4555717-02/": [
+   "/cat/SECTION8117S1"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-criss-hathaway-birth-of-trungle/2617895-02/": [
+   "/cat/SECTION8079D"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-no-exit/4303621-02/": [
+   "/cat/SECTION8114S2"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-push-back/4575834-02/": [
+   "/cat/SECTION8117S3"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-shine-on-i-miss-you/4303623-02/": [
+   "/cat/SECTION8114S4"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-the-hack-ep/4335994-02/": [
+   "/cat/SECTION8114"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-the-hack/4303051-02/": [
+   "/cat/SECTION8114S1"
+  ],
+  "https://www.junodownload.com/products/sick-cycle-you-know/4557210-02/": [
+   "/cat/SECTION8117S2"
+  ],
+  "https://www.junodownload.com/products/sickorwell-all-i-see-is-darkness-waydo/2209134-02/": [
+   "/cat/SECTION8052D"
+  ],
+  "https://www.junodownload.com/products/sinecore-lazy-bloody-eyes/4008958-02/": [
+   "/cat/SECTION8107"
+  ],
+  "https://www.junodownload.com/products/synthetic-soul-beware-of-me-future-wars/3086379-02/": [
+   "/cat/SECTION8092D"
+  ],
+  "https://www.junodownload.com/products/tech-treatment-11-block-dodger/1688574-02/": [
+   "/cat/SECTION8021D"
+  ],
+  "https://www.junodownload.com/products/tech-treatment-4-kr4y/1629450-02/": [
+   "/cat/SECTION8014D"
+  ],
+  "https://www.junodownload.com/products/tech-treatment-5-genetic-killers/1630240-02/": [
+   "/cat/SECTION8015D"
+  ],
+  "https://www.junodownload.com/products/tech-treatment-6-forbidden-society/1637329-02/": [
+   "/cat/SECTION8016D"
+  ],
+  "https://www.junodownload.com/products/tech-treatment-9-hostage/1671507-02/": [
+   "/cat/SECTION8019D"
+  ],
+  "https://www.junodownload.com/products/tech-treatment-compilation-2/1904555-02/": [
+   "/cat/SECTION8LP2"
+  ],
+  "https://www.junodownload.com/products/the-mind-malbolge/4185261-02/": [
+   "/cat/SECTION8112"
+  ],
+  "https://www.junodownload.com/products/unsub-dark-places/2391745-02/": [
+   "/cat/SECTION8065D"
+  ],
+  "https://www.junodownload.com/products/unsub-fingerbang-ep/3056779-02/": [
+   "/cat/SECTION8090D"
+  ],
+  "https://www.junodownload.com/products/unsub-goosebreeder-selftitled/3450728-02/": [
+   "/cat/SECTION8097D"
+  ],
+  "https://www.junodownload.com/products/valkyr-romance-contortion/1679118-02/": [
+   "/cat/SECTION8022D"
+  ],
+  "https://www.junodownload.com/products/xiar-firetouch-acheron/2336719-02/": [
+   "/cat/SECTION8062D"
+  ],
+  "https://www.junodownload.com/products/xpander-heavy-gear/1753342-02/": [
+   "/cat/SECTION8028D"
+  ],
+  "https://www.junodownload.com/products/zeal-litta-dark-shadows/1817660-02/": [
+   "/cat/SECTION8031D"
+  ],
+  "https://www.youtube.com/section8dnb": [
+   "/",
+   "/cat/SECTION8001D",
+   "/cat/SECTION8002D",
+   "/cat/SECTION8003D",
+   "/cat/SECTION8004D",
+   "...+136"
+  ],
+  "https://www.youtube.com/watch": [
+   "/cat/SECTION8105",
+   "/cat/SECTION8106",
+   "/cat/SECTION8107",
+   "/cat/SECTION8111",
+   "/cat/SECTION8112",
+   "...+5"
+  ]
+ },
+ "state_paths": {
+  "/releases": "https://section8recs.com/",
+  "/latest": "https://section8recs.com/",
+  "/_nuxt/": "https://section8recs.com/",
+  "/dropbox": "https://section8recs.com/",
+  "/cat/SECTION8116": "https://section8recs.com/cat/SECTION8116",
+  "/cat/SECTION8116S5": "https://section8recs.com/cat/SECTION8116S5",
+  "/cat/SECTION8117": "https://section8recs.com/cat/SECTION8117",
+  "/cat/SECTION8116S4": "https://section8recs.com/cat/SECTION8116S4",
+  "/cat/SECTION8117S3": "https://section8recs.com/cat/SECTION8117S3",
+  "/cat/SECTION8116S3": "https://section8recs.com/cat/SECTION8116S3",
+  "/cat/SECTION8117S2": "https://section8recs.com/cat/SECTION8117S2",
+  "/cat/SECTION8116S2A": "https://section8recs.com/cat/SECTION8116S2A",
+  "/cat/SECTION8117S1": "https://section8recs.com/cat/SECTION8117S1",
+  "/cat/SECTION8116S1": "https://section8recs.com/cat/SECTION8116S1",
+  "/cat/SECTION8115": "https://section8recs.com/cat/SECTION8115",
+  "/cat/SECTION8115S2": "https://section8recs.com/cat/SECTION8115S2",
+  "/cat/SECTION8115S1": "https://section8recs.com/cat/SECTION8115S1",
+  "/cat/SECTION8114": "https://section8recs.com/cat/SECTION8114",
+  "/cat/SECTION8114S4": "https://section8recs.com/cat/SECTION8114S4",
+  "/cat/SECTION8114S3": "https://section8recs.com/cat/SECTION8114S3",
+  "/cat/SECTION8114S2": "https://section8recs.com/cat/SECTION8114S2",
+  "/cat/SECTION8114S1": "https://section8recs.com/cat/SECTION8114S1",
+  "/cat/SECTION8113": "https://section8recs.com/cat/SECTION8113",
+  "/cat/SECTION8112": "https://section8recs.com/cat/SECTION8112",
+  "/cat/SECTION8111": "https://section8recs.com/cat/SECTION8111",
+  "/cat/SECTION8110": "https://section8recs.com/cat/SECTION8110",
+  "/cat/SECTION8109": "https://section8recs.com/cat/SECTION8109",
+  "/cat/SECTION8107": "https://section8recs.com/cat/SECTION8107",
+  "/cat/SECTION8106": "https://section8recs.com/cat/SECTION8106",
+  "/cat/SECTION8105": "https://section8recs.com/cat/SECTION8105",
+  "/cat/SECTION8104": "https://section8recs.com/cat/SECTION8104",
+  "/cat/SECTION8103": "https://section8recs.com/cat/SECTION8103",
+  "/cat/SECTION8POD13": "https://section8recs.com/cat/SECTION8POD13",
+  "/cat/SECTION8102": "https://section8recs.com/cat/SECTION8102",
+  "/cat/SECTION8101": "https://section8recs.com/cat/SECTION8101",
+  "/cat/SECTION8100": "https://section8recs.com/cat/SECTION8100",
+  "/cat/SECTION8099D": "https://section8recs.com/cat/SECTION8099D",
+  "/cat/SECTION8098D": "https://section8recs.com/cat/SECTION8098D",
+  "/cat/SECTION8097D": "https://section8recs.com/cat/SECTION8097D",
+  "/cat/SECTION8095D": "https://section8recs.com/cat/SECTION8095D",
+  "/cat/SECTION8096D": "https://section8recs.com/cat/SECTION8096D",
+  "/cat/SECTION8093D": "https://section8recs.com/cat/SECTION8093D",
+  "/cat/SECTION8094D": "https://section8recs.com/cat/SECTION8094D",
+  "/cat/SECTION8092D": "https://section8recs.com/cat/SECTION8092D",
+  "/cat/SECTION8091D": "https://section8recs.com/cat/SECTION8091D",
+  "/cat/SECTION8090D": "https://section8recs.com/cat/SECTION8090D",
+  "/cat/SECTION8089D": "https://section8recs.com/cat/SECTION8089D",
+  "/cat/SECTION8088D": "https://section8recs.com/cat/SECTION8088D",
+  "/cat/SECTION8087D": "https://section8recs.com/cat/SECTION8087D",
+  "/cat/SECTION8BASS021": "https://section8recs.com/cat/SECTION8BASS021",
+  "/cat/SECTION8086D": "https://section8recs.com/cat/SECTION8086D",
+  "/cat/SECTION8008": "https://section8recs.com/cat/SECTION8008",
+  "/cat/SECTION8085D": "https://section8recs.com/cat/SECTION8085D",
+  "/cat/SECTION8084D": "https://section8recs.com/cat/SECTION8084D",
+  "/cat/SECTION8083D": "https://section8recs.com/cat/SECTION8083D",
+  "/cat/SECTION8082D": "https://section8recs.com/cat/SECTION8082D",
+  "/cat/SECTION8081D": "https://section8recs.com/cat/SECTION8081D",
+  "/cat/SECTION8080D": "https://section8recs.com/cat/SECTION8080D",
+  "/cat/SECTION8079D": "https://section8recs.com/cat/SECTION8079D",
+  "/cat/SECTION8078D": "https://section8recs.com/cat/SECTION8078D",
+  "/cat/SECTION8077D": "https://section8recs.com/cat/SECTION8077D",
+  "/cat/SECTION8074D": "https://section8recs.com/cat/SECTION8074D",
+  "/cat/SECTION8075D": "https://section8recs.com/cat/SECTION8075D",
+  "/cat/SECTION8007": "https://section8recs.com/cat/SECTION8007",
+  "/cat/SECTION8BP01": "https://section8recs.com/cat/SECTION8BP01",
+  "/cat/SECTION8073D": "https://section8recs.com/cat/SECTION8073D",
+  "/cat/SECTION8FREE003": "https://section8recs.com/cat/SECTION8FREE003",
+  "/cat/SECTION8072D": "https://section8recs.com/cat/SECTION8072D",
+  "/cat/SECTION8070DB": "https://section8recs.com/cat/SECTION8070DB",
+  "/cat/SECTION8071D": "https://section8recs.com/cat/SECTION8071D",
+  "/cat/SECTION8069D": "https://section8recs.com/cat/SECTION8069D",
+  "/cat/SECTION8067D": "https://section8recs.com/cat/SECTION8067D",
+  "/cat/SECTION8068D": "https://section8recs.com/cat/SECTION8068D",
+  "/cat/SECTION8066D": "https://section8recs.com/cat/SECTION8066D",
+  "/cat/SECTION8065D": "https://section8recs.com/cat/SECTION8065D",
+  "/cat/SECTION8064D": "https://section8recs.com/cat/SECTION8064D",
+  "/cat/SECTION8063D": "https://section8recs.com/cat/SECTION8063D",
+  "/cat/SECTION8062D": "https://section8recs.com/cat/SECTION8062D",
+  "/cat/SECTION8061D": "https://section8recs.com/cat/SECTION8061D",
+  "/cat/SECTION8060D": "https://section8recs.com/cat/SECTION8060D",
+  "/cat/SECTION8059D": "https://section8recs.com/cat/SECTION8059D",
+  "/cat/SECTION8FREE002": "https://section8recs.com/cat/SECTION8FREE002",
+  "/cat/SECTION8058D": "https://section8recs.com/cat/SECTION8058D",
+  "/cat/SECTION8057D": "https://section8recs.com/cat/SECTION8057D",
+  "/cat/SECTION8056D": "https://section8recs.com/cat/SECTION8056D",
+  "/cat/SECTION8055D": "https://section8recs.com/cat/SECTION8055D",
+  "/cat/SECTION8054D": "https://section8recs.com/cat/SECTION8054D",
+  "/cat/SECTION8053D": "https://section8recs.com/cat/SECTION8053D",
+  "/cat/SECTION8052D": "https://section8recs.com/cat/SECTION8052D",
+  "/cat/SECTION8051D": "https://section8recs.com/cat/SECTION8051D",
+  "/cat/SECTION8050D": "https://section8recs.com/cat/SECTION8050D",
+  "/cat/SECTION8049D": "https://section8recs.com/cat/SECTION8049D",
+  "/cat/SECTION8048D": "https://section8recs.com/cat/SECTION8048D",
+  "/cat/SECTION8LP3": "https://section8recs.com/cat/SECTION8LP3",
+  "/cat/SECTION8047D": "https://section8recs.com/cat/SECTION8047D",
+  "/cat/SECTION8046D": "https://section8recs.com/cat/SECTION8046D",
+  "/cat/SECTION8045D": "https://section8recs.com/cat/SECTION8045D",
+  "/cat/SECTION8044D": "https://section8recs.com/cat/SECTION8044D",
+  "/cat/SECTION8043D": "https://section8recs.com/cat/SECTION8043D",
+  "/cat/SECTION8042D": "https://section8recs.com/cat/SECTION8042D",
+  "/cat/SECTION8041D": "https://section8recs.com/cat/SECTION8041D",
+  "/cat/SECTION8040D": "https://section8recs.com/cat/SECTION8040D",
+  "/cat/SECTION8039D": "https://section8recs.com/cat/SECTION8039D",
+  "/cat/SECTION8038D": "https://section8recs.com/cat/SECTION8038D",
+  "/cat/SECTION8037D": "https://section8recs.com/cat/SECTION8037D",
+  "/cat/SECTION8LP2": "https://section8recs.com/cat/SECTION8LP2",
+  "/cat/SECTION8034D": "https://section8recs.com/cat/SECTION8034D",
+  "/cat/SECTION8036D": "https://section8recs.com/cat/SECTION8036D",
+  "/cat/SECTION8035D": "https://section8recs.com/cat/SECTION8035D",
+  "/cat/SECTION8033D": "https://section8recs.com/cat/SECTION8033D",
+  "/cat/SECTION8032D": "https://section8recs.com/cat/SECTION8032D",
+  "/cat/SECTION8031D": "https://section8recs.com/cat/SECTION8031D",
+  "/cat/SECTION8FILTH002D": "https://section8recs.com/cat/SECTION8FILTH002D",
+  "/cat/SECTION8030D": "https://section8recs.com/cat/SECTION8030D",
+  "/cat/SECTION8029D": "https://section8recs.com/cat/SECTION8029D",
+  "/cat/SECTION8028D": "https://section8recs.com/cat/SECTION8028D",
+  "/cat/SECTION8FILTH001D": "https://section8recs.com/cat/SECTION8FILTH001D",
+  "/cat/SECTION8027D": "https://section8recs.com/cat/SECTION8027D",
+  "/cat/SECTION8026D": "https://section8recs.com/cat/SECTION8026D",
+  "/cat/SECTION8025D": "https://section8recs.com/cat/SECTION8025D",
+  "/cat/SECTION8024D": "https://section8recs.com/cat/SECTION8024D",
+  "/cat/SECTION8023D": "https://section8recs.com/cat/SECTION8023D",
+  "/cat/SECTION8021D": "https://section8recs.com/cat/SECTION8021D",
+  "/cat/SECTION8TTC01": "https://section8recs.com/cat/SECTION8TTC01",
+  "/cat/SECTION8022D": "https://section8recs.com/cat/SECTION8022D",
+  "/cat/SECTION8019D": "https://section8recs.com/cat/SECTION8019D",
+  "/cat/SECTION8018D": "https://section8recs.com/cat/SECTION8018D",
+  "/cat/SECTION8017D": "https://section8recs.com/cat/SECTION8017D",
+  "/cat/SECTION8016D": "https://section8recs.com/cat/SECTION8016D",
+  "/cat/SECTION8015D": "https://section8recs.com/cat/SECTION8015D",
+  "/cat/SECTION8014D": "https://section8recs.com/cat/SECTION8014D",
+  "/cat/SECTION8012D": "https://section8recs.com/cat/SECTION8012D",
+  "/cat/SECTION8011D": "https://section8recs.com/cat/SECTION8011D",
+  "/cat/SECTION8010D": "https://section8recs.com/cat/SECTION8010D",
+  "/cat/SECTION8009D": "https://section8recs.com/cat/SECTION8009D",
+  "/cat/SECTION8008D": "https://section8recs.com/cat/SECTION8008D",
+  "/cat/SECTION8007D": "https://section8recs.com/cat/SECTION8007D",
+  "/cat/SECTION8006D": "https://section8recs.com/cat/SECTION8006D",
+  "/cat/SECTION8005D": "https://section8recs.com/cat/SECTION8005D",
+  "/cat/SECTION8004D": "https://section8recs.com/cat/SECTION8004D",
+  "/cat/SECTION8003D": "https://section8recs.com/cat/SECTION8003D",
+  "/cat/SECTION8002D": "https://section8recs.com/cat/SECTION8002D",
+  "/cat/SECTION8001D": "https://section8recs.com/cat/SECTION8001D",
+  "/cat/0": "https://section8recs.com/cat/0"
+ }
+}

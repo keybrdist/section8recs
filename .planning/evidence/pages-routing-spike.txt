@@ -1,0 +1,19 @@
+Spike 2026-10-24 ~00:00 UTC: throwaway branch spike/pages-routing (commit bbc946f, deleted after probing) deployed to
+https://spike-pages-routing.section8recs.pages.dev with public/{404.html,cat/SECTION8116.html,podcast.xml,_redirects,_headers}.
+_redirects: /cat/section8116 -> /cat/SECTION8116 301; /r/section8recs/10650 -> /cat/SECTION8116 301;
+/r/biobird-riders-lp/10650 -> ... 301; /cat/:cat/thanks /cat/:cat 301; /podcast-rss /podcast.xml 200
+_headers: Content-Type application/rss+xml for /podcast.xml and /podcast-rss
+
+/cat/SECTION8116                 200 text/html
+/cat/SECTION8116.html            308 -> /cat/SECTION8116
+/cat/SECTION8116/                308 -> /cat/SECTION8116
+/cat/section8116                 301 -> /cat/SECTION8116      (no loop: redirect matching is case-sensitive)
+/cat/Section8116                 404                          (only exact sources match)
+/r/section8recs/10650            301 -> /cat/SECTION8116
+/r/BIOBIRD-riders-lp/10650       404                          (case-sensitive; unknown slug variants fall through)
+/cat/SECTION8116/thanks          301 -> /cat/SECTION8116      (placeholder rule)
+/podcast-rss                     200 application/rss+xml      (200 rewrite + _headers)
+/podcast.xml                     200 application/rss+xml
+/nope-xyz                        404 (404.html served, SPA fallback off)
+/cat/NOPE                        404
+/index.html                      308 -> /

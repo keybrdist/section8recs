@@ -1,0 +1,82 @@
+{
+  "_note": {
+    "source": "Extracted from window.__NUXT__ SSR state in public HTML (https://section8recs.com/, fetched 2026-10-24 UTC). Direct API calls return 401 without the lgsites service token, so this is the payload as stored by lgsites after its own projection, not the raw API response.",
+    "api_endpoint": "GET /api/public/site-settings/links/{labelId}"
+  },
+  "response": {
+    "data": {
+      "links": {
+        "beatport": {
+          "id": "beatport",
+          "name": "Beatport",
+          "type": "dj",
+          "pos": 0,
+          "url": "https://www.beatport.com/label/section-8/15549"
+        },
+        "juno": {
+          "id": "juno",
+          "name": "Juno",
+          "type": "dj",
+          "pos": 1,
+          "url": "https://www.junodownload.com/labels/Section+8/?order=date_down"
+        },
+        "bandcamp": {
+          "id": "bandcamp",
+          "name": "Bandcamp",
+          "type": "retail",
+          "pos": 0,
+          "url": "https://section8recordings.bandcamp.com"
+        },
+        "youtube": {
+          "id": "youtube",
+          "name": "YouTube",
+          "type": "streaming",
+          "pos": 2,
+          "url": "https://www.youtube.com/section8dnb"
+        },
+        "soundcloud": {
+          "id": "soundcloud",
+          "name": "Soundcloud",
+          "type": "streaming",
+          "pos": 3,
+          "url": "https://soundcloud.com/section8recordings"
+        },
+        "deezer": {
+          "id": "deezer",
+          "name": "Deezer",
+          "type": "streaming",
+          "pos": 4,
+          "url": "http://www.trackitdown.net/recordlabel/114183/section-8.html"
+        },
+        "facebook": {
+          "id": "facebook",
+          "name": "Facebook",
+          "type": "social",
+          "pos": 1,
+          "url": "https://facebook.com/section8recs"
+        },
+        "twitter": {
+          "id": "twitter",
+          "name": "Twitter",
+          "type": "social",
+          "pos": 2,
+          "url": "https://x.com/section8recs"
+        },
+        "instagram": {
+          "id": "instagram",
+          "name": "Instagram",
+          "type": "social",
+          "pos": 3,
+          "url": "https://instagram.com/section8recs"
+        },
+        "website": {
+          "id": "website",
+          "name": "Website",
+          "type": "pub",
+          "pos": 0,
+          "url": "https://section8recs.com"
+        }
+      }
+    }
+  }
+}
