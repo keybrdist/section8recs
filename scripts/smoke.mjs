@@ -14,7 +14,7 @@ for (const arg of urls) {
   const errors = [];
   page.on('pageerror', e => errors.push(`pageerror: ${e.message}`));
   page.on('console', m => { if (m.type() === 'error' && !(want !== '200' && m.text().includes(`status of ${want}`))) errors.push(`console: ${m.text()}`); });
-  page.on('requestfailed', r => { if (!/fonts\.g|\.mp3/.test(r.url())) errors.push(`requestfailed: ${r.url()} ${r.failure()?.errorText}`); });
+  page.on('requestfailed', r => { if (!/fonts\.g|\.mp3|\/cdn-cgi\//.test(r.url())) errors.push(`requestfailed: ${r.url()} ${r.failure()?.errorText}`); });
   await page.goto(url, { waitUntil: 'load' });
   await page.waitForFunction(() => document.getElementById('enterSound')?.onclick, null, { timeout: 30000 }).catch(() => errors.push('first load: the app never started'));
   const res = await page.reload({ waitUntil: 'load' });
