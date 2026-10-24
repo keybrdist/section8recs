@@ -3,3 +3,8 @@ site/canonical.json
 # test runs
 node_modules/
 site/tests/out/
+# Astro build
+dist/
+.astro/
+static/app/
+src/generated/

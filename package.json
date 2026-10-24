@@ -1,0 +1,20 @@
+{
+  "name": "section8recs",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "bundle": "node scripts/bundle-app.mjs",
+    "dev": "npm run bundle && astro dev",
+    "build": "npm run bundle && astro build",
+    "preview": "astro preview",
+    "check:golden": "node scripts/check-golden.mjs",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "devDependencies": {
+    "astro": "^7.4.2",
+    "playwright-core": "^1.64.1"
+  }
+}
