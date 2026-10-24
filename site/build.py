@@ -112,3 +112,18 @@ write(slug, s)
 
 (DIST / 'index.html').write_text('<!doctype html><meta charset="utf-8"><title>Section 8 Recordings</title>'
                                  f'<meta http-equiv="refresh" content="0; url={slug}.html"><a href="{slug}.html">Section 8 Recordings</a>\n')
+
+# --- the live site: Cloudflare Pages serves public/. The chosen page becomes public/index.html with production metadata;
+#     the previous about page stays at public/classic.html ---
+LIVE, ORIGIN = S.parent / 'public', 'https://about.section8recs.com'
+live = (DIST / f'{slug}.html').read_text().replace(f'{slug}/', 'assets/')
+live = swap(live, f'<meta property="og:title" content="Section 8 Recordings · Intro J: {v["NAME"]} (mockup)">',
+            '<meta property="og:title" content="Section 8 Recordings">')
+live = swap(live, '<meta property="og:image" content="assets/og.jpg">',
+            f'<meta property="og:image" content="{ORIGIN}/assets/og.jpg">\n<meta property="og:url" content="{ORIGIN}/">'
+            f'\n<link rel="canonical" href="{ORIGIN}/">')
+assert 'mockup' not in live.split('</head>')[0].lower(), 'preview wording left in the live page head'
+(LIVE / 'assets').mkdir(parents=True, exist_ok=True)
+(LIVE / 'index.html').write_text(live)
+for f in (S / 'assets').glob('*.jpg'): shutil.copy2(f, LIVE / 'assets' / f.name)
+print('public/index.html', len(live))

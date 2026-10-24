@@ -7,7 +7,8 @@ release mood, with the full catalogue playable, searchable and queueable.
 
     python3 site/build.py
 
-Writes `site/dist/`:
+Writes `public/index.html` and `public/assets/`, which is the live site: Cloudflare Pages serves `public/` for
+about.section8recs.com, and the previous about page stays at `public/classic.html`. It also writes previews to `site/dist/`:
 
 - `section8-intro-j.html` — the experience behind the chosen home page (centred wireframe logo); `index.html` redirects here
 - `section8-about-mockup.html` — the same experience with the original full-frame intro
