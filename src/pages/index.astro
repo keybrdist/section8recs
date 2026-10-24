@@ -1,7 +1,19 @@
 ---
-import shell from '../generated/shell.json';
+import Experience from '../layouts/Experience.astro';
+import ReleaseCards from '../components/ReleaseCards.astro';
+import { figures, releases } from '../lib/catalog.mjs';
 ---
-<html lang="en">
-<head><Fragment set:html={shell.head} /></head>
-<body class="gated"><Fragment set:html={shell.body} /></body>
-</html>
+<Experience
+  seo={{ title: 'Section 8 Recordings', path: '/',
+    description: `Section 8 Recordings: the darkest drum & bass, jungle and bass music since 2007. An immersive listening experience across ${figures.releases} releases from Section 8 Recordings and Section 8 Bass.` }}
+  route={{ view: 'home' }}
+  gate={{ cue: 'Latest', cueHref: '#latest' }}>
+  <section class="g-sec" id="latest" aria-labelledby="latestH">
+    <div class="g-lw">
+      <p class="g-lk">Latest from the archive</p>
+      <h2 id="latestH" class="s">Releases</h2>
+      <ReleaseCards releases={releases.slice(0, 12)} />
+      <a class="r-more" href="/releases">All {figures.releases} releases →</a>
+    </div>
+  </section>
+</Experience>

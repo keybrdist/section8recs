@@ -1,0 +1,32 @@
+---
+// One page per artist, listing their releases on both labels.
+import Experience from '../../layouts/Experience.astro';
+import ReleaseCards from '../../components/ReleaseCards.astro';
+import { artists, artistUrl, cardUrl, labels } from '../../lib/catalog.mjs';
+
+export function getStaticPaths() {
+  return artists.map(a => ({ params: { slug: a.slug }, props: { a } }));
+}
+const { a } = Astro.props;
+const latest = a.releases[0];
+const n = a.releases.length;
+const on = labels.filter(l => a.releases.some(r => r.label === l.slug)).map(l => l.name).join(' and ');
+const years = [...new Set([a.releases.at(-1).date.slice(0, 4), latest.date.slice(0, 4)])].join('–');
+---
+<Experience
+  seo={{ title: `${a.name} · Section 8 Recordings`, path: artistUrl(a),
+    description: `${a.name} on ${on}: ${n} release${n > 1 ? 's' : ''} (${years}), latest ${latest.title} [${latest.cat}]. Listen in the Section 8 archive.`,
+    image: cardUrl(latest), imageAlt: `${latest.title} by ${latest.artist}: cover art`, type: 'profile' }}
+  route={{ view: 'artist', c: latest.cat }}
+  gate={{ kicker: `Artist · ${on}`, lede: `${a.name}. ${n} release${n > 1 ? 's' : ''} in the archive, ${years}.`,
+    enter: 'Play with sound', cue: 'Releases', cueHref: '#artist', nameIsHeading: false }}>
+  <section class="g-sec" id="artist" aria-labelledby="gT">
+    <div class="g-lw">
+      <p class="g-lk">Artist · {on}</p>
+      <h1 id="gT">{a.name}</h1>
+      <p class="g-by">{n} release{n > 1 ? 's' : ''}, {years}</p>
+      <ReleaseCards releases={a.releases} />
+      <a class="r-more" href="/releases">All releases →</a>
+    </div>
+  </section>
+</Experience>

@@ -166,7 +166,7 @@ function prev(){
   if(cur.i>0)return load(cur.r.c,cur.i-1);
   const r=D[(D.indexOf(cur.r)-1+D.length)%D.length];load(r.c,r.tr.length-1);
 }
-au.addEventListener('play',()=>{playing=true;document.body.classList.add('playing');markIndex()});
+au.addEventListener('play',()=>{playing=true;document.body.classList.add('playing');markIndex();if(cur.r)syncUrl(cur.r.c)});
 au.addEventListener('pause',()=>{playing=false;document.body.classList.remove('playing');markIndex()});
 au.addEventListener('ended',next);
 au.addEventListener('error',()=>{if(!au.src)return;setTimeout(next,800)});

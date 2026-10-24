@@ -1,0 +1,46 @@
+---
+// Every release on both labels, newest first, grouped by year. The label buttons filter the list in place.
+import Experience from '../layouts/Experience.astro';
+import { coverUrl, figures, labelOf, labels, releases, releaseUrl } from '../lib/catalog.mjs';
+
+const years = Object.entries(Object.groupBy(releases, r => r.date.slice(0, 4))).sort(([a], [b]) => b.localeCompare(a));
+---
+<Experience
+  seo={{ title: 'Releases · Section 8 Recordings', path: '/releases',
+    description: `All ${figures.releases} releases from Section 8 Recordings and Section 8 Bass, ${figures.years}: ${figures.tracks} tracks by ${figures.artists} artists.` }}
+  route={{ view: 'releases' }}
+  gate={{ kicker: `Archive · ${figures.years}`, lede: `${figures.releases} releases, ${figures.tracks} tracks, ${figures.artists} artists.`,
+    enter: 'Enter the archive', cue: 'Releases', cueHref: '#releases', nameIsHeading: false }}>
+  <section class="g-sec" id="releases" aria-labelledby="gT">
+    <div class="g-lw">
+      <p class="g-lk">Archive · {figures.years}</p>
+      <h1 id="gT">Releases</h1>
+      <div class="r-flt" role="group" aria-label="Label">
+        <button type="button" data-label="" aria-pressed="true">All labels</button>
+        {labels.map(l => <button type="button" data-label={l.slug} aria-pressed="false">{l.name}</button>)}
+      </div>
+      {years.map(([y, list]) => (
+        <section class="r-yr" aria-label={y}>
+          <h2>{y}</h2>
+          <ul class="r-rows">
+            {list.map(r => (
+              <li data-label={r.label}><a href={releaseUrl(r)}>
+                <img src={coverUrl(r, 96)} width="48" height="48" alt="" loading="lazy" decoding="async">
+                <span><span class="t">{r.title}</span><span class="a">{r.artist}</span></span>
+                <span class="c"><b>{r.cat}</b>{labelOf(r).name}</span>
+              </a></li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </section>
+  <script is:inline>
+    (()=>{const bs=[...document.querySelectorAll('.r-flt button')];
+      const show=l=>{bs.forEach(b=>b.setAttribute('aria-pressed',b.dataset.label===l));
+        document.querySelectorAll('.r-rows li').forEach(li=>li.hidden=!!l&&li.dataset.label!==l);
+        document.querySelectorAll('.r-yr').forEach(s=>s.hidden=![...s.querySelectorAll('li')].some(li=>!li.hidden))};
+      bs.forEach(b=>b.addEventListener('click',()=>show(b.dataset.label)));
+      const l=new URLSearchParams(location.search).get('label');if(l&&bs.some(b=>b.dataset.label===l))show(l)})();
+  </script>
+</Experience>

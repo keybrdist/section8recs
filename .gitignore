@@ -9,3 +9,4 @@ dist/
 static/app/
 src/generated/
 .sync-summary
+static/_redirects

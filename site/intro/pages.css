@@ -1,0 +1,58 @@
+
+/* page content below the hero: a release, an artist, the release list, latest releases on the home page.
+   Same forest-floor ground as the links section, so the gate scrolls as one page. */
+.g-sec{position:relative;padding:clamp(34px,6vh,64px) max(var(--pad),24px) clamp(30px,5vh,52px);color:#f1efe9;
+  background:linear-gradient(#050506,#070708 40%,#050506);border-top:1px solid rgba(236,235,230,.08)}
+.g-sec::before{content:"";position:absolute;left:0;right:0;top:-120px;height:120px;pointer-events:none;background:linear-gradient(transparent,#050506)}
+.g-sec + .g-links{border-top:0}.g-sec + .g-links::before{display:none}
+.g-sec a{color:inherit}
+.g-sec h1,.g-sec h2{margin:0;font:600 clamp(34px,5vw,64px)/.95 var(--cond);letter-spacing:.03em;text-transform:uppercase;color:#fff;text-wrap:balance}
+.g-sec h2.s{font-size:clamp(22px,2.4vw,30px);letter-spacing:.06em}
+.g-by{margin:12px 0 0;font:300 clamp(18px,1.8vw,24px)/1.3 var(--sans);color:rgba(236,235,230,.85)}
+.g-by a{text-decoration:none;border-bottom:1px solid rgba(236,235,230,.3)}.g-by a:hover,.g-by a:focus-visible{border-color:var(--acc);outline:0}
+
+/* a release */
+.r-grid{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start;margin-top:22px}
+.r-cover{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;background:#111;border:1px solid rgba(236,235,230,.12)}
+.r-facts{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin:22px 0 0;font:400 11px/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.r-facts dt{color:rgba(236,235,230,.42)}.r-facts dd{margin:0;color:rgba(236,235,230,.85)}
+.r-desc{margin:22px 0 0;max-width:62ch;font:400 15px/1.65 var(--sans);color:rgba(236,235,230,.78);white-space:pre-line}
+.r-trk{list-style:none;margin:26px 0 0;padding:0;border-top:1px solid rgba(236,235,230,.12)}
+.r-trk li{border-bottom:1px solid rgba(236,235,230,.12)}
+.r-trk button{display:grid;grid-template-columns:2.4em minmax(0,1fr) auto;gap:12px;align-items:baseline;width:100%;padding:12px 4px;text-align:left;transition:background .2s}
+.r-trk button:hover,.r-trk button:focus-visible{background:rgba(236,235,230,.05);outline:0}
+.r-trk .i{color:rgba(236,235,230,.38);font:500 10px var(--mono);letter-spacing:.14em}
+.r-trk .t{font:500 15px/1.35 var(--sans);color:#f1efe9}.r-trk .x{color:rgba(236,235,230,.5);font-weight:400}
+.r-trk .p{color:var(--acc);font:500 9.5px var(--mono);letter-spacing:.24em;text-transform:uppercase;opacity:0;transition:opacity .2s}
+.r-trk button:hover .p,.r-trk button:focus-visible .p{opacity:1}
+.r-st{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:26px 0 0;padding:0}
+.r-st a{display:inline-block;padding:8px 14px;border:1px solid rgba(236,235,230,.25);border-radius:999px;font:500 10px var(--mono);letter-spacing:.16em;
+  text-transform:uppercase;text-decoration:none;transition:border-color .2s,color .2s}
+.r-st a:hover,.r-st a:focus-visible{border-color:var(--acc);color:#fff;outline:0}
+.r-nav{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:clamp(30px,5vh,48px);padding-top:16px;border-top:1px solid rgba(236,235,230,.08);
+  font:500 10px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:rgba(236,235,230,.5)}
+.r-nav a{text-decoration:none}.r-nav a:hover,.r-nav a:focus-visible{color:#fff;outline:0}
+
+/* a list of releases: cover cards (artist pages, latest releases) and rows (the release list) */
+.r-cards{list-style:none;margin:26px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:22px 18px}
+.r-cards a{display:block;text-decoration:none}
+.r-cards img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;background:#111;border:1px solid rgba(236,235,230,.1);transition:border-color .2s}
+.r-cards a:hover img,.r-cards a:focus-visible img{border-color:var(--acc)}.r-cards a:focus-visible{outline:0}
+.r-cards .t{display:block;margin-top:10px;font:600 16px/1.1 var(--cond);letter-spacing:.05em;text-transform:uppercase;color:#f1efe9}
+.r-cards .m{display:block;margin-top:4px;color:rgba(236,235,230,.45);font:400 10px/1.4 var(--mono);letter-spacing:.06em}
+.r-more{display:inline-block;margin-top:26px;font:500 10.5px var(--mono);letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:var(--acc)}
+.r-flt{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.r-flt button{padding:8px 14px;border:1px solid rgba(236,235,230,.25);border-radius:999px;font:500 10px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:rgba(236,235,230,.7)}
+.r-flt button[aria-pressed="true"]{border-color:#f1efe9;color:#fff;background:rgba(236,235,230,.08)}
+.r-yr{margin:34px 0 0}.r-yr h2{font:600 22px/1 var(--cond);letter-spacing:.08em;color:rgba(236,235,230,.9);padding-bottom:10px;border-bottom:1px solid rgba(236,235,230,.12)}
+.r-rows{list-style:none;margin:0;padding:0}
+.r-rows li{border-bottom:1px solid rgba(236,235,230,.08)}
+.r-rows a{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:14px;align-items:center;padding:8px 4px;text-decoration:none;transition:background .2s}
+.r-rows a:hover,.r-rows a:focus-visible{background:rgba(236,235,230,.05);outline:0}
+.r-rows img{width:48px;height:48px;object-fit:cover;background:#111}
+.r-rows .t{display:block;font:500 14px/1.3 var(--sans);color:#f1efe9;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.r-rows .a{display:block;color:rgba(236,235,230,.55);font:400 13px/1.3 var(--sans);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.r-rows .c{color:rgba(236,235,230,.4);font:400 10px/1.4 var(--mono);letter-spacing:.06em;text-align:right}
+.r-rows .c b{display:block;font-weight:500;color:rgba(236,235,230,.6)}
+@media (max-width:760px){.r-grid{grid-template-columns:1fr}.r-cover{max-width:420px}.r-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .r-rows a{grid-template-columns:44px minmax(0,1fr)}.r-rows img{width:44px;height:44px}.r-rows .c{grid-column:2;text-align:left}.r-rows .c b{display:inline;margin-right:8px}}

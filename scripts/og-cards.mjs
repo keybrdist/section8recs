@@ -4,13 +4,12 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import { cardName } from './lib/cards.mjs';
 import { UA } from './lib/labelgrid.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const DIR = ROOT + 'static/og/';
 const W = 1200, H = 630, ART = 560;
-
-export const cardName = r => `${r.cat}-${r.cover_ts || '0'}.jpg`;
 
 export async function card(cover) {
   const bg = await sharp(cover).resize(W, H, { fit: 'cover' }).blur(28).modulate({ brightness: 0.42, saturation: 0.8 }).toBuffer();

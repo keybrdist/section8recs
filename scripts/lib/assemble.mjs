@@ -75,7 +75,7 @@ export function moduleSource() {
   return rd('v3-head.js') + rd('v4-scenes.js') + '\n' + rd('v4-engine.js') + '/* ---------------- shaders ---------------- */\n'
     + rd('v4-post.js') + common + rd('v4-walk.js') + rd('v4-scenes-a.js') + rd('v4-scenes-b.js') + sceneSource() + rd('v4-mix.js')
     + '\n' + rd('v4-trees.js') + '\n' + rd('v4-render.js') + '\n' + rd('v3-mid.js') + rd('v4-queue.js') + rd('v4-marks.js')
-    + rd('v4-search.js') + rd('v4-loop.js');
+    + rd('v4-search.js') + rd('v4-loop.js') + rd('v4-route.js');
 }
 
 // releases: the client array the module reads as D; dataText: its JSON text, inlined with '</' escaped

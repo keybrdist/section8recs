@@ -1,0 +1,15 @@
+---
+// Release covers linking to their pages.
+import { coverUrl, labelOf, releaseUrl } from '../lib/catalog.mjs';
+interface Props { releases: any[] }
+const { releases } = Astro.props;
+---
+<ul class="r-cards">
+  {releases.map(r => (
+    <li><a href={releaseUrl(r)}>
+      <img src={coverUrl(r, 320)} width="320" height="320" alt={`${r.title} cover`} loading="lazy" decoding="async">
+      <span class="t">{r.title}</span>
+      <span class="m">{r.artist} · {r.date.slice(0, 4)} · {labelOf(r).name}</span>
+    </a></li>
+  ))}
+</ul>
