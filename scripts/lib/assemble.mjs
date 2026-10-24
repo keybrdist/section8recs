@@ -103,6 +103,12 @@ export function assemble({ releases, dataText = JSON.stringify(releases), origin
   s = swap(s, '</body>', v.SCRIPT + '\n</body>');
   if (s.includes('section8-about-mockup/')) throw new Error('leftover base asset path');
 
+  // catalogue figures quoted in the page copy
+  const chron = [...releases].sort((x, y) => x.d.localeCompare(y.d) || x.c.localeCompare(y.c));
+  const figures = { RELEASES: releases.length, TRACKS: releases.reduce((n, r) => n + r.tr.length, 0), ARTISTS: new Set(releases.flatMap(r => r.ar)).size,
+    YEARS: `${chron[0].d.slice(0, 4)} — ${chron.at(-1).d.slice(0, 4)}`, FIRST: chron[0].c, LAST: chron.at(-1).c };
+  for (const [k, n] of Object.entries(figures)) s = s.split(`{${k}}`).join(String(n));
+
   const data = dataText.split('</').join('<\\/');
   if (count(s, '<!--CANONICAL-->') !== 1) throw new Error('canonical placeholder');
   s = s.split('<!--CANONICAL-->').join('').split('/*__DATA__*/[]').join(data);

@@ -32,7 +32,7 @@ addEventListener('keydown',e=>{
 addEventListener('pointermove',e=>{const x=e.clientX/innerWidth*2-1,y=-(e.clientY/innerHeight*2-1);mouse.mv=(mouse.mv||0)+Math.hypot(x-mouse.x,y-mouse.y);mouse.x=x;mouse.y=y});
 function enter(withSound){
   $('#gate').classList.add('gone');document.body.classList.remove('gated');acquire();lastSceneT=performance.now()/1000;
-  if(withSound){load(...firstTrack())}else{note([{t:'ARCHIVE OPENED · SECTION 8 RECORDINGS',c:'acc'},'139 RECORDINGS · 467 SEGMENTS · 2007—2020',{t:'NO AUDIO SIGNAL. PRESS PLAY.',c:'dim'}])}
+  if(withSound){load(...firstTrack())}else{note([{t:'ARCHIVE OPENED · SECTION 8 RECORDINGS',c:'acc'},`${D.length} RECORDINGS · ${NTRACKS} SEGMENTS · ${YEARS}`,{t:'NO AUDIO SIGNAL. PRESS PLAY.',c:'dim'}])}
 }
 $('#enterSound').onclick=()=>enter(true);$('#enterQuiet').onclick=()=>enter(false);
 (()=>{const st=['Signal acquired','Listening','Tree line: movement','Stay on the path'];let i=0;setInterval(()=>{if(document.body.classList.contains('gated')){i=(i+1)%st.length;

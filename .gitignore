@@ -8,3 +8,4 @@ dist/
 .astro/
 static/app/
 src/generated/
+.sync-summary
