@@ -1,31 +1,43 @@
-# Section 8 site redesign
+# Section 8 site
 
-An immersive, audio-reactive take on about.section8recs.com: a dark forest rendered in WebGL (three.js), one scene per
+An immersive, audio-reactive site for Section 8 Recordings: a dark forest rendered in WebGL (three.js), one scene per
 release mood, with the full catalogue playable, searchable and queueable.
 
 ## Build
 
-    python3 site/build.py
+Needs Node 24 (`.node-version`; Astro 7 needs at least 22.23.4).
 
-Writes `public/index.html` and `public/assets/`, which is the live site: Cloudflare Pages serves `public/` for
-about.section8recs.com, and the previous about page stays at `public/classic.html`. It also writes previews to `site/dist/`:
+    npm ci
+    npm run build      # bundle the app, then build the Astro pages into dist/
+    npm run preview    # serve dist/ locally
 
-- `section8-intro-j.html` — the experience behind the chosen home page (centred wireframe logo); `index.html` redirects here
-- `section8-about-mockup.html` — the same experience with the original full-frame intro
-- a folder of images next to each page
+Cloudflare Pages runs the same build for every push: `main` deploys about.section8recs.com, and every branch gets a
+preview at `https://<branch>.section8recs.pages.dev`.
 
-Each page is a single self-contained HTML file. Release data comes from `site/data/data.json` and is inlined at build
-time; audio streams from the label CDN; three.js loads from jsDelivr.
+`npm run bundle` (`scripts/bundle-app.mjs`) assembles the experience from `site/src/` and the home page variant in
+`site/intro/`, with the release data from `site/data/data.json` inlined, and writes it as cacheable files:
+
+- `static/app/app.<hash>.js` and `app.<hash>.css`: the module and styles every page shares
+- `static/app/intro.<hash>.js`: the home page's wireframe logo and link scrolling
+- `src/generated/shell.json`: the page head and body markup the Astro pages render around them
+
+Audio streams from the label CDN and three.js loads from jsDelivr. Static files (hero images, `classic.html`, the
+previous about page) live in `static/`.
 
 ## Layout
 
-- `site/src/` — the page shell (`v4-page.html`) and the module parts the build concatenates, in order:
-  head, scene registry, audio engine, post-processing, shared GLSL, scene shaders (`v4-scenes-old.js` is patched by the
-  build, `v4-walk.js`, `v4-scenes-a.js` and `v4-scenes-b.js` override by scene id), mixer, tree atlas, renderer, player,
-  queue, start/end markers, search, main loop
-- `site/intro/` — the home page variant (J) applied on top of the base page
-- `site/assets/` — hero images
-- `site/data/data.json` — 139 releases, 467 tracks
+- `site/src/`: the page shell (`v4-page.html`) and the module parts the bundle concatenates, in order: head, scene
+  registry, audio engine, post-processing, shared GLSL, scene shaders (`v4-scenes-old.js` is patched by
+  `scripts/lib/assemble.mjs`; `v4-walk.js`, `v4-scenes-a.js` and `v4-scenes-b.js` override by scene id), mixer, tree
+  atlas, renderer, player, queue, start/end markers, search, main loop
+- `site/intro/`: the home page variant (J) applied on top of the base page
+- `site/data/data.json`: 139 releases, 467 tracks
+- `src/pages/`: the Astro pages
+
+## Checks
+
+    node scripts/check-golden.mjs     # the Node assembly matches the page the old Python build published
+    node scripts/smoke.mjs <url>...   # headless Chromium: the page boots, WebGL renders, the gate enters
 
 ## Queue settings
 
@@ -40,5 +52,5 @@ menu, search, queue, archive) and reports horizontal overflow, controls off-scre
 groups, cut-off text and touch targets under 30 px. It writes screenshots, `report.json` and one contact sheet per state
 to `site/tests/out/`.
 
-    python3 -m http.server 8765 --directory site/dist &
-    NODE_PATH=<dir containing playwright-core> CHROME=<chromium binary> node site/tests/responsive.cjs
+    npx astro preview --port 8765 &
+    CHROME=<chromium binary> node site/tests/responsive.cjs

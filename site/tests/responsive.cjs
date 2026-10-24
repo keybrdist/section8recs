@@ -1,14 +1,14 @@
 // Responsive layout audit: loads the built page at phone, foldable and tablet sizes, opens each UI state, records layout
 // problems and screenshots, and writes one contact sheet per state.
 //
-//   python3 -m http.server 8765 --directory site/dist &
-//   NODE_PATH=<dir with playwright-core> node site/tests/responsive.cjs [url] [filter]
+//   npm run build && npx astro preview --port 8765 &
+//   node site/tests/responsive.cjs [url] [filter]
 //
 // CHROME=<path to a chromium binary> overrides the browser playwright-core would pick.
 const { chromium } = require('playwright-core');
 const fs = require('fs'), path = require('path');
 
-const URL = process.argv[2] || 'http://127.0.0.1:8765/section8-intro-j.html';
+const URL = process.argv[2] || 'http://127.0.0.1:8765/';
 const FILTER = process.argv[3] ? new RegExp(process.argv[3], 'i') : null;
 const OUT = path.join(__dirname, 'out');
 fs.mkdirSync(OUT, { recursive: true });
