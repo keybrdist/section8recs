@@ -1,25 +1,33 @@
 ---
 subject: Move section8recs.com onto the immersive design, statically hosted, with LabelGrid data synced every 24 h
-status: awaiting-decisions
-updated: 2026-10-24T00:15:00Z
+status: planned
+updated: 2026-10-24T08:40:00Z
 source: free-text (operator request, relayed from the source thread)
-plan: null
+plan: .planning/static-site-astro-migration.md
 ---
 
 # Discovery: section8recs.com on the immersive design, statically hosted
 
-## Recommendation in one paragraph
+## Recommendation in one paragraph (updated 2026-10-24 with the operator's decisions)
 
-Generate the site statically with the existing Python build, extended with Jinja2 templates and Pillow, and keep serving it from
-the Cloudflare Pages project that already serves about.section8recs.com. Every release keeps its current URL, `/cat/<CATALOG>`.
-Each one becomes a real HTML file (about 15 KB) with its own title, description, canonical, Open Graph/Twitter card, JSON-LD and
-visible release text, and it loads one shared, cached copy of the immersive app. The app opens with that release selected and
-uses `history.pushState` while browsing, so audio never stops between "pages". A GitHub Actions job runs every 24 h. It fetches the
-LabelGrid API with a dedicated token, keeps only an allowlist of public fields, validates the result and commits the data only when
-it changed. Pages then deploys that commit. A failed or suspicious sync commits nothing, so the live site always shows the last good data.
-A generated `_redirects` holds the 449 legacy and variant URLs. `404.html` turns on real 404s, and the build also writes `sitemap.xml`,
-`robots.txt` and the podcast feed. The cutover happens after a pre-flight crawl of the preview. It changes one DNS record and adds three
-redirect rules, and rollback is restoring that one record. Estimated effort is 4 to 5 working days, plus 2 to 4 weeks of monitoring.
+Generate the site statically with **Astro 7** (D1) and serve it from the Cloudflare Pages project that already serves
+about.section8recs.com. Pages builds from source, and its output is `dist/`. The catalogue covers **both labels on the
+section8recs LabelGrid account** (D2):
+
+- Section 8 Recordings (label 1): 140 releases;
+- Section 8 Bass (label 4, slug `section8dub`): 105 releases;
+- 843 tracks in total.
+
+Every release lives at `/cat/<CATALOG>`, which is the URL it has always had, including the old SECTION8DUB/BASS/FREE catalogues
+that crawlers still request. Each release page is a real HTML file with its own meta, social card, JSON-LD and visible release
+text. Every page loads one shared, cached copy of the immersive app, which opens with that release selected and uses `pushState`
+while browsing, so audio keeps playing. There's also a page for each of the 257 artists (D3), and the podcast feed is retired
+(D4).
+
+A GitHub Actions job runs every 24 h. It fetches the API with the dedicated token created on 2026-10-24 (D5), keeps only an
+allowlist of public fields, builds social cards for new or changed covers and validates the result. It commits only when
+something changed. A failed run commits nothing, so the live site keeps its last good data. A generated `_redirects` keeps 705
+legacy and variant URLs working, `404.html` turns on real 404s, and the cutover changes one DNS record.
 
 ## Starting Point
 
@@ -169,6 +177,44 @@ A throwaway branch was deployed to a preview and then deleted. On Pages as it is
 - `/podcast-rss /podcast.xml 200` plus `_headers` serves `application/rss+xml`.
 - `/cat/X.html` and `/cat/X/` 308 to `/cat/X`.
 
+### Evidence added 2026-10-24 (after the operator's decisions)
+- **Token (D5)**:
+  - Created through the operator's computer-use session at `app.labelgrid.com/user/profile/api-tokens` as
+    `section8recs-static-site-sync-v2`. It expires 2027-10-24.
+  - `GET /api/public/labels` with it returns label 1 `section8recs` and label 4 `section8dub` ("Section 8 Bass").
+  - It's stored as the repo Actions secret `LABELGRID_API_TOKEN` and locally as `SECTION8RECS_LABELGRID_API_TOKEN` in
+    `~/.secrets/agent-env.d/section8recs.env`.
+  - The first token created was exposed in the session log by a quoting mistake. It was deleted in the UI the same session, after
+    its replacement was verified.
+- **Token scope**:
+  - Sanctum mints every token with abilities `*`, and nothing checks abilities (`CreateApiToken.php:18-23`).
+  - `routes/api-public.php` has **59 write routes**, including label/artist update and `DELETE /labels/{label}`.
+  - The per-token IP whitelist can't be used, because GitHub Actions IPs aren't fixed.
+- **Catalogue** (`evidence/api/catalog-index.json`, `releases-both-labels-summary.json`):
+  - Label 1 has 140 releases: the 139 in `data.json`, plus SECTION8100S "We Might Be Monsters - Sampler" (2018).
+  - Label 4 has 105 releases (67 DUB, 29 BASS, 3 FREE and a few others).
+  - All 245 are `approved` and `distributed`, every release has tracks, and every track has a preview.
+  - `filter[label_id]` takes a single id (`ReleaseController.php:111-112`), so the sync makes one call per label.
+- **Old URLs**:
+  - Label 4 covers 98 of the 105 DUB/BASS/FREE catalogue paths requested in the last 30 days.
+  - By release id it maps 95 of the 98 previously unmatched archived `/r/<slug>/<id>` pairs, so 229 of 232 now redirect.
+  - Still unmapped: 3 test/removed pairs, plus `SECTION8116S2` and `SECTION8FREE01`.
+- **Media**:
+  - Label 4 previews are at `cdn-prod-1.labelgrid.com/labels/section8dub/320/<file>` and covers at `.../section8dub/img/<CAT>.jpg`.
+  - The CDN answers `206` with `Access-Control-Allow-Origin: *` for a browser User-Agent and **403 for Python's default
+    User-Agent**, so the sync must send an explicit UA.
+- **Artists**:
+  - `artists[]` entries are `{position, artistic_role, artist{id, artist_name, photo, spotify_artist_id, apple_artist_id, isni, public_id}}`.
+  - There are 257 distinct artists across both labels, 115 of them with two or more releases. One slug collides (`a-tech`).
+- **Hard-coded counts in the app**: "139" and "467" appear in `site/src/v3-mid.js:61,66,112,115,122`, `v4-loop.js:35`,
+  `site/intro/j.py:85`, `v4-search.js:1` and the page meta. These must come from the data.
+- **Toolchain**:
+  - Astro 7.4.2 requires Node >=22.23.4 (`npm view astro engines`).
+  - The Pages v3 build image defaults to Node 22.16.0 and honours `.node-version`
+    (https://developers.cloudflare.com/pages/configuration/build-image/).
+  - With `build.format: 'file'`, Astro writes `src/pages/cat/[cat].astro` as `/cat/<CAT>.html`, which Pages serves at
+    `/cat/<CAT>` (spike). `directory` format would force trailing-slash URLs.
+
 ## Unknown Inventory (material entries only)
 
 **Known unknowns (facts, now verified)**
@@ -194,262 +240,242 @@ A throwaway branch was deployed to a preview and then deleted. On Pages as it is
 ### Rendering model: static generation is enough, and SSR isn't needed
 
 Everything a crawler or link-preview bot needs (titles, descriptions, cards, JSON-LD, tracklists) is known at sync time and
-changes at most daily. With about 140 pages, a full rebuild takes seconds. SSR or edge functions would only add value for
-per-request personalisation or data fresher than 24 h, and nothing here needs either. A Pages Function stays available later for
-a single dynamic route if one appears; Functions requests count against a free quota of 100k per day.
+changes at most daily. With about 510 pages (245 releases, 257 artists and a handful of others), a full rebuild takes seconds to
+tens of seconds. SSR or edge functions would only add value for per-request personalisation or data fresher than 24 h, and nothing
+here needs either.
 
-### Stack options
-| | O1 Python build + Jinja2 + Pillow (**recommended**) | O2 Astro 7 SSG | O3 Eleventy 3 | O4 Next 16 export / Nuxt 4 generate |
+### Stack options (decided: O2 Astro, D1)
+| | O1 Python build + Jinja2 + Pillow | O2 Astro 7 SSG (**chosen, D1**) | O3 Eleventy 3 | O4 Next 16 export / Nuxt 4 generate |
 |---|---|---|---|---|
 | Crawlable HTML and per-page meta | Yes, templates | Yes | Yes | Yes |
-| OG/Twitter, JSON-LD, sitemap, RSS | Written by hand: about 150 lines in total for sitemap, RSS and JSON-LD | Integrations: `@astrojs/sitemap`, `@astrojs/rss` | Plugins or hand-written | Partly built in; `_redirects`/headers not supported in export |
-| Fit with the existing bundle | Native: `build.py` already assembles it, and the page templates just wrap it | `is:inline` ships it untouched, but GLSL patching stays in Python or gets ported to Node | Passthrough copy, same as Astro | Poor: a React/Vue runtime on every page, fighting a vanilla app |
-| Toolchain | One (Python 3 stdlib + 2 pinned libraries) | Python (bundle) + Node (pages), or a port of `build.py` | Python + Node | Node plus a framework runtime |
-| Build time (~150 pages) | Seconds | Seconds to tens of seconds | Seconds | Tens of seconds |
-| Maintenance | Lowest; nothing to upgrade but 2 libraries | Medium: majors yearly (6→7 in 2026) | Medium; project governance uncertain after the rename | Highest |
-| Cloudflare Pages fit | Static folder | Static folder (and Astro is now a Cloudflare project) | Static folder | Static folder |
+| OG/Twitter, JSON-LD, sitemap | Written by hand | `@astrojs/sitemap` plus components | Plugins or hand-written | Partly built in; `_redirects`/headers not supported in export |
+| Fit with the existing bundle | Native | `is:inline` / `public/` ships it untouched. The GLSL assembly gets ported to Node and checked against a golden file | Passthrough | Poor: a framework runtime on every page |
+| Toolchain | Python | Node only, after the port | Python + Node | Node plus a framework |
+| Maintenance | Lowest | Medium: majors yearly | Medium; governance uncertain | Highest |
+| Cloudflare Pages fit | Static folder | Static folder; Astro is a Cloudflare project since 2026 | Static folder | Static folder |
 
-**Why O1.** The site's hard part is the immersive app, and it already has a working, assertion-checked Python build that does
-GLSL surgery a generator can't replace. The pages around it are simple: about 140 releases, one index, a home page, perhaps 80
-artists, a sitemap, a feed and a 404. Adding a second toolchain and a framework release cadence to render that is cost without
-benefit. O1 also keeps the "single command builds `public/`" property that Pages, the previews and the responsive test rely on.
+**Operator decision (D1): Astro.** It gives component templating for the release, artist, index and 404 pages, the sitemap
+integration and image tooling, and it leaves room for editorial content later. To keep a single toolchain, the plan ports the
+130-line `build.py` assembly (and the intro J module `j.py`) to a Node script. A golden-output test proves the port: the
+Node-assembled app must match today's Python output byte for byte before anything else changes.
 
 **Rejected:**
-- **O2 Astro** is the strongest alternative. Move to it if the site grows into editorial content (news, interviews, artist bios
-  with rich text) or needs component-level templating. Porting later is cheap, because the data contract and URL scheme don't change.
-- **O3 Eleventy** offers no advantage over O1, and its governance changed in 2026.
-- **O4** puts the wrong runtime on every page and can't express `_redirects` in export mode.
-- **Workers static assets instead of Pages** would make clean-URL redirects 307 (temporary) by default and needs Workers Builds set
-  up again. Pages already works here, so stay on Pages. Moving later is a migration Cloudflare documents.
+- O1 Python, by the operator's choice.
+- O3 Eleventy: no advantage over Astro here, and its governance changed in 2026.
+- O4: puts the wrong runtime on every page.
+- Workers static assets instead of Pages: clean-URL redirects become 307, and Pages already works here.
 
-### Page architecture (O1)
-- `build.py` emits:
-  - `assets/app.<hash>.js` (the current module, unchanged apart from a router shim), `assets/app.<hash>.css` and
-    `assets/catalog.<hash>.json` (the client catalogue, about 70 KB, gzip about 15 KB);
-  - per-route HTML from Jinja2 templates.
-  All pages share the cached app, so per-page HTML is about 10–20 KB instead of 340 KB.
-- Each page embeds `<script type="application/json" id="s8-route">{"view":"release","c":"SECTION8116"}</script>`. On boot, the app
-  reads it, preselects the release, and the gate offers "Play *Riders LP*" (browsers still need one gesture before audio).
-- Inside the app, opening a release calls `history.pushState('/cat/<CAT>')` and updates `document.title`. `popstate` reopens the
-  previous view without stopping audio. A track deep link is `/cat/<CAT>?t=<n>`, with the canonical staying `/cat/<CAT>`.
-- Crawlable content is a **visible** release dossier in the gate's scroll area, the same place the home page links live today. It
-  holds:
+### Page architecture (Astro)
+- **Layout**: an Astro project at the repo root, with `publicDir: 'static'` because the existing `public/` is what Pages serves until the build switch.
+  - `src/pages/index.astro`, `releases.astro`, `cat/[cat].astro`, `artist/[slug].astro` and `404.astro`;
+  - `src/content.config.ts` loads `site/data/catalog.json` through a file loader;
+  - `astro.config.mjs` sets `site: 'https://section8recs.com'`, `build.format: 'file'`, `trailingSlash: 'never'`,
+    `outDir: 'dist'`, and `@astrojs/sitemap`;
+  - `.node-version` pins Node 24 LTS (Astro needs >=22.23.4).
+- **App bundle**: `scripts/bundle-app.mjs`, the Node port of `site/build.py`, writes:
+  - `static/app/app.<hash>.js` (the current module, plus a small router shim);
+  - `static/app/app.<hash>.css`;
+  - `static/app/catalog.<hash>.json` (the compact client catalogue for both labels, about 120 KB raw, about 25 KB gzip);
+  - a manifest the Astro layout reads to emit the script and link tags.
+  Every page shares those cached files, so per-page HTML is about 10–20 KB instead of 340 KB.
+- **Route boot**: each page embeds
+  `<script type="application/json" id="s8-route">{"view":"release","c":"SECTION8116"}</script>`. The app reads it on boot, preselects
+  the release, and the gate offers "Play *Riders LP*" (browsers still need one gesture before audio).
+  - In the app, opening a release calls `history.pushState('/cat/<CAT>')` and updates `document.title`.
+  - `popstate` restores the view without stopping audio.
+  - A track deep link is `/cat/<CAT>?t=<n>`, with the canonical staying `/cat/<CAT>`.
+- **Labels in the experience**: one archive holds both labels. Releases show their label (Section 8 Recordings / Section 8
+  Bass), and the archive can filter by label. Counts such as "139 recordings" come from the data.
+- **Crawlable content**: a **visible** release dossier in the gate's scroll area, the same place the home page links live today.
+  It holds:
   - cover `<img>` (400 px CDN variant, with alt text);
-  - title (h1), artist, catalogue number, date and genres;
+  - title (h1), artist links, label, catalogue number, date and genres;
   - description and the tracklist (each item a play button);
-  - store links;
-  - links to `/releases` and the artist pages.
-  Without JS or WebGL it reads as a normal page, and `body.nogl` already exists.
+  - store links.
+  Artist pages and `/releases` use the same pattern. Without JS or WebGL they read as normal pages.
 
 ## Target URL scheme
 | URL | Content | Source |
 |---|---|---|
 | `/` | Home: the immersive experience (intro J), plus crawlable label text, latest releases and links below | existing |
-| `/releases` | Crawlable index of all releases by year (cover, title, artist, cat). Opens the archive view in the app | new (lgsites had one) |
-| `/cat/<CAT>` | Release page; the canonical stays exactly as today, uppercase as stored in LabelGrid | kept |
-| `/artist/<slug>` | Artist page: their releases, MusicGroup JSON-LD (**D3**) | new, optional |
-| `/podcast-rss` | RSS 2.0 + iTunes feed, rewritten from `/podcast.xml` (**D4**) | revived |
-| `/sitemap.xml`, `/robots.txt`, `/404.html` | Generated | new |
-| `/classic` | The old about page | existing (`public/classic.html`) |
+| `/releases` | Crawlable index of all 245 releases by year, filterable by label. Opens the archive view in the app | new (lgsites had one) |
+| `/cat/<CAT>` | Release page; the canonical is exactly as today, uppercase as stored in LabelGrid, for both labels | kept / restored |
+| `/artist/<slug>` | Artist page with their releases on both labels and MusicGroup JSON-LD. The slug comes from `artist_name`; on a collision (`a-tech`), the later artist id gets a `-<id>` suffix | new (D3) |
+| `/sitemap-index.xml` (+ `/sitemap.xml` 301), `/robots.txt`, `/404.html` | Generated | new |
+| `/classic` | The old about page | existing |
+| `/podcast-rss`, `/podcast` | **404** (retired, D4) | retired |
 
-### Redirect map (Pages `_redirects`, generated each build; draft in `evidence/redirects-draft.txt`)
-- **Static** (449 now, limit 2,000):
-  - `/r/section8recs/<id>` → `/cat/<CAT>` (139);
-  - `/r/<lgsites-slug>/<id>` → `/cat/<CAT>` (139, slug = artist + title, lowercased and hyphenated);
-  - the 134 archived `/r/<slug>/<id>` pairs → `/cat/<CAT>`;
-  - `/cat/<lowercase>` → `/cat/<CAT>` for every release.
-  Analytics ids are merged into the map at each build.
-- **Dynamic** (11, limit 100):
-  - `/section8recs/cat/:cat`, `/player/cat/:cat`, `/player/:cat`, `/cat/:cat/thanks`, `/cat/:cat/cancelled` → `/cat/:cat` (301);
-  - `/section8recs[/releases]` → `/` or `/releases` (301);
+### Redirect map (Pages `_redirects`, generated at build; draft v2 in `evidence/redirects-draft.txt`)
+- **Static** (696, limit 2,000):
+  - `/r/section8recs/<id>` → `/cat/<CAT>` (label 1);
+  - `/r/<lgsites-slug>/<id>` → `/cat/<CAT>` for all 245 releases;
+  - 229 archived `/r/<slug>/<id>` pairs → `/cat/<CAT>`;
+  - `/cat/<lowercase>` → `/cat/<CAT>` for every release, plus requested mixed-case variants;
+  - `/cat/SECTION8DUB43D` → `/cat/SECTION8DUB043D`.
+- **Dynamic** (9, limit 100):
+  - `/section8recs/cat/:cat`, `/player/cat/:cat`, `/player/:cat` and `/cat/:cat/*` → `/cat/:cat` (301; the last covers
+    `thanks`, `cancelled` and `SECTION8DUB054D/1911`);
+  - `/section8recs[/releases]` → `/` or `/releases`;
+  - `/r/:slug/:id/*` → `/releases`;
   - `/checkout` → `/releases` (301);
-  - `/latest` → `/releases` (302, since it was never a real page);
-  - `/podcast-rss` → `/podcast.xml` (200 rewrite).
-- **Deliberately 404**: retired catalogues (DUB/BASS/FREE, 98 dead `/r/` pairs), `/dropbox` (**D7**) and scanner paths.
-  Redirecting removed pages to `/releases` would itself be reported as a soft 404.
-- **Host redirects** (zone wildcard Single Redirect rules such as `https://www.section8recs.com/*` → `https://section8recs.com/${1}`, since Pages can't redirect across hosts; the Free plan allows 10, https://developers.cloudflare.com/rules/url-forwarding/):
-  - `www.section8recs.com/*` → `https://section8recs.com/${path}` 301;
-  - `dl.section8recs.com/*` → the same;
-  - `about.section8recs.com/*` → the same, **after** cutover (**D6**).
-- **Takedowns**: when a release disappears from the API, the sync keeps a tombstone list. Its `/cat/` URL returns 404 and its
-  redirects are dropped, so nothing redirects to a 404.
+  - `/latest` → `/releases` (302).
+- **Deliberately 404**:
+  - unknown catalogues (`SECTION8116S2`, `SECTION8FREE01`, test values);
+  - 3 dead `/r/` pairs;
+  - `/podcast-rss`, `/podcast` and `/podcast-00N-*` (D4);
+  - `/dropbox` (D7);
+  - scanner paths.
+- **Host redirects** (zone wildcard Single Redirect rules; the Free plan allows 10,
+  https://developers.cloudflare.com/rules/url-forwarding/):
+  - `https://www.section8recs.com/*` and `https://dl.section8recs.com/*` → `https://section8recs.com/${1}` 301;
+  - `https://about.section8recs.com/*` → the same, after cutover (D6).
+- **Takedowns**: a release that disappears from the API goes on a tombstone list. Its page returns 404 and its redirects are
+  dropped.
 
 ## Data sync design
-- **`site/sync.py`** (stdlib `urllib`):
-  - resolves label 1 and pages `GET /api/public/releases?filter[label_id]=1&per_page=100&page=N` until `meta.last_page`;
-  - reads `labels/{id}` and `site-settings/links/{id}` for label links and the podcast URL;
-  - projects to an **allowlist**: release `id, cat, title, mix_version, artist, artists[], release_date, genres, description,
-    cover url + ts, short_url, store links (non-empty, valid http(s), dropping "0")`; track
-    `id, track_num, title, display artist, preview url, filename`; label `name, logo, social links`;
-  - writes `site/data/catalog.json` with sorted keys and stable order, so diffs are readable;
-  - `site/data/overrides.json` holds editorial fixes: title spacing, the mislabelled "Deezer" link that points to trackitdown,
-    hidden releases.
-- **Client data**:
-  - The build derives the compact client array the app already reads (`c,a,t,d,s,ar,x,tr`), so the app code doesn't change.
-  - `tr` entries become `[title, file, trackId]`, and `MP3 + file` is replaced by the API's `preview_file.url`, which supports UUID names.
-  - `site/data/data.json` is retired after the first reviewed sync.
+- **`scripts/sync.mjs`** (Node, built-in `fetch`, explicit User-Agent `section8recs-site-sync/1.0`):
+  - `GET /api/public/labels`, the owner-scoped list, which today returns labels 1 and 4. The sync expects exactly that set and
+    fails on any change, so a new label is an explicit decision.
+  - For each label, pages `GET /api/public/releases?filter[label_id]=<id>&per_page=100&page=N` until `meta.last_page`.
+  - Reads `site-settings/links/{id}` for label social links.
+  - **Allowlist projection**:
+    - release: `id, public_id, cat, label{id, slug, name}, title, mix_version, display artist, artists[{id, name, role}],
+      release_date, genres, description, cover url + ts, short_url, store links` (non-empty http(s) only, `"0"` dropped);
+    - track: `id, track_num, title, display artist, preview url, filename`;
+    - label: `name, logo, social links`.
+    Nothing else is written, which keeps emails, revenue share and similar fields out of git.
+  - Writes `site/data/catalog.json` with stable sort order, so diffs are readable.
+  - `site/data/overrides.json` holds editorial fixes: title spacing, the "Deezer" link that points to trackitdown, any hidden release.
+- **Social cards**: for each release whose cover `ts` changed, the sync fetches the 800 px cover and writes a 1200×630 JPEG to
+  `static/og/<CAT>-<ts>.jpg` with `sharp`. The card is the cover on a blurred, darkened copy of itself, with no text. Cards are
+  committed with the data, so the Pages build stays offline and deterministic.
 - **Validation before writing** (any failure exits non-zero and writes nothing):
-  - HTTP 200 on every page, and the item count equals `meta.total`;
-  - every release has `cat`, `title`, a date and at least one track with a preview URL; catalogue numbers are unique;
-  - the count hasn't dropped by more than 3 versus the last good catalogue. Larger drops open a PR for review instead of
-    committing to `main`;
-  - every key in the app's `DEFAULT_CONFIG` still resolves (U3).
-- **Runner**: `.github/workflows/sync.yml` runs on `schedule: '17 6 * * *'` (UTC, away from :00), `workflow_dispatch`, and
+  - every page returns HTTP 200, the count per label equals `meta.total`, and the label set is exactly {1, 4};
+  - every release has `cat`, `title`, a date and at least one track with a preview URL;
+  - catalogue numbers are unique across both labels;
+  - no label lost more than 3 releases versus the last good catalogue. Larger drops go to a PR instead of `main`;
+  - every key in the app's `DEFAULT_CONFIG` still resolves;
+  - no forbidden key appears in the output.
+- **Runner**: `.github/workflows/sync.yml`, on `schedule: '17 6 * * *'` (UTC), `workflow_dispatch` and
   `repository_dispatch: labelgrid-release`. It:
-  1. runs sync, build and checks (meta checker, redirect self-check, link check of every `/cat/` page);
-  2. commits `site/data/catalog.json` and `public/` to `main` only if the diff is non-empty;
-  3. lets the Pages Git integration deploy, as it does today.
+  1. runs sync;
+  2. runs `npm run build` and the checks (meta checker, redirect self-check, link check of every page);
+  3. commits `site/data/catalog.json`, `site/data/tombstones.json` and `static/og/*` to `main` only if they changed. The Pages Git
+     build then deploys.
 
-  The token is `LABELGRID_API_TOKEN`, stored as an Actions secret and never echoed. Logs print only counts and catalogue numbers.
-- **Keep the last good data**: the live site is whatever `main` holds. A failed run commits nothing, and GitHub emails on failure.
-- **Liveness** (U5): if the last data commit is older than 30 days, the run commits `site/data/.heartbeat` (a timestamp). That
-  keeps the cron alive in a public repo and costs about one extra Pages build a month (500 are free). A run that hasn't succeeded
-  in 72 h opens an issue.
-- **Later (optional, P6)**: a LabelGrid webhook `release.distributed` goes to a tiny Worker that verifies the HMAC and calls
-  `repository_dispatch`, so new releases appear within minutes instead of within 24 h.
-- **Why not Cloudflare cron + deploy hook**: it would fetch the API inside the Pages build, so data history, diff review and
-  data-level rollback would all be lost. It would also put the API token in Pages build env. GitHub Actions keeps the data in git,
-  where every change is reviewable and revertible.
+  The token is `LABELGRID_API_TOKEN`, an Actions secret that is never echoed. Logs show counts and catalogue numbers only. Forks and
+  PR workflows never receive the secret.
+- **Liveness**:
+  - If the last data commit is older than 30 days, the run commits `site/data/.heartbeat`.
+  - A run that hasn't succeeded in 72 h opens an issue.
+  - From 2027-09-24 the run opens an issue saying the token expires on 2027-10-24.
+- **Later (optional)**: a LabelGrid `release.distributed` webhook goes to a Worker that verifies the HMAC and calls
+  `repository_dispatch`.
 
 ## SEO and social checklist
-- **Release title**: `<Title> by <Artist> [<CAT>] · Section 8 Recordings` (drop "LabelGrid").
-- **Release description**: `description_long` cut at a sentence boundary, 160 characters maximum. When it's empty (45 of 139),
-  generate "<Title> by <Artist>, <n> tracks of <genres>, released <Mon YYYY> on Section 8 Recordings."
-- **Canonical and `og:url`**: absolute `https://section8recs.com/cat/<CAT>` on every page. Home, `/releases` and artist pages
-  have their own.
-- **OG image**:
-  - A generated 1200×630 JPEG per release: the cover on a blurred, darkened copy of itself, with a small "S8" mark and no other
-    text. Apple advises against text in previews.
-  - Pillow builds it at build time from the 800 px cover and caches it by cover `ts`.
-  - It's referenced as `og:image` with width and height, `og:image:alt`, `twitter:card=summary_large_image` and `twitter:image`.
-  - The filename includes the hash, so a cover change gets a new URL and busts the X (7 d) and Facebook caches.
-  - Home keeps `og.jpg`. `/releases` gets a cover-grid card.
-- **Other social meta**: `og:type` is `music.album` on releases and `website` elsewhere. Also `og:site_name`,
-  `music:release_date`, `theme-color`, and `twitter:site` if the operator confirms the X handle.
+- **Release title**: `<Title> by <Artist> [<CAT>] · <Label name>` (Section 8 Recordings or Section 8 Bass).
+- **Release description**: `description_long` cut at a sentence boundary, 160 characters maximum. When it's empty, a generated
+  sentence from title, artist, track count, genres, date and label.
+- **Artist page**: title `<Artist> · Section 8 Recordings`, and a description listing their release count and latest release.
+- **Canonical and `og:url`**: absolute URLs on every page.
+- **Card tags**: `og:image` = the generated card (with width, height and alt), `twitter:card=summary_large_image`,
+  `twitter:image`.
+  - Card filenames carry the cover `ts`, so a cover change busts the X and Facebook caches.
+  - Home keeps `og.jpg`. `/releases` and artist pages use a cover grid or the artist photo, falling back to the label card.
 - **JSON-LD**:
-  - release: `MusicAlbum` (`byArtist` MusicGroup, `datePublished`, `numTracks`, `track` ItemList of `MusicRecording`, `image`,
-    `albumRelease` MusicRelease with `catalogNumber`, `recordLabel` Organization, and `sameAs` = store links);
-  - home: `Organization` plus `WebSite`;
-  - artist: `MusicGroup`;
-  - podcast: `PodcastSeries` if revived.
-  There's no rich result to win, but it helps entity understanding and costs nothing.
-- **Real 404s**: `public/404.html`, styled, with links to `/` and `/releases`. A test asserts unknown paths return 404.
-- **`robots.txt`**: `Allow: /` and `Sitemap: https://section8recs.com/sitemap.xml`. Cloudflare's managed content signals stay
-  if the operator wants them.
-- **`sitemap.xml`**: `/`, `/releases`, every `/cat/<CAT>` and every artist page, with `lastmod` = the release's last data change
-  (only when it's accurate), plus an `image:loc` cover per release.
-- **`/podcast-rss`**: RSS 2.0 with iTunes and `atom:link self`. `guid` = the release `public_id` (stable), the enclosure is the
-  preview URL, and the episodes are releases whose `cat` contains `POD` (**D4**).
-- **Indexing control**: `_headers` sets `X-Robots-Tag: noindex` on `https://:project.pages.dev/*` and `https://:version.:project.pages.dev/*` (the documented pattern for pages.dev and branch previews) and, until cutover,
-  on `https://about.section8recs.com/*`, so staging never competes with the apex.
-- **Search Console**:
-  - The domain property is DNS-verified (TXT records stay), so nothing to re-verify.
-  - At cutover, submit `sitemap.xml` and spot-check a few URLs with URL Inspection.
-  - Watch Page indexing and 404s for 4 weeks.
-  - Change of Address isn't used, since the domain stays the same.
-- **Pre-cutover validation**:
-  - Rich Results Test / Schema validator on 3 pages;
-  - X, Facebook, LinkedIn and Discord preview checks on 3 releases;
-  - Lighthouse SEO and a11y on `/`, `/releases` and one release;
-  - the responsive test extended to a release page.
+  - release: `MusicAlbum` (`byArtist` MusicGroup, `datePublished`, `numTracks`, `track` ItemList of `MusicRecording`,
+    `albumRelease` MusicRelease with `catalogNumber` and `recordLabel`, `sameAs` = store links);
+  - artist: `MusicGroup` (`sameAs` Spotify/Apple ids when present);
+  - home: `Organization` with both labels as `subOrganization`, plus `WebSite`.
+- **Indexing files**:
+  - Real 404s, with a test asserting unknown paths return 404.
+  - `robots.txt` with a `Sitemap:` line.
+  - Sitemap with every page and an `image:loc` cover per release.
+- **`_headers`**: `X-Robots-Tag: noindex` on `https://:project.pages.dev/*`, `https://:version.:project.pages.dev/*`, and
+  `https://about.section8recs.com/*` until cutover.
+- **Podcast retired (D4)**: `/podcast-rss` returns 404. SECTION8POD13 stays a normal release page. The operator removes the show
+  from Apple Podcasts Connect / Spotify for Creators if it's listed; the plan includes a checklist item to check for listings.
+- **Search Console**: the property is DNS-verified. Submit the sitemap at cutover and watch Page indexing for 4 weeks.
 
-## Phased rollout (estimates are focused agent-days)
-| Phase | Work | Effort | Exit check |
-|---|---|---|---|
-| P1 Pages and routing | Split the build into app bundle and templates; route shim and pushState; release dossier; `/releases`; `404.html`; robots; sitemap; generated `_redirects`; `_headers` noindex for previews and about. Built from the current `data.json` | 1.5 d | Preview: all 139 pages return 200 with correct meta; all 449 legacy URLs return 301 to the right page; unknown paths 404; the responsive test passes on home and one release |
-| P2 Data sync | `sync.py`, allowlist, overrides, validation, workflow, secret, heartbeat. The first sync goes to a PR diffed against the scraped `data.json` | 1 d | The operator approves the first data PR; a forced-failure run commits nothing |
-| P3 SEO and social | OG card generation, JSON-LD, description fallback, podcast feed (D4), artist pages (D3), external validators | 1 d | Validators are clean; previews render on X, FB, Discord and iMessage |
-| P4 Staging on about. | P1–P3 deploy to about.section8recs.com (noindex) for the operator to review on real devices | 0.25 d + review | Operator sign-off |
-| P5 Cutover | (1) Add `section8recs.com` as a Pages custom domain. (2) Create the www/dl Single Redirect rules. (3) Replace apex `A 157.90.158.72` with `CNAME section8recs.pages.dev` (proxied); wait for Pages to validate. (4) Re-crawl the apex with the evidence URL list. (5) Add the about→apex redirect and drop the about noindex. (6) Submit the sitemap. Go at a low-traffic hour; the edge serves the change within seconds because the records are proxied | 0.5 d | Same URL-list crawl on the apex passes; analytics show no rise in 404s on real paths |
-| P6 Monitor and decommission | 2–4 weeks on Search Console and analytics. Then remove section8recs.com from the lgsites proxy/domain config, update podcast directories if D4 changes the feed, retire the old `www` A record target | 0.25 d spread out | Indexed `/cat/` count steady; no lgsites traffic for the domain |
-| P7 Optional | Webhook relay for near-real-time releases; bot rules (side note) | 0.5 d | |
+## Phased rollout
+Detailed in `.planning/static-site-astro-migration.md`. In summary:
+1. **Astro skeleton and app port**, golden-tested.
+2. **Sync for both labels** and the first data PR.
+3. **Pages, routing and redirects**.
+4. **SEO and cards**.
+5. **Pages build switch and staging on about.**
+6. **Cutover**: Pages custom domain, www/dl redirect rules, apex DNS swap, URL-list crawl.
+7. **Monitor and decommission lgsites** for this domain.
 
-**Total**: about 4.5–5 agent-days, plus operator review and 2–4 weeks of monitoring.
-
-**Rollback**:
-- Before P5 step (3), nothing user-visible has changed.
-- After it, restore the apex `A 157.90.158.72` record (one API call, effective within seconds while proxied). lgsites stays running
-  untouched until P6, so rollback stays available for the whole monitoring window.
-- Data rollback is `git revert` of a sync commit.
-
-**What changes for lgsites**: nothing until P6. Then the section8recs.com mapping (the upstream proxy that sets the `slug` header;
-its location is INCONCLUSIVE, outside the lgsites repo) is removed. lgsites stays live for other labels. The label-object leak (U9)
-should be fixed in lgsites regardless.
+That's about 6 agent-days, plus 2–4 weeks of monitoring. Rollback is restoring the apex `A 157.90.158.72` record; lgsites stays
+untouched until phase 7.
 
 ## Bot and scanner noise (side note; no decision taken)
-Static assets on Pages are free and unlimited, and probes will get a cheap real 404 instead of a 760 KB SSR render, so the cost
-problem mostly disappears at cutover. Options, in increasing strength:
-1. Do nothing.
-2. A free WAF custom rule (5 on Free) that blocks `*.php`, `/.env*`, `/.git*`, `/wp-*` and similar paths.
-3. Bot Fight Mode. Verified bots such as Googlebot and Twitterbot are allowed, but it can challenge unverified preview fetchers
-   (some chat apps).
-4. Rate-limiting rules.
-
-Recommendation: option 2 at P6, if analytics noise still matters.
+Static assets are free on Pages, and probes get a cheap 404. If noise still matters after cutover, add a free WAF custom rule that
+blocks `*.php`, `/.env*`, `/.git*` and `/wp-*`. Bot Fight Mode can challenge unverified link-preview fetchers, so it isn't recommended.
 
 ## Locked Decisions
-None yet. The operator's answers to D1–D7 lock them.
-
-## Operator decisions needed
-- **D1 Stack**: Python + Jinja2 (O1, recommended), or Astro 7 (O2) if you expect editorial content soon.
-- **D2 Catalogue scope**: only the 139 releases the API returns for label 1 (recommended). The old SECTION8DUB/BASS/FREE
-  catalogues still draw crawler requests but aren't in LabelGrid's list for this label. Should any of them come back, for example
-  as another LabelGrid label?
-- **D3 Artist pages**: add `/artist/<slug>` (recommended in P3; 89 display-artist strings, individual artists from `artists[]`),
-  or keep releases only.
-- **D4 Podcast**:
-  - revive `/podcast-rss` as a valid feed of the POD releases (1 episode today; recommended only if you'll publish more), or
-  - retire it: serve 404 and remove the show from Apple/Spotify.
-  The current feed has been broken for years either way.
-- **D5 API credential**: who mints a dedicated LabelGrid API token on an account with `api_access` that owns label 1, stored as the
-  repo's `LABELGRID_API_TOKEN` Actions secret (recommended over reusing lgsites' service token). This blocks P2 only.
-- **D6 about.section8recs.com after cutover**: 301 to the apex (recommended), or keep it as a separate site.
-- **D7 `/dropbox` demo upload**: drop it with a 404 (recommended, since `enable_demos_inbox` is false), or point demos to an email
-  address on a `/demos` page.
-- **Timing**: when to cut over. Any weekday at a low-traffic hour works, and nothing else is needed from you.
+- **D1** (operator, 2026-10-24): Astro 7 static generation on Cloudflare Pages. The Python assembly is ported to Node.
+- **D2** (operator): include both labels on the section8recs LabelGrid account, label 1 `section8recs` and label 4 `section8dub`
+  ("Section 8 Bass"), all at `/cat/<CAT>`.
+- **D3** (operator): artist pages at `/artist/<slug>`.
+- **D4** (operator): retire the podcast feed; `/podcast-rss` returns 404.
+- **D5** (operator, executed 2026-10-24): dedicated token `section8recs-static-site-sync-v2`, created via computer use and
+  expiring 2027-10-24, stored as Actions secret `LABELGRID_API_TOKEN`.
+- **D6** (default, not yet confirmed by the operator): about.section8recs.com 301s to the apex after cutover.
+- **D7** (default, not yet confirmed by the operator): `/dropbox` is dropped and returns 404.
 
 ## Assumptions
-- About 140 releases changing rarely means daily sync is ample. Webhooks are optional.
-- LabelGrid keeps serving covers and previews from `cdn-prod-1.labelgrid.com` with CORS open. That's verified for previews on
-  pages.dev and about; covers are plain `<img>`, so CORS doesn't apply to them.
-- The operator's X handle is `@section8recs`. Unconfirmed; it's only used for `twitter:site`.
+- Both labels change rarely, so a daily sync is enough.
+- LabelGrid keeps serving covers and previews from `cdn-prod-1.labelgrid.com` with CORS open. Verified for both labels'
+  previews on 2026-10-24.
+- The X handle `@section8recs` is unconfirmed; it's used only for `twitter:site`.
 
 ## Residual Unknowns
 | Unknown | Risk | Revisit |
 |---|---|---|
-| Where the lgsites proxy maps section8recs.com (sets `slug`) | Low: only matters for decommission | P6 |
-| Whether lgapi tokens support read-only abilities | Low: affects token blast radius only | D5 / P2 |
-| Release `content_type` and whether singles/EPs/LPs need distinct schema | Low | P3 |
-| How Google has indexed `/r/` versus `/cat/` (no GSC access in this session) | Medium: affects how long to watch redirects | P5: check GSC Page indexing before and after |
-| Whether a heartbeat commit pushed by `GITHUB_TOKEN` counts as repository activity for GitHub's 60-day rule (the docs don't say) | Medium: the cron could still lapse | P2: if not confirmed, trigger `workflow_dispatch` from a Cloudflare Worker cron instead (5 free crons) |
-| Whether Pages auto-replaces the apex A record in the custom-domain flow, or needs it removed first (community reports only) | Low: either way it's one record | P5 dry-run in the dashboard |
+| Where the lgsites proxy maps section8recs.com | Low | Phase 7 |
+| How Google has indexed `/r/` versus `/cat/` (no GSC access) | Medium | Phase 6: check GSC before and after |
+| Whether a `GITHUB_TOKEN` heartbeat commit counts as activity for the 60-day rule | Medium | Phase 2: if unconfirmed, add a Cloudflare Worker cron that calls `workflow_dispatch` |
+| Whether Pages replaces the apex A record itself in the custom-domain flow | Low | Phase 6 dry run |
+| Whether the podcast is listed in any directory | Low | Phase 7 checklist |
 
 ## Risks
-- **R1 Token availability** (D5) blocks P2. P1 and P3 run on committed data meanwhile.
-- **R2 Filename-keyed curation** (U3). If LabelGrid re-transcodes, the curated defaults vanish. The build check catches it; long
-  term, key by track id.
-- **R3 Mass takedown or API anomaly** could empty the site. The count guard routes large drops to a PR.
-- **R4 Visible-content design**: the dossier must be part of the immersive design, not hidden text. It's user-visible design work,
-  so the operator reviews it at P4.
-- **R5 Cutover misses www/dl**: the host redirect rules are created before the DNS swap and are part of the P5 exit crawl.
-- **R6 Silent cron death** (U5): heartbeat plus a staleness issue.
-- **R7 Publishing private label fields** (U4): allowlist projection, and a test asserts the forbidden keys are absent from
-  `catalog.json`.
-- **R8 Heavier first load for crawlers**: the WebGL app is about 270 KB of JS, but the HTML already carries all content and meta,
-  so rendering isn't needed for indexing.
+- **R1 Token has full write scope.** Abilities are `*`, and the public API can delete labels. Mitigations:
+  - the token exists only in the Actions secret and the local 0600 env file;
+  - the sync only issues GETs;
+  - recommend a lgapi change to support read-only abilities (separate ticket for LabelGrid).
+- **R2 Filename-keyed curation.** The build check catches broken `DEFAULT_CONFIG` keys. Long term, key by track id.
+- **R3 Mass takedown or API anomaly.** A per-label drop guard routes large drops to a PR.
+- **R4 Visible-content design.** The dossier is user-visible design work, so the operator reviews it on about. before cutover.
+- **R5 Cutover misses www/dl.** The host redirect rules are created before the DNS swap and are part of the exit crawl.
+- **R6 Silent cron death.** Heartbeat, a staleness issue, and an expiry-warning issue.
+- **R7 Private label fields in a public repo.** Allowlist projection plus a test for forbidden keys.
+- **R8 CDN User-Agent block.** The sync and card generation send an explicit UA, and a fetch failure fails the run.
+- **R9 Node version drift.** `.node-version` pins Node 24 in both CI and Pages.
+- **R10 Doubling the archive (139 → 245 releases).** Search, queue and archive UI must stay usable. The responsive test runs on
+  the full catalogue.
 
 ## Scope
-**IN**: page generation, URL preservation and redirects, the 404, sitemap, robots and feed, the 24 h sync, OG and JSON-LD,
-staging on about., the apex cutover, and lgsites decommission for this domain.
+**IN**:
+- Astro migration, with the app assembly ported to Node;
+- both labels in the catalogue, and artist pages;
+- URL preservation and redirects; 404, sitemap and robots;
+- the 24 h sync with social cards; OG and JSON-LD;
+- retiring the podcast feed;
+- staging on about., the apex cutover, and lgsites decommission for this domain.
 
-**OUT**: changes to scenes, audio or the visual design beyond the release dossier and route shim; store/checkout (sales stay on
-Bandcamp and the DSPs); new editorial content; fixing lgsites for other labels (except the reported leak); bot protection beyond
-the side note.
+**OUT**:
+- scene, audio or visual redesign beyond the dossier, label filter and route shim;
+- store or checkout;
+- editorial content;
+- lgsites fixes beyond the reported leak;
+- bot protection beyond the side note;
+- a read-only-token feature in lgapi (recommended separately).
 
 ## Plan Handoff
-After D1–D7 are answered: lock them above, set `status: ready-to-plan`, and write the implementation plan with planf3 from this
-file.
+Plan: `.planning/static-site-astro-migration.md`.
 
 ```text
-Implement <plan-path>; honor .planning/DISCOVERY-static-site.md; track material deviations and stop on architecture, user-visible, high-stakes, or irreversible changes.
+Implement .planning/static-site-astro-migration.md; honor .planning/DISCOVERY-static-site.md; track material deviations and stop on architecture, user-visible, high-stakes, or irreversible changes.
 ```
