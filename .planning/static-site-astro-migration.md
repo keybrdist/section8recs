@@ -1,14 +1,14 @@
 ---
 title: section8recs.com on Astro — static immersive site with daily LabelGrid sync
 mode: plan
-status: ready
+status: in-progress (phases 1–4 done; phase 5 awaits the operator)
 created: 2026-10-24T08:45:00Z
-modified: [2026-10-24T08:45:00Z]
-commits: [null]
+modified: [2026-10-24T08:45:00Z, 2026-10-24T10:40:00Z]
+commits: [c597e35, 9d97aef, 94b948e, 7baab9d]
 agents: [claude-opus-5-5]
 sessions: [plan/static-site]
 back_refs: [.planning/DISCOVERY-static-site.md, https://github.com/keybrdist/section8recs/pull/3]
-forward_refs: []
+forward_refs: [https://github.com/keybrdist/section8recs/pull/4, https://github.com/keybrdist/section8recs/pull/5, https://github.com/keybrdist/section8recs/pull/6, https://github.com/keybrdist/section8recs/pull/7]
 ---
 
 # section8recs.com on Astro: static immersive site with a daily LabelGrid sync
@@ -98,6 +98,56 @@ Supporting choices:
 - **Phases 5–7** are operator-approved operations: staging sign-off, the DNS cutover, and decommission.
 - **HITL batching:** the operator reviews about. once after Phase 4 (design of dossier and artist pages, cards) and approves the
   cutover in the same turn.
+
+## Progress (2026-10-24)
+
+Phases 1–4 are merged and live on about.section8recs.com, which stays noindexed until the move:
+
+- **Phase 1** (PR #4): Astro build. The golden check proved the Node port byte-identical before anything changed. Pages now builds
+  from source (`npm run build` → `dist/`, image v3, `NODE_VERSION=24`). The previous Pages config is saved in the primary checkout's
+  `.scratch/pages-config-before-astro.json`.
+- **Phase 2** (PR #5): daily sync of labels 1 and 4 (245 releases, 843 tracks) with 245 social cards. Workflow run 40083638179 on
+  `main` went green with `+0 −0 ~0` and committed nothing. Its commit-and-push path runs for real on the first LabelGrid change.
+- **Phase 3** (PR #6): 245 release pages, 257 artist pages, `/releases`, a real 404, the router, and 697 redirects.
+  `check-urls` passes all 1,209 addresses on the preview and on about.
+- **Phase 4** (PR #7): JSON-LD (validator.schema.org: 0 errors, 0 warnings on four page types), `/sitemap.xml` with cover
+  images, and `robots.txt`.
+
+Deviations, none of which changes the outcome:
+
+- The hard-coded "139/467" counts moved from phase 3 into phase 2, because phase 2 already changed the catalogue the app shows.
+- The golden check was retired in phase 2. Once the data source changed, it had nothing left to compare.
+- The address follows the release on air with `history.replaceState` rather than `pushState`/`popstate`, so the back button
+  leaves the site instead of stepping through tracks.
+- The label filter is on `/releases`, not inside the app's archive.
+- The pages read `catalog.json` through `src/lib/catalog.mjs` instead of a content collection.
+- `/sitemap.xml` comes from a small endpoint rather than `@astrojs/sitemap`, which has no image entries. That makes the
+  planned `/sitemap.xml` → `/sitemap-index.xml` redirect unnecessary.
+- Artist pages use release covers. LabelGrid's artist photos are mostly a placeholder icon.
+- 8 archived `/r/` slugs containing `:` get no redirect, because Pages reads `:` as a placeholder.
+- A trailing slash (`/cat/X/`) gets a 301 from the `/cat/:cat/*` rule rather than Pages' 308. Both are permanent.
+
+### Cutover runbook (phase 6, ready to run once the operator approves)
+
+1. Snapshot the zone's DNS records and the Pages project config to `.scratch/cutover-<date>/`. This is the rollback reference.
+2. Create two zone wildcard Single Redirect rules (Free plan allows 10):
+   - `https://www.section8recs.com/*` → `https://section8recs.com/${1}` (301);
+   - `https://dl.section8recs.com/*` → `https://section8recs.com/${1}` (301).
+
+   Then check that `curl -sI https://www.section8recs.com/cat/SECTION8116` returns 301 to `https://section8recs.com/cat/SECTION8116`
+   and no longer goes through http. This works before the swap, because the rules run ahead of the origin.
+3. Add `section8recs.com` as a Pages custom domain (`POST /accounts/{acct}/pages/projects/section8recs/domains`).
+4. Replace the apex `A 157.90.158.72` (proxied) with `CNAME section8recs.pages.dev` (proxied), and wait until the Pages domain
+   shows `active`.
+5. Check `node scripts/check-urls.mjs --base https://section8recs.com` (expect 1,209 as expected). Also check
+   `node scripts/smoke.mjs https://section8recs.com/ https://section8recs.com/cat/SECTION8116`. Then make sure the zone's managed
+   robots.txt (Cloudflare content signals) still ends with this site's `Sitemap:` line.
+6. Run a one-line PR that removes the `https://about.section8recs.com/*` noindex rule from `static/_headers`. Add the
+   `https://about.section8recs.com/*` → `https://section8recs.com/${1}` Single Redirect (D6).
+7. In Search Console, submit `https://section8recs.com/sitemap.xml` and URL-inspect three release pages.
+
+**Rollback:** restore the apex A record from the step-1 snapshot (one API call, effective at once because the record is
+proxied). lgsites keeps running untouched until phase 7.
 
 ## Implementation
 
