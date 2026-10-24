@@ -72,8 +72,10 @@ The token (`section8recs-static-site-sync-v2`) expires on 2027-10-24; the workfl
 
 ## Phones
 
-On a phone the now-playing block shows four lines; the 8 sigil at its left (or the Section 8 mark at the top left)
-shows the rest. Swiping up skips to the next track and down to the previous one (a deliberate flick only). The heart
+On a phone the now-playing block shows four lines, and after 10 s of playing untouched the controls and text fade,
+leaving the 8 sigil in the corner: tapping it brings them back, again shows the full details, and again folds them;
+tapping the scene hides everything. Swiping up skips to the next track and down to the previous one (a deliberate flick
+only, also when it starts on the seek bar, which seeks on a tap and scrubs when dragged sideways). The heart
 opens the track's outlets and a Favorite toggle; favourites are kept in this browser (`s8.favorites.v1`, apart from
 the queue). In the looking-up scenes, craft stay above the bottom third of a phone screen (`site/src/v4-mobile.js`).
 The lock screen gets the Section 8 mark and stays in sync with playback (`site/src/v4-media.js`).

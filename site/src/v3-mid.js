@@ -124,7 +124,7 @@ function setNow(){
   $('#npS').innerHTML=`${esc(ta||r.a)} <em>— ${esc(r.t)} · ${pad(cur.i+1)} / ${pad(r.tr.length)}</em>`;
   $('#npTags').textContent=r.s.join(' / ');
   document.title=`${tn} · ${ta||r.a} · Section 8`;
-  if('mediaSession' in navigator)navigator.mediaSession.metadata=new MediaMetadata({title:tn,artist:ta||r.a,album:`${r.t} [${r.c}]`,artwork:ART});
+  mediaMeta();
   markIndex();favMark();
 }
 function load(c,i,auto=true){
@@ -173,8 +173,13 @@ au.addEventListener('ended',next);
 au.addEventListener('error',()=>{if(!au.src)return;setTimeout(next,800)});
 $('#playBtn').onclick=toggle;$('#nextBtn').onclick=next;$('#prevBtn').onclick=prev;
 if('mediaSession' in navigator){navigator.mediaSession.setActionHandler('nexttrack',next);navigator.mediaSession.setActionHandler('previoustrack',prev)}
-(()=>{const s=$('#seek');let drag=false;const go=e=>{const b=s.getBoundingClientRect();const k=Math.min(1,Math.max(0,(e.clientX-b.left)/b.width));if(au.duration)au.currentTime=k*au.duration};
-  s.addEventListener('pointerdown',e=>{drag=true;s.setPointerCapture(e.pointerId);go(e)});s.addEventListener('pointermove',e=>{if(drag)go(e)});s.addEventListener('pointerup',()=>drag=false);
+// a finger on the seek bar may be starting a swipe between tracks: it seeks on a tap, scrubs once it moves sideways, and
+// leaves a vertical movement to the swipe. A mouse or pen seeks at once, as before
+(()=>{const s=$('#seek');let drag=false,pend=null;const go=e=>{const b=s.getBoundingClientRect();const k=Math.min(1,Math.max(0,(e.clientX-b.left)/b.width));if(au.duration)au.currentTime=k*au.duration};
+  s.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'){pend={x:e.clientX,y:e.clientY,id:e.pointerId};return}drag=true;s.setPointerCapture(e.pointerId);go(e)});
+  s.addEventListener('pointermove',e=>{if(drag)return go(e);if(!pend||e.pointerId!==pend.id)return;const dx=Math.abs(e.clientX-pend.x),dy=Math.abs(e.clientY-pend.y);
+    if(dx>8&&dx>dy){pend=null;drag=true;try{s.setPointerCapture(e.pointerId)}catch(_){}go(e)}else if(dy>8&&dy>=dx)pend=null});
+  s.addEventListener('pointerup',e=>{if(pend&&e.pointerId===pend.id)go(e);pend=null;drag=false});s.addEventListener('pointercancel',()=>{pend=null;drag=false});
   s.addEventListener('keydown',e=>{if(!au.duration)return;if(e.key==='ArrowRight'){au.currentTime=Math.min(au.duration,au.currentTime+10);e.preventDefault();e.stopPropagation()}if(e.key==='ArrowLeft'){au.currentTime=Math.max(0,au.currentTime-10);e.preventDefault();e.stopPropagation()}});})();
 
 /* ---------------- archive (metadata only) ---------------- */
