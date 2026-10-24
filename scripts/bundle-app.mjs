@@ -47,6 +47,13 @@ rmSync(APP, { recursive: true, force: true }); mkdirSync(APP, { recursive: true 
 for (const [name, text] of Object.entries(out)) writeFileSync(APP + name, text);
 const [js, cssName, introName] = Object.keys(out).map(n => '/app/' + n);
 
+// fetch three.js and its add-ons alongside the app instead of after it has been parsed (they come after the import map,
+// which must be in place before any module is requested)
+const map = JSON.parse(s.match(/<script type="importmap">(.*?)<\/script>/)[1]).imports;
+const deps = [...mod.matchAll(/^import .* from '([^']+)';$/gm)].map(m => m[1])
+  .map(d => map[d] || Object.entries(map).filter(([k]) => k.endsWith('/') && d.startsWith(k)).map(([k, v]) => v + d.slice(k.length))[0]);
+if (deps.some(d => !d)) throw new Error('an import the import map does not resolve');
+s = s.replace(/(<script type="importmap">.*?<\/script>)/, `$1\n<link rel="modulepreload" href="${js}">` + deps.map(d => `\n<link rel="modulepreload" href="${d}">`).join(''));
 s = s.replace('<!--APP_CSS-->', `<link rel="stylesheet" href="${cssName}">`)
   .replace('<!--APP_JS-->', `<script type="module" src="${js}"></script>`)
   .replace('<!--INTRO_JS-->', `<script src="${introName}"></script>`);

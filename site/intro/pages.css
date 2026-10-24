@@ -56,3 +56,20 @@
 .r-rows .c b{display:block;font-weight:500;color:rgba(236,235,230,.6)}
 @media (max-width:760px){.r-grid{grid-template-columns:1fr}.r-cover{max-width:420px}.r-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
   .r-rows a{grid-template-columns:44px minmax(0,1fr)}.r-rows img{width:44px;height:44px}.r-rows .c{grid-column:2;text-align:left}.r-rows .c b{display:inline;margin-right:8px}}
+
+/* loading bar under the enter buttons: a hairline that fills red as the forest loads; the buttons wake when it is full */
+.g-load{position:relative;width:min(300px,64vw);height:1px;margin:22px auto 0;background:rgba(236,235,230,.16);overflow:hidden;transition:opacity .5s .2s}
+.g-load i{position:absolute;inset:0;background:var(--acc);box-shadow:0 0 8px rgba(254,1,1,.8);transform:scaleX(0);transform-origin:left;will-change:transform}
+.g-load::after{content:"";position:absolute;top:0;bottom:0;width:28%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+  animation:gLoadSweep 1.6s linear infinite;will-change:transform}
+@keyframes gLoadSweep{from{transform:translateX(-110%)}to{transform:translateX(370%)}}
+.g-load + .f-st{margin-top:12px}
+body:not(.loading) .g-load{opacity:0}
+body:not(.loading) .g-load::after{animation:none}
+body.loading .f-c .f-b{opacity:.32;pointer-events:none;transition:opacity .6s}
+body.load-lost .g-load i{background:rgba(236,235,230,.4);box-shadow:none}
+body.load-lost .g-load::after{animation:none}
+@media (prefers-reduced-motion:reduce){.g-load::after{animation:none}}
+@media (max-height:500px) and (orientation:landscape){.g-load{margin-top:10px}}
+/* on the shortest portrait screens the hero content reaches the bottom edge, so the scroll cue would sit on the status line */
+@media (max-height:600px) and (orientation:portrait){.g-cue{display:none}}
