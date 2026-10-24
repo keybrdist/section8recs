@@ -1,0 +1,5 @@
+# local preview publishing targets
+site/canonical.json
+# test runs
+node_modules/
+site/tests/out/
