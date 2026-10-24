@@ -7,6 +7,10 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { AfterimagePass } from 'three/addons/postprocessing/AfterimagePass.js';
 
 THREE.ColorManagement.enabled=false;
+// the gate's loading bar (site/intro/loader.js): report each stage, and let a frame paint before the next heavy step
+const S8L=window.S8L||{stage(){},done(){}};
+const yieldFrame=()=>new Promise(r=>{requestAnimationFrame(()=>setTimeout(r,0));setTimeout(r,150)});
+S8L.stage('app');await yieldFrame();
 const D=/*__DATA__*/[];
 const MP3='https://cdn-prod-1.labelgrid.com/labels/';
 const BY=Object.fromEntries(D.map(r=>[r.c,r]));

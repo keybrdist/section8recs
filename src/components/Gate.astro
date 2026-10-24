@@ -39,7 +39,8 @@ const social = [
     <Name class="i-name ff-in ff-d1" id={nameIsHeading ? 'gT' : undefined}>Section <span class="r">8</span> Recordings</Name>
     <p class="f-l ff-in ff-d2">{lede}</p>
     <div class="f-c ff-in ff-d3"><button class="f-b" id="enterSound">{enter}</button><button class="f-b" id="enterQuiet">Enter silently</button></div>
-    <p class="f-st mono ff-in ff-d4" id="gSt">Signal acquired<span class="cursor"></span></p>
+    <div class="g-load ff-in ff-d4" id="gLoad" role="progressbar" aria-label="Loading the forest" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div>
+    <p class="f-st mono ff-in ff-d4" id="gSt" aria-live="polite">Tuning in<span class="cursor"></span></p>
   </div>
   <a class="g-cue" href={cueHref}><span>{cue}</span><i aria-hidden="true"></i></a>
 </div>

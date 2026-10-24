@@ -36,7 +36,9 @@ function enter(withSound,start=routeStart()){
   if(withSound){load(...(start||firstTrack()))}else if(start){load(...start,false)}else{note([{t:'ARCHIVE OPENED · SECTION 8 RECORDINGS',c:'acc'},`${D.length} RECORDINGS · ${NTRACKS} SEGMENTS · ${YEARS}`,{t:'NO AUDIO SIGNAL. PRESS PLAY.',c:'dim'}])}
 }
 $('#enterSound').onclick=()=>enter(true);$('#enterQuiet').onclick=()=>enter(false);
-(()=>{const st=['Signal acquired','Listening','Tree line: movement','Stay on the path'];let i=0;setInterval(()=>{if(document.body.classList.contains('gated')){i=(i+1)%st.length;
+// the first frame compiles the opening scene; once it has drawn, the forest is ready and the buttons wake
+requestAnimationFrame(()=>requestAnimationFrame(()=>S8L.done()));
+(()=>{const st=['Signal acquired','Listening','Tree line: movement','Stay on the path'];let i=0;setInterval(()=>{if(document.body.classList.contains('gated')&&!document.body.classList.contains('loading')){i=(i+1)%st.length;
   const el=$('#gSt');scramble(el,st[i].toUpperCase(),500);setTimeout(()=>{if(!el.querySelector('.cursor'))el.insertAdjacentHTML('beforeend','<span class="cursor"></span>')},520)}},3200)})();
 
 /* ---------------- main loop ---------------- */

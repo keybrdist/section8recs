@@ -8,6 +8,7 @@ try{
   renderer.setPixelRatio(q);renderer.setSize(innerWidth,innerHeight);
   const cam=new THREE.OrthographicCamera(-1,1,1,-1,0,1);
   const atlas=buildTreeAtlas();
+  S8L.stage('trees');await yieldFrame();
   const trees=new THREE.DataTexture(atlas.data,ATLAS_W,ATLAS_H,THREE.RedFormat,THREE.UnsignedByteType);
   trees.minFilter=THREE.LinearMipmapLinearFilter;trees.magFilter=THREE.LinearFilter;trees.generateMipmaps=true;trees.unpackAlignment=1;trees.needsUpdate=true;
   const cells=ATLAS_CELLS.map(([x,y,w,h])=>new THREE.Vector4(x/ATLAS_W,(ATLAS_H-(y+h))/ATLAS_H,w/ATLAS_W,h/ATLAS_H));

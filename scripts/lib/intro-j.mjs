@@ -9,4 +9,4 @@ export const CSS = rd('ff.css') + rd('j.css') + rd('pages.css');
 export const HTML = '<!--GATE-->\n';
 export const SCRIPT = '<script>\n' + rd('wire-lib.js')
   + '\nmountWire(document.getElementById("wire"),{gate:document.getElementById("gate"),records:"none"});\n'
-  + rd('links.js') + '</script>';
+  + rd('links.js') + rd('loader.js') + '</script>';

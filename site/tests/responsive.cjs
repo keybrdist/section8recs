@@ -94,6 +94,8 @@ function audit(state) {
       } catch (e) { res.push({ state, kind: 'error', msg: e.message.split('\n')[0] }) }
     };
     await p.goto(URL, { waitUntil: 'networkidle' }); await p.evaluate(() => localStorage.clear()); await p.reload({ waitUntil: 'networkidle' }); await sleep(1500);
+    // the enter buttons wake once the forest has loaded (the gate's loading bar)
+    await p.waitForFunction(() => !document.body.classList.contains('loading'), null, { polling: 250, timeout: 90000 }).catch(() => res.push({ state: 'home', kind: 'error', msg: 'still loading after 90 s' }));
     // layout, not animation: panels open instantly so they are measured where they settle
     await p.addStyleTag({ content: '#index,#qpanel{transition:none!important}' });
     await snap('home');

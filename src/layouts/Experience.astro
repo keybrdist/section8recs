@@ -21,7 +21,7 @@ const routeJson = JSON.stringify(route).replace(/</g, '\\u003c');
 <script is:inline type="application/json" id="s8-route" set:html={routeJson}></script>
 <slot name="head" />
 </head>
-<body class="gated">
+<body class="gated loading">
 <Fragment set:html={shell.bodyStart} />
 <Gate {...gate}><slot /></Gate>
 <Fragment set:html={shell.bodyEnd} />
