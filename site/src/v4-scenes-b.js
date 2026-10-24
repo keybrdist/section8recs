@@ -87,13 +87,12 @@ vec3 scene(){
   // the object: a dark core inside a bright aura, slowly rotating about its axis
   vec2 o=p-vec2(.006*sin(uTime*1.3),.004*sin(uTime*1.7));
   float rotA=.9*sin(uTime*.045)+.35*sin(uTime*.013);
-  // uX.x: range. It drops back and returns now and then, and the outline slowly reshapes, a little
+  // uX.x: range. It drops back and returns now and then; the outline itself holds its shape
   vec2 lo=rot2(rotA)*o/uX.x;
-  float mo=(.4+.6*(.5+.5*sin(uTime*.05)))*.12;
-  float fo=.034*(1.+mo*sin(uTime*.16+1.3)), fr=.027*(1.+mo*sin(uTime*.19+2.));
-  float core=length(lo*vec2(1.,2.6*(1.+mo*.9*sin(uTime*.21))))-.05;
-  float fins=min(length((lo-vec2(-fo,.0))*vec2(2.4,1.))-fr*(1.+mo*.6*sin(uTime*.13)),length((lo-vec2(fo,.0))*vec2(2.4,1.))-fr*(1.-mo*.6*sin(uTime*.13)));
-  float sd=smin(core,fins,.004+.012*mo)+.0025*mo*8.*sin(atan(lo.y,lo.x)*3.+uTime*.4);
+  float fo=.034, fr=.027;
+  float core=length(lo*vec2(1.,2.6))-.05;
+  float fins=min(length((lo-vec2(-fo,.0))*vec2(2.4,1.))-fr,length((lo-vec2(fo,.0))*vec2(2.4,1.))-fr);
+  float sd=smin(core,fins,.004);
   sd*=uX.x;
   col=mix(col,vec3(.45),exp(-max(sd,0.)*40.)*.85*mix(.75,1.,uX.x));
   col=mix(col,vec3(.03),fillD(sd,aa*2.));

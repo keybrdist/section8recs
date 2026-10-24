@@ -5,7 +5,14 @@
    silent; the audio element meanwhile keeps counting, so the lock screen showed a moving playhead and no sound. The
    lock screen shows the label's mark, not release artwork. */
 if(navigator.audioSession)try{navigator.audioSession.type='playback'}catch(e){}
-const ART=[96,192,256,512].map(s=>({src:`/assets/s8-${s}.png`,sizes:`${s}x${s}`,type:'image/png'}));
+// lock-screen artwork: full-colour JPEGs at absolute addresses, and the largest also held in memory as a blob URL, so it
+// is there without a fetch when the track changes while the phone is locked. Set again once playback has started,
+// since iOS can disregard metadata given before then.
+const ART=[512,256,192,96].map(s=>({src:new URL(`/assets/s8-${s}.jpg`,location.href).href,sizes:`${s}x${s}`,type:'image/jpeg'}));
+function mediaMeta(){if(!('mediaSession' in navigator)||!cur.r)return;const r=cur.r,[a,n]=splitT(r.tr[cur.i][0]);
+  try{navigator.mediaSession.metadata=new MediaMetadata({title:n,artist:a||r.a,album:`${r.t} [${r.c}]`,artwork:ART})}catch(e){}}
+fetch(ART[0].src).then(r=>r.ok?r.blob():null).then(b=>{if(b){ART.unshift({src:URL.createObjectURL(b),sizes:'512x512',type:'image/jpeg'});mediaMeta()}}).catch(()=>{});
+au.addEventListener('playing',mediaMeta);
 const BG={broke:false,held:false};
 // bring a suspended or interrupted context back; cycle it when it may be running but silent
 function wake(cycle){const c=eng.ctx;if(!c||c.state==='closed')return Promise.resolve();
