@@ -8,10 +8,11 @@ import { AfterimagePass } from 'three/addons/postprocessing/AfterimagePass.js';
 
 THREE.ColorManagement.enabled=false;
 const D=/*__DATA__*/[];
-const MP3='https://cdn-prod-1.labelgrid.com/labels/section8recs/320/';
+const MP3='https://cdn-prod-1.labelgrid.com/labels/';
 const BY=Object.fromEntries(D.map(r=>[r.c,r]));
 const CHRON=[...D].sort((a,b)=>a.d.localeCompare(b.d)||a.c.localeCompare(b.c));
 const RANK=Object.fromEntries(CHRON.map((r,i)=>[r.c,i+1]));
+const NTRACKS=D.reduce((n,r)=>n+r.tr.length,0), YEARS=`${CHRON[0].d.slice(0,4)}—${CHRON.at(-1).d.slice(0,4)}`;
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const MON=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];

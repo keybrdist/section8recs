@@ -58,12 +58,12 @@ function nextLine(){
     `EMF ${(1.4+lv*7).toFixed(1)} mG ${lv>.5?'▲':'▽'} // LOW ${(A.low*100|0)}%`,
     `AMBIENT ${(-2.4-A.low*5).toFixed(1)}°C // FALLING`,
     `CASE <b>${r.c}</b> // RECOVERED ${fdate(r.d)}`,
-    `TRANSMISSION ${pad(RANK[r.c],3)} OF 139 // ${pad(cur.i+1)}/${pad(r.tr.length)}`,
+    `TRANSMISSION ${pad(RANK[r.c],3)} OF ${D.length} // ${pad(cur.i+1)}/${pad(r.tr.length)}`,
     `EVP CLASS ${'ABC'[Math.floor(Math.random()*3)]} // SIGNAL ${(91+lv*8.9).toFixed(1)}%`,
     `TREE LINE MOVEMENT // ${1+Math.floor(Math.random()*7)} CONTACTS`,
     `WITNESSES 0 // DO NOT LEAVE THE PATH`,
     `LOCATION // <b>${loc}</b>`,`LOCATION // ${loc} // ${ph}`,
-  ]:[`LISTENING`,`NO SIGNAL // PRESS PLAY`,`THE FOREST IS QUIET`,`FIELD REC // SECTOR 8 // <b>${ph}</b>`,`139 RECORDINGS ON FILE`,`STAY ON THE PATH`,`LOCATION // <b>${loc}</b>`];
+  ]:[`LISTENING`,`NO SIGNAL // PRESS PLAY`,`THE FOREST IS QUIET`,`FIELD REC // SECTOR 8 // <b>${ph}</b>`,`${D.length} RECORDINGS ON FILE`,`STAY ON THE PATH`,`LOCATION // <b>${loc}</b>`];
   RO.line=pool[Math.floor(Math.random()*pool.length)];RO.shown=0;RO.hold=0;
 }
 function tickReadout(dt){
@@ -109,17 +109,17 @@ function tickNote(dt){
   else{NOTE.acc+=dt;if(NOTE.acc>.07){NOTE.acc=0;NOTE.lines.pop();if(!NOTE.lines.length){NOTE.state='idle';$('#note').innerHTML='';return}renderNote()}}
 }
 function noteAlbum(r){
-  note([{t:`ARCHIVE FOOTAGE — TAPE ${pad(RANK[r.c],3)}/139`,c:'acc'},`${r.c} · ${r.t.toUpperCase()}`,r.ar.join(', ').toUpperCase(),
+  note([{t:`ARCHIVE FOOTAGE — TAPE ${pad(RANK[r.c],3)}/${D.length}`,c:'acc'},`${r.c} · ${r.t.toUpperCase()}`,r.ar.join(', ').toUpperCase(),
     {t:`RECORDED ${fdate(r.d)} · LOC: ${SCENES[deck.cur.si].name.toUpperCase()}`,c:'dim'},{t:NOTE_FLAVOR[fnv(r.c)%NOTE_FLAVOR.length],c:'dim'}]);
 }
-function noteTrack(r,i){const [a,n]=splitT(r.tr[i][0]);note([{t:`TAPE ${pad(RANK[r.c],3)}/139 · SEGMENT ${pad(i+1)}/${pad(r.tr.length)}`,c:'acc'},`${n.toUpperCase()} — ${(a||r.a).toUpperCase()}`],2.8)}
+function noteTrack(r,i){const [a,n]=splitT(r.tr[i][0]);note([{t:`TAPE ${pad(RANK[r.c],3)}/${D.length} · SEGMENT ${pad(i+1)}/${pad(r.tr.length)}`,c:'acc'},`${n.toUpperCase()} — ${(a||r.a).toUpperCase()}`],2.8)}
 function noteScene(si){note([{t:`LOCATION CHANGE · ${SCENES[si].name.toUpperCase()}`,c:'acc'},{t:SCENES[si].note.toUpperCase(),c:'dim'}],2.8)}
 
 /* ---------------- player ---------------- */
 const au=eng.el;
 function setNow(){
   const r=cur.r;if(!r)return;const [ta,tn]=splitT(r.tr[cur.i][0]);
-  $('#npK').innerHTML=`Transmission <b>${pad(RANK[r.c],3)}</b> / 139 · ${r.c} · ${fdate(r.d)}`;
+  $('#npK').innerHTML=`Transmission <b>${pad(RANK[r.c],3)}</b> / ${D.length} · ${r.c} · ${fdate(r.d)}`;
   scramble($('#npT'),tn.toUpperCase(),700);
   $('#npS').innerHTML=`${esc(ta||r.a)} <em>— ${esc(r.t)} · ${pad(cur.i+1)} / ${pad(r.tr.length)}</em>`;
   $('#npTags').textContent=r.s.join(' / ');
@@ -131,7 +131,7 @@ function load(c,i,auto=true){
   const r=BY[c];if(!r)return;const first=!cur.r,changed=first||cur.r.c!==c;cur={r,i};
   history.push(c);if(history.length>40)history.shift();
   eng.ensure();eng.resume();
-  au.src=MP3+r.tr[i][1];qOnLoad(r.tr[i][1]);if(auto)au.play().catch(()=>{});
+  au.src=r.tr[i][2]||MP3+r.l+'/320/'+r.tr[i][1];qOnLoad(r.tr[i][1]);if(auto)au.play().catch(()=>{});
   // every track change moves to a new scene (unless one is pinned); the first track always opens on the clearing
   // a scene associated with this track (queue config) wins; otherwise the first track opens on the clearing
   const own=sceneOf(r.tr[i][1]);

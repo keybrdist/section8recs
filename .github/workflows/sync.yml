@@ -1,0 +1,96 @@
+# Daily LabelGrid sync: fetch both labels, rebuild, and commit the catalogue and social cards to main when they changed.
+# Cloudflare Pages deploys main. A failed run commits nothing (the site keeps the last good catalogue) and opens an issue;
+# a label losing more than 3 releases goes to a pull request instead of main.
+name: Sync LabelGrid catalogue
+
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [labelgrid-release]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: catalogue-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - run: npm ci
+
+      - name: Fetch the catalogue
+        id: sync
+        env:
+          LABELGRID_API_TOKEN: ${{ secrets.LABELGRID_API_TOKEN }}
+        run: |
+          set +e
+          node scripts/sync.mjs
+          code=$?
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          [ "$code" = 0 ] || [ "$code" = 3 ]
+
+      - name: Social cards
+        run: node scripts/og-cards.mjs
+
+      - name: Build and check
+        run: npm run build && npm run check
+
+      - name: Commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REVIEW: ${{ steps.sync.outputs.code == '3' }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          # scheduled workflows in a public repository stop after 60 days without activity; keep one commit a month
+          last=$(git log -1 --format=%ct -- site/data/catalog.json site/data/.heartbeat)
+          if [ $(( $(date +%s) - ${last:-0} )) -gt $(( 30 * 86400 )) ]; then date -u +%FT%TZ > site/data/.heartbeat; fi
+          git add site/data static/og
+          if git diff --cached --quiet; then echo 'catalogue unchanged'; exit 0; fi
+          summary=$(head -1 .sync-summary 2>/dev/null || echo 'heartbeat')
+          git commit -q -m "Sync LabelGrid catalogue: $summary" -m "$(tail -n +2 .sync-summary 2>/dev/null)"
+          if [ "$REVIEW" = true ]; then
+            branch="sync/review-$(date -u +%Y%m%d-%H%M)"
+            git push -q origin "HEAD:refs/heads/$branch"
+            gh pr create --base main --head "$branch" --title "Review catalogue sync: releases removed" \
+              --body "A label lost more than 3 releases in this sync, so it was not committed to main. $summary"
+          else
+            git push -q origin HEAD:main
+          fi
+
+      - name: Token expiry reminder
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # the LabelGrid token section8recs-static-site-sync-v2 expires on 2027-10-24
+          if [ "$(date -u +%F)" \> 2027-09-23 ] && [ -z "$(gh issue list --state open --search 'LabelGrid token expires in:title' --json number -q '.[].number')" ]; then
+            gh issue create --title 'LabelGrid token expires 2027-10-24' --body 'Create a new token at https://app.labelgrid.com/user/profile/api-tokens and update the LABELGRID_API_TOKEN secret; the sync stops working when it expires.'
+          fi
+
+      - name: Report a failed sync
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          open=$(gh issue list --state open --search 'Catalogue sync failing in:title' --json number -q '.[0].number')
+          if [ -n "$open" ]; then gh issue comment "$open" --body "Failed again: $RUN"
+          else gh issue create --title 'Catalogue sync failing' --body "The LabelGrid sync failed and nothing was committed; the site still shows the last good catalogue. $RUN"; fi

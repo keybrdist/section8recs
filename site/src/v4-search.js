@@ -1,4 +1,4 @@
-/* ---------------- track search: every one of the 467 tracks, ranked, playable from the keyboard ---------------- */
+/* ---------------- track search: every track in the catalogue, ranked, playable from the keyboard ---------------- */
 const TRACKS=[];D.forEach(r=>r.tr.forEach((t,i)=>{const [a,n]=splitT(t[0]);const ta=a||r.a;
   TRACKS.push({c:r.c,i,f:t[1],n,a:ta,r,nl:n.toLowerCase(),al:ta.toLowerCase(),
     hay:[n,ta,r.a,r.t,r.c,r.d.slice(0,4),r.s.join(' '),t[1]].join(' ').toLowerCase()})}));
