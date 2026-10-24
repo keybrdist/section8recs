@@ -1,6 +1,6 @@
 ---
 subject: Move section8recs.com onto the immersive design, statically hosted, with LabelGrid data synced every 24 h
-status: planned
+status: planned (implementation: phases 1–4 merged 2026-10-24, see plan Progress)
 updated: 2026-10-24T08:40:00Z
 source: free-text (operator request, relayed from the source thread)
 plan: .planning/static-site-astro-migration.md
