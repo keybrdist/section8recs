@@ -6,12 +6,14 @@
    lock screen shows the label's mark, not release artwork. */
 if(navigator.audioSession)try{navigator.audioSession.type='playback'}catch(e){}
 // lock-screen artwork: full-colour JPEGs at absolute addresses, and the largest also held in memory as a blob URL, so it
-// is there without a fetch when the track changes while the phone is locked. Set again once playback has started,
-// since iOS can disregard metadata given before then.
+// is there without a fetch when the track changes while the phone is locked. Set once per track, when it starts playing:
+// iOS can disregard metadata given before playback, and every new MediaMetadata makes it load the artwork again, showing
+// a blank tile until it arrives.
 const ART=[512,256,192,96].map(s=>({src:new URL(`/assets/s8-${s}.jpg`,location.href).href,sizes:`${s}x${s}`,type:'image/jpeg'}));
-function mediaMeta(){if(!('mediaSession' in navigator)||!cur.r)return;const r=cur.r,[a,n]=splitT(r.tr[cur.i][0]);
+let metaKey='';
+function mediaMeta(){if(!('mediaSession' in navigator)||!cur.r)return;const k=cur.r.c+':'+cur.i;if(k===metaKey)return;metaKey=k;const r=cur.r,[a,n]=splitT(r.tr[cur.i][0]);
   try{navigator.mediaSession.metadata=new MediaMetadata({title:n,artist:a||r.a,album:`${r.t} [${r.c}]`,artwork:ART})}catch(e){}}
-fetch(ART[0].src).then(r=>r.ok?r.blob():null).then(b=>{if(b){ART.unshift({src:URL.createObjectURL(b),sizes:'512x512',type:'image/jpeg'});mediaMeta()}}).catch(()=>{});
+fetch(ART[0].src).then(r=>r.ok?r.blob():null).then(b=>{if(b){ART.unshift({src:URL.createObjectURL(b),sizes:'512x512',type:'image/jpeg'})}}).catch(()=>{});
 au.addEventListener('playing',mediaMeta);
 const BG={broke:false,held:false};
 // bring a suspended or interrupted context back; cycle it when it may be running but silent

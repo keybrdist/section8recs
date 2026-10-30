@@ -7,9 +7,9 @@ try{
   let q=Math.min(devicePixelRatio,1.25)*(mobile?.5:.68);
   renderer.setPixelRatio(q);renderer.setSize(innerWidth,innerHeight);
   const cam=new THREE.OrthographicCamera(-1,1,1,-1,0,1);
-  const atlas=buildTreeAtlas();
+  S8L.mark('trees-start');const atlas=buildTreeAtlas();
   S8L.stage('trees');await yieldFrame();
-  const trees=new THREE.DataTexture(atlas.data,ATLAS_W,ATLAS_H,THREE.RedFormat,THREE.UnsignedByteType);
+  const trees=new THREE.DataTexture(atlas.data,ATLAS_TW,ATLAS_TH,THREE.RedFormat,THREE.UnsignedByteType);
   trees.minFilter=THREE.LinearMipmapLinearFilter;trees.magFilter=THREE.LinearFilter;trees.generateMipmaps=true;trees.unpackAlignment=1;trees.needsUpdate=true;
   const cells=ATLAS_CELLS.map(([x,y,w,h])=>new THREE.Vector4(x/ATLAS_W,(ATLAS_H-(y+h))/ATLAS_H,w/ATLAS_W,h/ATLAS_H));
   const U={uRes:{value:new THREE.Vector2()},uTime:{value:0},uLow:{value:0},uMid:{value:0},uHigh:{value:0},uKick:{value:0},uLevel:{value:0},uSnare:{value:0},
@@ -40,12 +40,17 @@ try{
   const draw=(si,rt)=>{renderer.setRenderTarget(rt);renderer.render(stages[si],cam);renderer.setRenderTarget(null);ready.add(si);
     const pr=renderer.properties.get(stages[si].children[0].material).currentProgram;
     if(pr&&pr.diagnostics&&pr.diagnostics.runnable===false&&!broken.has(si)){broken.add(si);console.warn('Scene shader failed on this GPU, skipping:',SCENES[si].name);setTimeout(()=>{if(deck.cur.si===si)applyScene(nextScene(),true)},0)}};
-  // compile every scene in the background so cutting between them never stalls
-  const order=ALL_SCENES.filter(i=>i!==0);let oi=0;
-  const pre=()=>{if(oi>=order.length)return;const si=order[oi++];
-    (renderer.compileAsync?renderer.compileAsync(stages[si],cam):Promise.resolve()).then(()=>ready.add(si)).catch(()=>{}).finally(()=>setTimeout(pre,40))};
-  setTimeout(pre,900);
-  R={renderer,composer,U,rays,after,bloom,fin,mix,rtA,rtB,draw,resize,broken,ready,setQ(n){q=n;resize()},get q(){return q}};
+  // compile the other scenes in the background so cutting between them never stalls. Safari links a shader in one blocking
+  // step, so this waits until the experience has been entered and does one scene at a time, when the page is idle and
+  // visible, rather than holding up the first frame (scene cuts pick compiled scenes only, so variety just builds up)
+  const order=ALL_SCENES.filter(i=>i!==0);let oi=0,started=false;
+  const idle=f=>window.requestIdleCallback?requestIdleCallback(f,{timeout:3000}):setTimeout(f,200);
+  const pre=()=>{if(document.hidden)return setTimeout(pre,1500);while(oi<order.length&&ready.has(order[oi]))oi++;if(oi>=order.length)return S8L.mark('all-scenes');
+    const si=order[oi++],t0=performance.now();
+    (renderer.compileAsync?renderer.compileAsync(stages[si],cam):Promise.resolve()).then(()=>ready.add(si)).catch(()=>{})
+      .finally(()=>{S8L.mark('scene '+SCENES[si].id,performance.now()-t0);setTimeout(()=>idle(pre),1200)})};
+  const precompile=()=>{if(started)return;started=true;setTimeout(()=>idle(pre),2500)};
+  R={renderer,composer,U,rays,after,bloom,fin,mix,rtA,rtB,draw,resize,broken,ready,precompile,setQ(n){q=n;resize()},get q(){return q}};
 }catch(e){document.body.classList.add('nogl');console.warn('WebGL unavailable',e)}
 
 /* ---------------- state ---------------- */
@@ -86,8 +91,10 @@ function applyScene(si,instant,fast){
   sceneUI();
 }
 function nextScene(){
-  const pool=ALL_SCENES.filter(i=>i!==deck.cur.si&&!CY.recent.includes(i)&&(!R||(R.ready.has(i)&&!R.broken.has(i))));
-  const L=pool.length?pool:ALL_SCENES.filter(i=>i!==deck.cur.si);
+  const ok=i=>!R||(R.ready.has(i)&&!R.broken.has(i));
+  const pool=ALL_SCENES.filter(i=>i!==deck.cur.si&&!CY.recent.includes(i)&&ok(i));
+  const any=ALL_SCENES.filter(i=>i!==deck.cur.si&&ok(i));
+  const L=pool.length?pool:any.length?any:ALL_SCENES.filter(i=>i!==deck.cur.si&&!(R&&R.broken.has(i)));
   return L[Math.floor(Math.random()*L.length)];
 }
 function applyProfile(p,instant,si){

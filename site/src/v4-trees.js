@@ -1,6 +1,9 @@
 /* ---------------- tree atlas: 17 silhouettes drawn once on a canvas, uploaded as one alpha channel ----------------
    0-7 evergreens of varying fullness, 8-9 pines, 10-11 snags, 12-15 dead mesquite-style spreaders, 16 bare deciduous */
 const ATLAS_W=3840,ATLAS_H=2048,ROW_H=1024,TREE_H=ROW_H-20;
+// cells are laid out in these units; phones and tablets draw the atlas at half size (a quarter of the pixels to fill, read
+// back and upload), which their render scale cannot tell apart
+const ATLAS_K=matchMedia('(max-width: 760px), (pointer: coarse)').matches?.5:1,ATLAS_TW=ATLAS_W*ATLAS_K,ATLAS_TH=ATLAS_H*ATLAS_K;
 const ATLAS_CELLS=(()=>{const c=[];let x=0;
   for(let i=0;i<8;i++){c.push([x,0,320,ROW_H]);x+=320}
   for(let i=0;i<2;i++){c.push([x,0,384,ROW_H]);x+=384}
@@ -127,8 +130,8 @@ function mesquite(g,r,CW){
   [H*.022,H*.015,H*.01,H*.0068,H*.0046,H*.0032,H*.0023,H*.0016,H*.0012,H*.001].forEach((w,i)=>segs(g,S[i],Math.max(1,w)));
 }
 function buildTreeAtlas(){
-  const cv=document.createElement('canvas');cv.width=ATLAS_W;cv.height=ATLAS_H;
-  const g=cv.getContext('2d',{willReadFrequently:true});g.lineCap='round';g.lineJoin='round';g.strokeStyle='#fff';g.fillStyle='#fff';
+  const cv=document.createElement('canvas');cv.width=ATLAS_TW;cv.height=ATLAS_TH;
+  const g=cv.getContext('2d',{willReadFrequently:true});g.scale(ATLAS_K,ATLAS_K);g.lineCap='round';g.lineJoin='round';g.strokeStyle='#fff';g.fillStyle='#fff';
   const draw=[];
   EVERGREENS.forEach(o=>draw.push((r,cw)=>conifer(g,r,o,cw)));
   draw.push((r,cw)=>pine(g,r,cw),(r,cw)=>pine(g,r,cw),(r,cw)=>snag(g,r,cw),(r,cw)=>snag(g,r,cw));
@@ -137,7 +140,7 @@ function buildTreeAtlas(){
   ATLAS_CELLS.forEach(([x,y,w,h],i)=>{g.save();g.beginPath();g.rect(x+2,y+2,w-4,h-4);g.clip();
     g.translate(x+w/2,y+h-6);g.scale(1,-1);draw[i](mulberry(4242+i*977),w);g.restore()});
   // keep only alpha, flipped so texture v=0 is the bottom row
-  const id=g.getImageData(0,0,ATLAS_W,ATLAS_H).data,a=new Uint8Array(ATLAS_W*ATLAS_H);
-  for(let y=0;y<ATLAS_H;y++){const src=(ATLAS_H-1-y)*ATLAS_W*4,dst=y*ATLAS_W;for(let x=0;x<ATLAS_W;x++)a[dst+x]=id[src+x*4+3]}
+  const W=ATLAS_TW,H=ATLAS_TH,id=g.getImageData(0,0,W,H).data,a=new Uint8Array(W*H);
+  for(let y=0;y<H;y++){const src=(H-1-y)*W*4,dst=y*W;for(let x=0;x<W;x++)a[dst+x]=id[src+x*4+3]}
   return {data:a,canvas:cv};
 }

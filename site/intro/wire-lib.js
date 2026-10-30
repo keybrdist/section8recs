@@ -166,7 +166,11 @@ function mountWire(canvas, opts = {}) {
   const INTRO = 3.2;
   let t0 = null;
 
+  let lastDraw = 0;
   function frame(now) {
+    // while the forest loads, draw every other frame (about 30 fps) and leave the main thread to the app
+    if (document.body.classList.contains('loading') && now - lastDraw < 30) { if (running) requestAnimationFrame(frame); return; }
+    lastDraw = now;
     if (t0 === null) t0 = now;
     const t = reduced ? (opts.t ?? 30) : (now - t0) / 1000;
 

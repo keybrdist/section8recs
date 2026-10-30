@@ -33,6 +33,7 @@ addEventListener('pointermove',e=>{const x=e.clientX/innerWidth*2-1,y=-(e.client
 function enter(withSound,start=routeStart()){
   $('#gate').classList.add('gone');document.body.classList.remove('gated');acquire();lastSceneT=performance.now()/1000;
   if(ROUTE.view==='releases')openIndex(true);
+  if(R)R.precompile();
   if(withSound){load(...(start||firstTrack()))}else if(start){load(...start,false)}else{note([{t:'ARCHIVE OPENED · SECTION 8 RECORDINGS',c:'acc'},`${D.length} RECORDINGS · ${NTRACKS} SEGMENTS · ${YEARS}`,{t:'NO AUDIO SIGNAL. PRESS PLAY.',c:'dim'}])}
 }
 $('#enterSound').onclick=()=>enter(true);$('#enterQuiet').onclick=()=>enter(false);
