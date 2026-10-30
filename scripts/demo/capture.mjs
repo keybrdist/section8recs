@@ -6,14 +6,14 @@
    AnalyserNode (a Blackman-windowed 2048-point FFT in dB, as getFloatFrequencyData returns it). Every second step
    is screenshotted and piped to ffmpeg, giving a 30 fps clip in which the visuals follow the music exactly.
 
-   node scripts/capture-demo.mjs --base http://localhost:8791 --cat SECTION8088D --t 2 --mp3 Specter.mp3 \
-     --start 85 --dur 6 --out shot.mp4 [--scene Rendlesham] [--w 1920 --h 1080] [--warm 6] [--q 0.68] [--ffmpeg <bin>] [--chrome <bin>]
+   node scripts/demo/capture.mjs --base http://localhost:8791 --cat SECTION8088D --t 2 --mp3 Specter.mp3 \
+     --start 85 --dur 6 --out shot.mp4 [--scene Rendlesham] [--w 1920 --h 1080] [--warm 6] [--q 0.68]
 
-   --scene pins a scene by its name in the Scene menu. The clip has no audio: mux the same range of the MP3 afterwards.
-   Needs an ffmpeg with libx264, and one shot at a time: two software-GPU browsers in parallel render slower in total. */
+   --scene pins a scene by its name in the Scene menu. The clip has no audio: assemble.sh adds it. FFMPEG=<bin> (with
+   libx264) and CHROME=<chromium binary> override the tools found by default. Run one shot at a time: two
+   software-GPU browsers in parallel render slower in total. See README.md in this folder. */
 import {spawn, execFileSync} from 'node:child_process';
 import {readFileSync} from 'node:fs';
-import {homedir} from 'node:os';
 import {chromium} from 'playwright-core';
 
 const arg = (k, d) => {const i = process.argv.indexOf('--' + k); return i > 0 ? process.argv[i + 1] : d};
@@ -21,8 +21,7 @@ const BASE = arg('base', 'http://localhost:8791'), CAT = arg('cat'), TN = +arg('
 const START = +arg('start', 0), DUR = +arg('dur', 6), W = +arg('w', 1920), H = +arg('h', 1080), WARM = +arg('warm', 8);
 const SCENE = arg('scene'), FPS = 30, STEP = 60, N = 2048;
 let SR, pcm;
-const FF = arg('ffmpeg', 'ffmpeg');
-const CHROME = arg('chrome', `${homedir()}/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell`);
+const FF = process.env.FFMPEG || 'ffmpeg', CHROME = process.env.CHROME || undefined;
 if (!CAT || !MP3 || !OUT) {console.error('need --cat, --mp3 and --out'); process.exit(2)}
 
 // mono at the context rate: the analyser down-mixes to mono as (L+R)/2, which is what -ac 1 does
@@ -114,6 +113,9 @@ for (let k = (WARM - 1.5) * STEP; k < WARM * STEP; k++) await step(t0 + k / STEP
 const cdp = await ctx.newCDPSession(page);
 const enc = spawn(FF, ['-v', 'error', '-y', '-f', 'image2pipe', '-c:v', 'mjpeg', '-framerate', String(FPS), '-i', '-',
   '-c:v', 'libx264', '-preset', 'medium', '-crf', '12', '-pix_fmt', 'yuv420p', '-r', String(FPS), OUT], {stdio: ['pipe', 'inherit', 'inherit']});
+const encoded = new Promise(r => enc.on('close', r));
+enc.stdin.on('error', () => {});
+encoded.then(code => {if (code) {console.error(`ffmpeg failed (exit ${code}), nothing written`); process.exit(1)}});
 const frames = Math.round(DUR * FPS), T = Date.now();
 for (let f = 0; f < frames; f++) {
   const a = Date.now(); await step(START + f / FPS, 2); const b = Date.now();
@@ -121,6 +123,6 @@ for (let f = 0; f < frames; f++) {
   if (!enc.stdin.write(Buffer.from(data, 'base64'))) await new Promise(r => enc.stdin.once('drain', r));
   if (f % 30 === 0 || f < 3) console.error(`frame ${f}/${frames} ${((Date.now() - T) / (f + 1)).toFixed(0)} ms/frame (render ${b - a} ms, shot ${Date.now() - b} ms)`);
 }
-enc.stdin.end(); await new Promise(r => enc.on('close', r));
+enc.stdin.end(); await encoded;
 await browser.close();
 console.error(`wrote ${OUT}`);
