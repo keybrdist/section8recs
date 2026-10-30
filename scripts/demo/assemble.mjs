@@ -33,12 +33,19 @@ T.rows.forEach((r, i) => {
 const FL = fr(+(T.set.flash || 0)), vin = [];
 const input = (...args) => {vin.push(...args); return vin.filter(a => a === '-i').length - 1};
 const still = (png, secs) => input('-loop', '1', '-framerate', String(FPS), '-t', String(secs + 1), '-i', `${C}/${png}.png`);
-let fc = '', cat = '';
-if (fi) {fc += `[${still('intro', T.intro)}:v]trim=end_frame=${fi},setpts=PTS-STARTPTS,format=yuv420p,${GRAIN},fade=in:0:12[vi];`; cat += '[vi]'}
+let fc = '', cat = '', tl = 0;
+// the title card for `secs`, swapping between the table's titles every @swap seconds, counted from video frame `from`
+const K = Math.max(1, (T.set.title || '').split('\t').length), SW = Math.max(1, fr(+(T.set.swap || .13)));
+const card = (secs, from) => {
+  let lab = `[${still('intro', secs)}:v]`;
+  for (let k = 1; k < K; k++) {fc += `${lab}[${still(`intro-${k}`, secs)}:v]overlay=shortest=1:enable='eq(mod(floor((n+${from})/${SW})\\,${K})\\,${k})'[t${tl}];`; lab = `[t${tl++}]`}
+  return lab;
+};
+if (fi) {const lab = card(T.intro, 0); fc += `${lab}trim=end_frame=${fi},setpts=PTS-STARTPTS,format=yuv420p,${GRAIN}${FL ? '' : ',fade=in:0:12'}[vi];`; cat += '[vi]'}
 T.rows.forEach((r, i) => {
   let ch = `[${input('-i', `${work}/shots/${r.name}.mp4`)}:v]trim=end_frame=${fs[i]},setpts=PTS-STARTPTS,format=yuv420p`;
   // @flash: the title card strobes over the first frames of the first shot, the end card over the last frames of the last
-  if (FL && i === 0) {fc += `${ch}[p${i}];`; ch = `[p${i}][${still('intro', fs[i] / FPS)}:v]overlay=shortest=1:enable='lt(n\\,${FL})*eq(mod(n\\,2)\\,0)'`}
+  if (FL && i === 0) {fc += `${ch}[p${i}];`; const lab = card(fs[i] / FPS, fi); ch = `[p${i}]${lab}overlay=shortest=1:enable='lt(n\\,${FL})*eq(mod(n\\,2)\\,0)'`}
   if (FL && i === N - 1) {const s = fs[i] - FL; fc += `${ch}[q${i}];`; ch = `[q${i}][${still('end', fs[i] / FPS)}:v]overlay=shortest=1:enable='gte(n\\,${s})*eq(mod(n-${s}\\,2)\\,0)'`}
   fc += `${ch},format=yuv420p[v${i}];`; cat += `[v${i}]`;
 });
