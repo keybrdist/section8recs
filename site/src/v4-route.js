@@ -33,5 +33,5 @@ $('#tapCue').onclick=tapPlay;
     if(Math.hypot(c.clientX-s.x,c.clientY-s.y)>=10)return;e.stopPropagation();if(e.cancelable)e.preventDefault();tapPlay()},{capture:true});
   addEventListener('click',e=>{if(document.body.classList.contains('await-tap')&&!e.target.closest(CTL))tapPlay()});
 }
-$('#npInfo').addEventListener('click',e=>{if(!cur.r||cur.r.c!==ROUTE.c||!$('#release'))return;e.preventDefault();openGate('#release')});
+$('#npInfo').addEventListener('click',e=>{if(!cur.r||cur.r.c!==ROUTE.c||!$('#release')||e.metaKey||e.ctrlKey||e.shiftKey)return;e.preventDefault();openGate('#release')});
 addEventListener('keydown',e=>{if(e.key==='Escape'&&entered&&document.body.classList.contains('gated'))closeGate(false)});
