@@ -3,6 +3,14 @@
 An immersive, audio-reactive site for Section 8 Recordings: a dark forest rendered in WebGL (three.js), one scene per
 release mood, with the full catalogue playable, searchable and queueable.
 
+## Hosting
+
+section8recs.com is served by the Cloudflare Pages project `section8recs` (zone `section8recs.com`, account KEYBRDIST
+INC): the apex is a proxied CNAME to `section8recs.pages.dev`, and zone redirect rules send www., dl. and about.
+section8recs.com to it with a 301. Until 2026-10-30 the apex pointed at LabelGrid's lgsites (A 157.90.158.72); the DNS
+and Pages settings from before the move are in `.scratch/cutover-2026-10-30/` of the maintainer's checkout. To roll
+back, point the apex at that address again.
+
 ## Build
 
 Needs Node 24 (`.node-version`; Astro 7 needs at least 22.23.4).
@@ -11,7 +19,7 @@ Needs Node 24 (`.node-version`; Astro 7 needs at least 22.23.4).
     npm run build      # bundle the app, then build the Astro pages into dist/
     npm run preview    # serve dist/ locally
 
-Cloudflare Pages runs the same build for every push: `main` deploys about.section8recs.com, and every branch gets a
+Cloudflare Pages runs the same build for every push: `main` deploys section8recs.com, and every branch gets a
 preview at `https://<branch>.section8recs.pages.dev`.
 
 `npm run bundle` (`scripts/bundle-app.mjs`) assembles the experience from `site/src/` and the home page variant in
@@ -50,7 +58,7 @@ previous about page) live in `static/`.
 Each page names what it shows in `<script id="s8-route">`; entering plays it (`site/src/v4-route.js`), and the address
 follows the release on air. `scripts/redirects.mjs` writes `_redirects` at build time: lgsites' `/r/<slug>/<id>`
 addresses, the archived ones in `site/data/legacy-urls.json`, lowercase catalogue numbers and lgsites' player and
-checkout paths all 301 to the release page. `static/_headers` keeps previews and about.section8recs.com out of search
+checkout paths all 301 to the release page. `static/_headers` keeps previews out of search
 results.
 
 ## Catalogue sync
@@ -67,7 +75,7 @@ The token (`section8recs-static-site-sync-v2`) expires on 2027-10-24; the workfl
 
 ## Load timing
 
-Add `?timing` to any page address (for example https://about.section8recs.com/?timing) to get a panel with the load
+Add `?timing` to any page address (for example https://section8recs.com/?timing) to get a panel with the load
 stages, the blocking WebGL calls (shader compile and link, texture upload) and the slowest frames, with a Copy button.
 It is meant for phones, where there are no developer tools at hand. To keep the first frame quick, the tree atlas is
 drawn at half size on phones and tablets, and the scenes other than the first compile only after the experience has
