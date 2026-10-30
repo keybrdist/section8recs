@@ -11,13 +11,13 @@ HERE=$(cd "$(dirname "$0")" && pwd); FF=${FFMPEG:-ffmpeg}; C=$WORK/cards; A=$WOR
 SHOT=${SHOT:-5.9}; INTRO=${INTRO:-1.5}; END=${END:-2.2}; GRAIN="noise=alls=7:allf=t"
 fr(){ awk "BEGIN{printf \"%d\", $1*30+.5}"; }; calc(){ awk "BEGIN{printf \"%.3f\", $1}"; }
 mkdir -p "$A"; [ -s "$C/end-nocur.png" ] || node "$HERE/cards.mjs" "$C"
-mapfile -t ROWS < <(grep -v '^#' "$TABLE"); N=${#ROWS[@]}
+mapfile -t ROWS < <(grep -v -e '^#' -e '^[[:space:]]*$' "$TABLE"); N=${#ROWS[@]}
 # video, cut by frame count so each cut lands on its drop
-args=(-loop 1 -framerate 30 -t 3 -i "$C/intro.png")
+args=(-loop 1 -framerate 30 -t "$(calc "$INTRO+1")" -i "$C/intro.png")
 fc="[0:v]trim=end_frame=$(fr $INTRO),setpts=PTS-STARTPTS,format=yuv420p,$GRAIN,fade=in:0:12[v0];"; cat="[v0]"
 for i in "${!ROWS[@]}"; do IFS=$'\t' read -r name _ <<<"${ROWS[$i]}"; k=$((i+1)); args+=(-i "$WORK/shots/$name.mp4")
   fc+="[$k:v]trim=end_frame=$(fr $SHOT),setpts=PTS-STARTPTS,format=yuv420p[v$k];"; cat+="[v$k]"; done
-args+=(-loop 1 -framerate 30 -t 4 -i "$C/end-nocur.png" -loop 1 -framerate 30 -t 4 -i "$C/end.png")
+args+=(-loop 1 -framerate 30 -t "$(calc "$END+1")" -i "$C/end-nocur.png" -loop 1 -framerate 30 -t "$(calc "$END+1")" -i "$C/end.png")
 fc+="[$((N+1)):v][$((N+2)):v]overlay=enable='lt(mod(t\,1.06)\,0.53)',trim=end_frame=$(fr $END),setpts=PTS-STARTPTS,format=yuv420p,$GRAIN,fade=in:0:6,fade=out:st=$(calc "$END-.6"):d=0.6[ve];"
 fc+="${cat}[ve]concat=n=$((N+2)):v=1:a=0,fps=30[v]"
 "$FF" -v error -y "${args[@]}" -filter_complex "$fc" -map "[v]" -c:v libx264 -preset medium -crf 12 -pix_fmt yuv420p "$A/video.mp4"

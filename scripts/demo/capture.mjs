@@ -78,7 +78,8 @@ const info = await page.evaluate(scene => {
   const s8 = window.__s8, eng = s8.eng, au = eng.el;
   // the track keeps playing (so the page stays in its playing state) but never ends or reaches an end marker
   au.loop = true; au.playbackRate = .0625;
-  if (scene) {const b = [...document.querySelectorAll('#sceneMenu [data-sc]')].find(b => b.dataset.sc !== 'auto' && b.querySelector('.t').firstChild.textContent.trim().toLowerCase() === scene.toLowerCase()); if (b) s8.scene(+b.dataset.sc, true)}
+  let pinned = !scene;
+  if (scene) {const b = [...document.querySelectorAll('#sceneMenu [data-sc]')].find(b => b.dataset.sc !== 'auto' && b.querySelector('.t').firstChild.textContent.trim().toLowerCase() === scene.toLowerCase()); if (b) {s8.scene(+b.dataset.sc, true); pinned = true}}
   eng.frame = function () {
     this.fd.set(window.__spec); const t = window.__vtSec, dt = Math.min(.1, Math.max(.004, t - this.last || 1 / 60)); this.last = t;
     const out = this.bands.frame(this.fd, t, dt), e = this.energy.frame(out, this.fd, t, dt, this.binHz); out.state = e.state; out.rate = e.rate; return out;
@@ -87,9 +88,10 @@ const info = await page.evaluate(scene => {
   const st = document.createElement('style');
   st.textContent = '.top,.bot,.np>div,.note,#qtoast,#sceneMenu{opacity:0!important;visibility:hidden!important;transition:none!important}';
   document.head.append(st);
-  return {sr: eng.ctx.sampleRate, scene: document.querySelector('#sceneBtn')?.textContent.trim()};
+  return {sr: eng.ctx.sampleRate, pinned, scene: document.querySelector('#sceneBtn')?.textContent.trim()};
 }, SCENE);
 console.error(`${CAT} t=${TN} ctx ${info.sr} Hz, scene button "${info.scene}"`);
+if (!info.pinned) {console.error(`no scene named "${SCENE}" in the Scene menu`); await browser.close(); process.exit(1)}
 SR = info.sr; pcm = decode(SR);
 
 const step = async (t, n = 1) => {
@@ -115,7 +117,7 @@ const enc = spawn(FF, ['-v', 'error', '-y', '-f', 'image2pipe', '-c:v', 'mjpeg',
   '-c:v', 'libx264', '-preset', 'medium', '-crf', '12', '-pix_fmt', 'yuv420p', '-r', String(FPS), OUT], {stdio: ['pipe', 'inherit', 'inherit']});
 const encoded = new Promise(r => enc.on('close', r));
 enc.stdin.on('error', () => {});
-encoded.then(code => {if (code) {console.error(`ffmpeg failed (exit ${code}), nothing written`); process.exit(1)}});
+encoded.then(code => {if (code !== 0) {console.error(`ffmpeg failed (exit ${code}), nothing written`); process.exit(1)}});
 const frames = Math.round(DUR * FPS), T = Date.now();
 for (let f = 0; f < frames; f++) {
   const a = Date.now(); await step(START + f / FPS, 2); const b = Date.now();

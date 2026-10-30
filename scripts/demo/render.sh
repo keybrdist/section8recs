@@ -8,7 +8,7 @@ TABLE=${1:?usage: render.sh <shots.tsv> <work-dir>}; WORK=${2:?usage: render.sh 
 HERE=$(cd "$(dirname "$0")" && pwd); BASE=${BASE:-http://localhost:8791}
 UA='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36'
 mkdir -p "$WORK/mp3" "$WORK/shots"
-grep -v '^#' "$TABLE" | while IFS=$'\t' read -r name cat track file start warm scene; do
+grep -v -e '^#' -e '^[[:space:]]*$' "$TABLE" | while IFS=$'\t' read -r name cat track file start warm scene; do
   # the CDN answers 403 to some default user agents
   [ -s "$WORK/mp3/$file" ] || curl -fsS -A "$UA" -o "$WORK/mp3/$file" "https://cdn-prod-1.labelgrid.com/labels/section8recs/320/$file"
   [ -s "$WORK/shots/$name.mp4" ] && { echo "$name: already rendered"; continue; }
