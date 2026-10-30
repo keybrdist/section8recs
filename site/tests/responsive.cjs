@@ -99,7 +99,8 @@ function audit(state) {
     // layout, not animation: panels open instantly so they are measured where they settle
     await p.addStyleTag({ content: '#index,#qpanel{transition:none!important}' });
     await snap('home');
-    await snap('playing', async () => { await p.tap('#enterSound'); await sleep(3500); });
+    // a release page has already entered by itself
+    await snap('playing', async () => { if (await p.evaluate(() => document.body.classList.contains('gated'))) await p.tap('#enterSound'); await sleep(3500); });
     await snap('scene-menu', async () => { await p.tap('#sceneBtn'); await sleep(300); });
     await snap('search', async () => { await p.keyboard.press('Escape'); await p.evaluate(() => document.querySelector('#sBtn').click()); await sleep(200); await p.fill('#sQ', 'biobird'); });
     await snap('queue', async () => { await p.keyboard.press('Escape'); await p.evaluate(() => document.querySelector('#qBtn').click()); });

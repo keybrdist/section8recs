@@ -67,6 +67,16 @@
 body:not(.loading) .g-load{opacity:0}
 body:not(.loading) .g-load::after{animation:none}
 body.loading .f-c .f-b{opacity:.32;pointer-events:none;transition:opacity .6s}
+/* a release page enters by itself: no enter buttons while it loads */
+body.autoplay.loading .f-c{visibility:hidden}
+/* the gate reopened over the experience (Release info): a way back to the scene */
+.g-x{display:none}
+body.entered .g-x{position:fixed;z-index:5;top:14px;right:14px;display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 18px;border-radius:999px;
+  border:1px solid rgba(236,235,230,.4);background:rgba(5,5,6,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#f1efe9;
+  font:500 10.5px var(--mono);letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+body.entered .g-x:hover,body.entered .g-x:focus-visible{border-color:#f1efe9;outline:0}
+body.entered .g-x span{color:#fe0101}
+body.entered .f-top{display:none}
 body.load-lost .g-load i{background:rgba(236,235,230,.4);box-shadow:none}
 body.load-lost .g-load::after{animation:none}
 @media (prefers-reduced-motion:reduce){.g-load::after{animation:none}}

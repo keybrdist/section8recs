@@ -124,6 +124,7 @@ function setNow(){
   $('#npS').innerHTML=`${esc(ta||r.a)} <em>— ${esc(r.t)} · ${pad(cur.i+1)} / ${pad(r.tr.length)}</em>`;
   $('#npTags').textContent=r.s.join(' / ');
   document.title=`${tn} · ${ta||r.a} · Section 8`;
+  $('#npInfo').href=`/cat/${encodeURIComponent(r.c)}`;$('#npInfo').parentElement.hidden=false;
   markIndex();favMark();
 }
 function load(c,i,auto=true){

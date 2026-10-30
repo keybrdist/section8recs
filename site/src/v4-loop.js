@@ -30,15 +30,24 @@ addEventListener('keydown',e=>{
   else if(e.key==='Escape'){openIndex(false);$('#sceneMenu').classList.remove('open')}
 });
 addEventListener('pointermove',e=>{const x=e.clientX/innerWidth*2-1,y=-(e.clientY/innerHeight*2-1);mouse.mv=(mouse.mv||0)+Math.hypot(x-mouse.x,y-mouse.y);mouse.x=x;mouse.y=y});
+let entered=false;
 function enter(withSound,start=routeStart()){
   $('#gate').classList.add('gone');document.body.classList.remove('gated');acquire();lastSceneT=performance.now()/1000;
+  // a track button on the gate reopened over the experience (Release info) just plays that track
+  if(entered){load(...start);return}
+  entered=true;document.body.classList.add('entered');
   if(ROUTE.view==='releases')openIndex(true);
   if(R)R.precompile();
   if(withSound){load(...(start||firstTrack()))}else if(start){load(...start,false)}else{note([{t:'ARCHIVE OPENED · SECTION 8 RECORDINGS',c:'acc'},`${D.length} RECORDINGS · ${NTRACKS} SEGMENTS · ${YEARS}`,{t:'NO AUDIO SIGNAL. PRESS PLAY.',c:'dim'}])}
 }
-$('#enterSound').onclick=()=>enter(true);$('#enterQuiet').onclick=()=>enter(false);
+// the gate reopened on the page's own details, and back to the scene, carrying on with what is playing
+function openGate(sel){const g=$('#gate'),t=sel&&$(sel);g.classList.remove('gone');document.body.classList.add('gated');
+  g.scrollTop=t?t.getBoundingClientRect().top-g.getBoundingClientRect().top+g.scrollTop:0;$('#gClose')?.focus({preventScroll:true})}
+function closeGate(withSound){$('#gate').classList.add('gone');document.body.classList.remove('gated');if(withSound&&au.paused)toggle()}
+$('#enterSound').onclick=()=>entered?closeGate(true):enter(true);$('#enterQuiet').onclick=()=>entered?closeGate(false):enter(false);
+$('#gClose')?.addEventListener('click',()=>closeGate(false));
 // the first frame compiles the opening scene; once it has drawn, the forest is ready and the buttons wake
-requestAnimationFrame(()=>requestAnimationFrame(()=>S8L.done()));
+requestAnimationFrame(()=>requestAnimationFrame(()=>{S8L.done();routeReady()}));
 (()=>{const st=['Signal acquired','Listening','Tree line: movement','Stay on the path'];let i=0;setInterval(()=>{if(document.body.classList.contains('gated')&&!document.body.classList.contains('loading')){i=(i+1)%st.length;
   const el=$('#gSt');scramble(el,st[i].toUpperCase(),500);setTimeout(()=>{if(!el.querySelector('.cursor'))el.insertAdjacentHTML('beforeend','<span class="cursor"></span>')},520)}},3200)})();
 

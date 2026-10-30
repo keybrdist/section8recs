@@ -429,6 +429,20 @@ html,body{overscroll-behavior:none}
 }
 body.ui-idle .top,body.ui-idle .bot,body.ui-idle .np>div,body.ui-idle .note,body.ui-idle .tape{opacity:0;visibility:hidden;transition:opacity .5s,visibility 0s .5s}
 body.ui-idle .np{bottom:calc(16px + env(safe-area-inset-bottom))}
+/* the release on air: its page, or on its own page the details below the gate; on a phone with the full details */
+.np-info{margin:10px 0 0}.np-info[hidden]{display:none}
+.np-info a{display:inline-flex;align-items:center;gap:8px;min-height:30px;color:var(--fg2);font-size:10px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none}
+.np-info a span{color:#fe0101;transition:transform .2s}.np-info a:hover,.np-info a:focus-visible{color:var(--fg);outline:0}.np-info a:hover span{transform:translateX(3px)}
+@media (max-width:760px),(pointer:coarse) and (max-height:500px){body:not(.np-full) .np-info{display:none}.np-info{margin-top:4px}}
+/* a release page that could not start its sound by itself: the first tap does */
+.tapcue{position:fixed;z-index:20;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:12px;padding:14px 22px;
+  border:1px solid rgba(254,1,1,.7);border-radius:999px;background:rgba(5,5,6,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  color:#f1efe9;font:500 11px var(--mono);letter-spacing:.3em;text-transform:uppercase;cursor:pointer;animation:tapIn .6s ease both}
+.tapcue[hidden],body.gated .tapcue{display:none}
+.tapcue i{width:0;height:0;border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent #fe0101;filter:drop-shadow(0 0 6px rgba(254,1,1,.8));animation:tapPulse 1.6s ease-in-out infinite}
+@keyframes tapIn{from{opacity:0}to{opacity:1}}
+@keyframes tapPulse{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.tapcue,.tapcue i{animation:none}}
 </style>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/"}}</script>
 </head>
@@ -471,6 +485,7 @@ body.ui-idle .np{bottom:calc(16px + env(safe-area-inset-bottom))}
     <p class="np-s" id="npS">The darkest drum &amp; bass, jungle, and breakbeat-oriented music <em>· since 2007</em></p>
     <p class="np-tags mono" id="npTags">Darkstep / Hardstep / Technoid</p>
     <p class="np-marks" id="npMarks" hidden></p>
+    <p class="np-info" hidden><a class="mono" id="npInfo" href="/releases">Release info <span aria-hidden="true">→</span></a></p>
   </div>
 </section>
 
@@ -515,6 +530,7 @@ body.ui-idle .np{bottom:calc(16px + env(safe-area-inset-bottom))}
 <div id="favDlg" role="dialog" aria-modal="true" aria-labelledby="favT" hidden><div class="fpn"><button class="tb mono" id="favClose">Close ✕</button><div class="fbody"></div></div></div>
 <div id="ctx" role="menu" aria-hidden="true"></div>
 <div id="qtoast" role="status" aria-live="polite"></div>
+<button class="tapcue mono" id="tapCue" hidden><i aria-hidden="true"></i><span>Tap to play</span></button>
 
 <div id="gate" role="dialog" aria-modal="true" aria-labelledby="gT">
   <div class="g-imgw"><img class="g-img" src="section8-about-mockup/forest.jpg" srcset="section8-about-mockup/forest-1280.jpg 1280w, section8-about-mockup/forest.jpg 2560w" sizes="100vw" alt="Spruce forest standing in backlit fog at night" fetchpriority="high" decoding="async"></div>
