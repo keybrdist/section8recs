@@ -68,7 +68,7 @@ await ctx.route('**/labels/section8recs/320/*.mp3', r => r.fulfill({status: 200,
 await ctx.addInitScript(CLOCK);
 const page = await ctx.newPage();
 page.on('pageerror', e => console.error('pageerror', e.message));
-await page.goto(`${BASE}/cat/${CAT}?t=${TN}`, {waitUntil: 'load'});
+await page.goto(`${BASE}/cat/${CAT}?track=${TN}`, {waitUntil: 'load'});
 // the gate wakes once the first frame has drawn
 for (let i = 0; i < 400 && !(await page.evaluate(() => !document.body.classList.contains('loading') && !!window.__s8?.R)); i++) {await page.evaluate(() => window.__vstep(16.667)); await page.waitForTimeout(20)}
 // the other scenes would compile in the background while recording, which stalls a software GPU for minutes;

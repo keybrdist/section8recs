@@ -10,3 +10,5 @@ static/app/
 src/generated/
 .sync-summary
 static/_redirects
+# wrangler pages dev (the Functions run locally)
+.wrangler/
