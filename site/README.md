@@ -112,3 +112,8 @@ to `site/tests/out/`.
 
     npx astro preview --port 8765 &
     CHROME=<chromium binary> node site/tests/responsive.cjs
+
+## Demo videos
+
+`scripts/demo/` cuts short videos of the experience from real, frame-by-frame renders of the scenes, each shot on a
+track's drop: see `scripts/demo/README.md`.
