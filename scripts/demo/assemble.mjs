@@ -22,6 +22,12 @@ const ff = args => {const r = spawnSync(FF, ['-v', 'error', '-y', ...args], {std
 // everything is counted in frames, so each cut lands where the table puts it
 const fr = s => Math.round(s * FPS), fi = fr(T.intro), fe = fr(T.end), fs = T.rows.map(r => fr(r.len));
 const total = fi + fs.reduce((a, b) => a + b, 0) + fe, N = T.rows.length;
+// a shot shorter than its length (say a DUR=1 test left in the work dir) would move every later cut
+T.rows.forEach((r, i) => {
+  const crc = spawnSync(FF, ['-v', 'error', '-i', `${work}/shots/${r.name}.mp4`, '-map', '0:v', '-c', 'copy', '-f', 'framecrc', '-'], {encoding: 'utf8', maxBuffer: 1 << 26}).stdout || '';
+  const n = crc.split('\n').filter(l => /^\d/.test(l)).length;
+  if (n < fs[i]) {console.error(`${r.name}: ${n || 'no'} frames, the table needs ${fs[i]}; render it again`); process.exit(1)}
+});
 
 const vin = ['-loop', '1', '-framerate', String(FPS), '-t', String(T.intro + 1), '-i', `${C}/intro.png`];
 let fc = `[0:v]trim=end_frame=${fi},setpts=PTS-STARTPTS,format=yuv420p,${GRAIN},fade=in:0:12[v0];`, cat = '[v0]';
