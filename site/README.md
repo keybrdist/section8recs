@@ -21,7 +21,8 @@ preview at `https://<branch>.section8recs.pages.dev`.
 - `static/app/intro.<hash>.js`: the home page's wireframe logo and link scrolling
 - `src/generated/shell.json`: the page head and body markup the Astro pages render around them
 
-Audio streams from the label CDN and three.js loads from jsDelivr. Static files (hero images, `classic.html`, the
+Audio streams from the label CDN. three.js (0.162, from npm) is bundled into the app module with rolldown, so only
+the parts the experience uses ship, from this site. Static files (hero images, `classic.html`, the
 previous about page) live in `static/`.
 
 ## Layout
@@ -63,6 +64,14 @@ releases opens a pull request instead. Locally:
     LABELGRID_API_TOKEN=... npm run sync   # sync, then make any missing social cards
 
 The token (`section8recs-static-site-sync-v2`) expires on 2027-10-24; the workflow opens a reminder issue a month before.
+
+## Load timing
+
+Add `?timing` to any page address (for example https://about.section8recs.com/?timing) to get a panel with the load
+stages, the blocking WebGL calls (shader compile and link, texture upload) and the slowest frames, with a Copy button.
+It is meant for phones, where there are no developer tools at hand. To keep the first frame quick, the tree atlas is
+drawn at half size on phones and tablets, and the scenes other than the first compile only after the experience has
+been entered, one at a time while the page is idle.
 
 ## Checks
 

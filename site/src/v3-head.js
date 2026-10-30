@@ -8,7 +8,7 @@ import { AfterimagePass } from 'three/addons/postprocessing/AfterimagePass.js';
 
 THREE.ColorManagement.enabled=false;
 // the gate's loading bar (site/intro/loader.js): report each stage, and let a frame paint before the next heavy step
-const S8L=window.S8L||{stage(){},done(){}};
+const S8L=window.S8L||{stage(){},done(){},mark(){}};
 const yieldFrame=()=>new Promise(r=>{requestAnimationFrame(()=>setTimeout(r,0));setTimeout(r,150)});
 S8L.stage('app');await yieldFrame();
 const D=/*__DATA__*/[];

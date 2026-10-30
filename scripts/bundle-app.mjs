@@ -1,11 +1,13 @@
 // Build the immersive app into cacheable files for the Astro pages:
-//   static/app/app.<hash>.js     the page module (release data from site/data/catalog.json inlined)
+//   static/app/app.<hash>.js     the page module, bundled with the parts of three.js it uses (release data from
+//                                site/data/catalog.json inlined)
 //   static/app/app.<hash>.css    the page styles
 //   static/app/intro.<hash>.js   the home page's wireframe logo and link scrolling
 //   src/generated/shell.json     the page head and body markup around them
 import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { rolldown } from 'rolldown';
 import { assemble } from './lib/assemble.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
@@ -47,6 +49,21 @@ let s = page, css, mod, intro;
 [s, mod] = cut(s, '<script type="module">', '</script>', '<!--APP_JS-->');
 [s, intro] = cut(s, '<script>\n', '</script>', '<!--INTRO_JS-->');
 
+// bundle three.js (0.162, from node_modules) into the module instead of loading it from jsDelivr: no third-party
+// connection to open before the forest can start, and only the parts of three.js the experience uses (the full library
+// is 1.2 MB to download and parse)
+const ENTRY = ROOT + 'node_modules/.cache/s8/app-entry.js';
+mkdirSync(ROOT + 'node_modules/.cache/s8', { recursive: true }); writeFileSync(ENTRY, mod);
+const bundle = await rolldown({ input: ENTRY, cwd: ROOT, logLevel: 'warn' });
+const { output } = await bundle.generate({ format: 'esm', minify: true, codeSplitting: false,
+  banner: '/*! three.js r162 | MIT License | https://github.com/mrdoob/three.js */' });
+await bundle.close();
+if (output.length !== 1 || /\bfrom ?["']three/.test(output[0].code)) throw new Error('three.js was not bundled into one file');
+mod = output[0].code;
+s = s.replace(/<script type="importmap">.*?<\/script>\n?/, '');
+if (/jsdelivr/.test(s.replace(/<link rel="preconnect" href="https:\/\/cdn\.jsdelivr\.net" crossorigin>\n?/, ''))) throw new Error('jsDelivr still referenced');
+s = s.replace(/<link rel="preconnect" href="https:\/\/cdn\.jsdelivr\.net" crossorigin>\n?/, '');
+
 const hash = t => createHash('sha256').update(t).digest('hex').slice(0, 10);
 const out = { [`app.${hash(mod)}.js`]: mod, [`app.${hash(css)}.css`]: css, [`intro.${hash(intro)}.js`]: intro };
 rmSync(APP, { recursive: true, force: true }); mkdirSync(APP, { recursive: true }); mkdirSync(GEN, { recursive: true });
@@ -54,15 +71,8 @@ for (const [name, text] of Object.entries(out)) writeFileSync(APP + name, text);
 writeFileSync(APP + linksName, linksText);
 const [js, cssName, introName] = Object.keys(out).map(n => '/app/' + n);
 
-// fetch three.js and its add-ons alongside the app instead of after it has been parsed. A plain preload only fetches:
-// modulepreload would also parse, and on a reload the preload scanner gets there before the import map is registered,
-// so the bare 'three' imports fail to resolve and the app never starts
-const map = JSON.parse(s.match(/<script type="importmap">(.*?)<\/script>/)[1]).imports;
-const deps = [...mod.matchAll(/^import .* from '([^']+)';$/gm)].map(m => m[1])
-  .map(d => map[d] || Object.entries(map).filter(([k]) => k.endsWith('/') && d.startsWith(k)).map(([k, v]) => v + d.slice(k.length))[0]);
-if (deps.some(d => !d)) throw new Error('an import the import map does not resolve');
-s = s.replace(/(<script type="importmap">.*?<\/script>)/, '$1' + [js, ...deps].map(d => `\n<link rel="preload" as="script" crossorigin href="${d}">`).join(''));
-s = s.replace('<!--APP_CSS-->', `<link rel="stylesheet" href="${cssName}">`)
+// the module is one self-contained file now, so it can be preloaded as a module
+s = s.replace('<!--APP_CSS-->', `<link rel="stylesheet" href="${cssName}">\n<link rel="modulepreload" href="${js}">`)
   .replace('<!--APP_JS-->', `<script type="module" src="${js}"></script>`)
   .replace('<!--INTRO_JS-->', `<script src="${introName}"></script>`);
 // pages live at any depth (/cat/<CAT>), so the hero images are referenced from the root
