@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /* Cut a demo video from the rendered shots: the title card over the 1.5 s before the first shot (its track's build-up),
-   each shot for its length, and the end card while the last track fades out. Shots that continue the same track
+   each shot for its length, and the end card while the last track fades out. With @flash, each card also strobes
+   (every other frame) over the first or last frames of the footage next to it. Shots that continue the same track
    (a row starting where the one before ends) share one unbroken stretch of audio; elsewhere the cut is hard.
    node scripts/demo/assemble.mjs <shots.tsv> <work-dir> <out.mp4>
    Reads <work-dir>/shots and mp3 (render.mjs) and draws <work-dir>/cards. Out: H.264 at the table's @size, 30 fps,
@@ -29,12 +30,21 @@ T.rows.forEach((r, i) => {
   if (n < fs[i]) {console.error(`${r.name}: ${n || 'no'} frames, the table needs ${fs[i]}; render it again`); process.exit(1)}
 });
 
-const vin = ['-loop', '1', '-framerate', String(FPS), '-t', String(T.intro + 1), '-i', `${C}/intro.png`];
-let fc = `[0:v]trim=end_frame=${fi},setpts=PTS-STARTPTS,format=yuv420p,${GRAIN},fade=in:0:12[v0];`, cat = '[v0]';
-T.rows.forEach((r, i) => {vin.push('-i', `${work}/shots/${r.name}.mp4`); fc += `[${i + 1}:v]trim=end_frame=${fs[i]},setpts=PTS-STARTPTS,format=yuv420p[v${i + 1}];`; cat += `[v${i + 1}]`});
-for (const p of ['end-nocur', 'end']) vin.push('-loop', '1', '-framerate', String(FPS), '-t', String(T.end + 1), '-i', `${C}/${p}.png`);
-fc += `[${N + 1}:v][${N + 2}:v]overlay=enable='lt(mod(t\\,1.06)\\,0.53)',trim=end_frame=${fe},setpts=PTS-STARTPTS,format=yuv420p,${GRAIN},fade=in:0:6,fade=out:st=${(T.end - .6).toFixed(3)}:d=0.6[ve];`;
-fc += `${cat}[ve]concat=n=${N + 2}:v=1:a=0,fps=${FPS}[v]`;
+const FL = fr(+(T.set.flash || 0)), vin = [];
+const input = (...args) => {vin.push(...args); return vin.filter(a => a === '-i').length - 1};
+const still = (png, secs) => input('-loop', '1', '-framerate', String(FPS), '-t', String(secs + 1), '-i', `${C}/${png}.png`);
+let fc = '', cat = '';
+if (fi) {fc += `[${still('intro', T.intro)}:v]trim=end_frame=${fi},setpts=PTS-STARTPTS,format=yuv420p,${GRAIN},fade=in:0:12[vi];`; cat += '[vi]'}
+T.rows.forEach((r, i) => {
+  let ch = `[${input('-i', `${work}/shots/${r.name}.mp4`)}:v]trim=end_frame=${fs[i]},setpts=PTS-STARTPTS,format=yuv420p`;
+  // @flash: the title card strobes over the first frames of the first shot, the end card over the last frames of the last
+  if (FL && i === 0) {fc += `${ch}[p${i}];`; ch = `[p${i}][${still('intro', fs[i] / FPS)}:v]overlay=shortest=1:enable='lt(n\\,${FL})*eq(mod(n\\,2)\\,0)'`}
+  if (FL && i === N - 1) {const s = fs[i] - FL; fc += `${ch}[q${i}];`; ch = `[q${i}][${still('end', fs[i] / FPS)}:v]overlay=shortest=1:enable='gte(n\\,${s})*eq(mod(n-${s}\\,2)\\,0)'`}
+  fc += `${ch},format=yuv420p[v${i}];`; cat += `[v${i}]`;
+});
+const e0 = still('end-nocur', T.end), e1 = still('end', T.end);
+fc += `[${e0}:v][${e1}:v]overlay=enable='lt(mod(t\\,1.06)\\,0.53)',trim=end_frame=${fe},setpts=PTS-STARTPTS,format=yuv420p,${GRAIN}${FL ? '' : `,fade=in:0:6,fade=out:st=${(T.end - .6).toFixed(3)}:d=0.6`}[ve];`;
+fc += `${cat}[ve]concat=n=${N + 1 + (fi ? 1 : 0)}:v=1:a=0,fps=${FPS}[v]`;
 ff([...vin, '-filter_complex', fc, '-map', '[v]', '-c:v', 'libx264', '-preset', 'medium', '-crf', '12', '-pix_fmt', 'yuv420p', `${A}/video.mp4`]);
 
 // audio: one stretch per run of rows that continue the same track
@@ -49,7 +59,7 @@ if (runs[0].start < 0) {console.error('the first shot starts less than @intro se
 const ain = [];
 let afc = '', acat = '';
 runs.forEach((r, i) => {
-  const fin = i === 0 ? .4 : .01, fout = i === runs.length - 1 ? 1.6 : .01;
+  const fin = i === 0 && T.intro ? .4 : .01, fout = i === runs.length - 1 ? 1.6 : .01;
   ain.push('-ss', r.start.toFixed(3), '-t', r.dur.toFixed(3), '-i', `${work}/mp3/${r.file}`);
   afc += `[${i}:a]aresample=48000,aformat=channel_layouts=stereo,atrim=duration=${r.dur.toFixed(3)},asetpts=PTS-STARTPTS,afade=in:d=${fin},afade=out:st=${(r.dur - fout).toFixed(3)}:d=${fout}[a${i}];`;
   acat += `[a${i}]`;

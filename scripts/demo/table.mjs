@@ -1,9 +1,9 @@
 /* A shot table: one tab-separated row per shot (name, catalogue number, track, file on the label CDN, start in the
    track, warm-up seconds, scene as named in the Scene menu, and optionally the shot's length in seconds), plus
    settings on lines starting with @ (name, tab, value):
-     @size    WxH of the video (1920x1080)        @title, @kicker, @line   text of the title card
-     @intro   title card seconds (1.5)            @end     end card seconds (2.2)
-     @shot    default shot length in seconds (5.9)
+     @size    WxH of the video (1920x1080)            @title, @kicker, @line   text of the title card
+     @intro   title card seconds (1.5, 0 for none)    @end     end card seconds (2.2)
+     @shot    default shot length in seconds (5.9)    @flash   seconds the cards strobe over the footage (0)
    Lines starting with # and blank lines are skipped. */
 import {readFileSync} from 'node:fs';
 
