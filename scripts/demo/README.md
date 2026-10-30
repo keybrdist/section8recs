@@ -35,13 +35,16 @@ camcorder, night-vision and FLIR read-outs, the edge text and the 8 sigil stay, 
 
 ## Speed
 
-Without a GPU, Chromium draws WebGL on the CPU (SwiftShader): on a 16-core Linux machine 0.6–1.3 s per step at the
-site's desktop render scale, about 1.6–2.6 s per output frame, so 7 shots took about 50 minutes. What matters:
+Pass `--gpu` (or `GPU=1` to `render.sh`) where the browser can reach a GPU: it draws through Vulkan (ANGLE) and stops if
+Chromium falls back to a CPU renderer (SwiftShader, or Mesa's llvmpipe when the device cannot be opened). On Linux that
+needs read and write access to `/dev/dri/renderD128`, usually through the `render` group (in a session started before
+joining it, run the command under `sg render -c '…'`), and Mesa's Vulkan driver. Measured on an AMD Radeon 780M at
+1920×1080: about 160 ms per output frame (40 ms drawing, the rest the screenshot), so a 45 s video renders in about 4
+minutes. The other GL flag sets (`--use-angle=gl-egl`, no flags) still fell back to SwiftShader there.
 
-- One shot at a time. Two CPU-rendering browsers in parallel were slower in total than one.
+Without a GPU, Chromium draws WebGL on the CPU (SwiftShader): on a 16-core Linux machine 0.6–1.3 s per step at the
+site's desktop render scale, about 1.6–2.6 s per output frame, so 7 shots took about 50 minutes. Then:
+
+- Render one shot at a time. Two CPU-rendering browsers in parallel were slower in total than one.
 - The script waits for the GPU after every step and turns off the background compile of the other scenes. Without
   either, the screenshots stall for many seconds each.
-- A GPU would make steps take milliseconds, leaving the screenshot (about 0.2 s) as the cost: a 45 s video in roughly
-  10 minutes (not yet measured). On Linux the browser needs read and write access to `/dev/dri/renderD128` (usually
-  the `render` group) and the Mesa drivers; then try `--use-angle=vulkan` or `--use-gl=angle --use-angle=gl-egl` in
-  place of the SwiftShader flags in `capture.mjs`, and check that the WebGL renderer name is no longer SwiftShader.
