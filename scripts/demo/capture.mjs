@@ -7,8 +7,9 @@
    is screenshotted and piped to ffmpeg, giving a 30 fps clip in which the visuals follow the music exactly.
 
    node scripts/demo/capture.mjs --base http://localhost:8791 --cat SECTION8088D --t 2 --mp3 Specter.mp3 \
-     --start 85 --dur 6 --out shot.mp4 [--scene Rendlesham] [--w 1920 --h 1080] [--warm 6] [--q 0.68]
+     --start 85 --dur 6 --out shot.mp4 [--scene Rendlesham] [--w 1920 --h 1080] [--warm 6] [--q 0.68] [--gpu]
 
+   --gpu draws on the GPU through Vulkan instead of on the CPU, and stops if the browser falls back to a CPU renderer.
    --scene pins a scene by its name in the Scene menu. The clip has no audio: assemble.sh adds it. FFMPEG=<bin> (with
    libx264) and CHROME=<chromium binary> override the tools found by default. Run one shot at a time: two
    software-GPU browsers in parallel render slower in total. See README.md in this folder. */
@@ -19,7 +20,7 @@ import {chromium} from 'playwright-core';
 const arg = (k, d) => {const i = process.argv.indexOf('--' + k); return i > 0 ? process.argv[i + 1] : d};
 const BASE = arg('base', 'http://localhost:8791'), CAT = arg('cat'), TN = +arg('t', 1), MP3 = arg('mp3'), OUT = arg('out');
 const START = +arg('start', 0), DUR = +arg('dur', 6), W = +arg('w', 1920), H = +arg('h', 1080), WARM = +arg('warm', 8);
-const SCENE = arg('scene'), FPS = 30, STEP = 60, N = 2048;
+const SCENE = arg('scene'), GPU = process.argv.includes('--gpu'), FPS = 30, STEP = 60, N = 2048;
 let SR, pcm;
 const FF = process.env.FFMPEG || 'ffmpeg', CHROME = process.env.CHROME || undefined;
 if (!CAT || !MP3 || !OUT) {console.error('need --cat, --mp3 and --out'); process.exit(2)}
@@ -57,7 +58,8 @@ const CLOCK = () => {
   window.__vstep = ms => {vt = (vt || pn() - base) + ms; const run = q; q = []; for (const cb of run) {try {cb(vt)} catch (e) {console.error(e)}}};
 };
 
-const browser = await chromium.launch({executablePath: CHROME, args: ['--enable-unsafe-swiftshader', '--use-gl=angle', '--use-angle=swiftshader', '--autoplay-policy=no-user-gesture-required', '--mute-audio', '--disable-background-timer-throttling', '--disable-renderer-backgrounding']});
+const GL = GPU ? ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gpu-blocklist', '--enable-gpu'] : ['--enable-unsafe-swiftshader', '--use-gl=angle', '--use-angle=swiftshader'];
+const browser = await chromium.launch({executablePath: CHROME, args: [...GL, '--autoplay-policy=no-user-gesture-required', '--mute-audio', '--disable-background-timer-throttling', '--disable-renderer-backgrounding']});
 // the page boots at full size, so it picks the desktop render scale and tree atlas
 const ctx = await browser.newContext({viewport: {width: W, height: H}, deviceScaleFactor: 1,
   userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36'});
@@ -88,9 +90,11 @@ const info = await page.evaluate(scene => {
   const st = document.createElement('style');
   st.textContent = '.top,.bot,.np>div,.note,#qtoast,#sceneMenu{opacity:0!important;visibility:hidden!important;transition:none!important}';
   document.head.append(st);
-  return {sr: eng.ctx.sampleRate, pinned, scene: document.querySelector('#sceneBtn')?.textContent.trim()};
+  const g = s8.R.renderer.getContext(), x = g.getExtension('WEBGL_debug_renderer_info');
+  return {sr: eng.ctx.sampleRate, pinned, scene: document.querySelector('#sceneBtn')?.textContent.trim(), gl: x ? g.getParameter(x.UNMASKED_RENDERER_WEBGL) : g.getParameter(g.RENDERER)};
 }, SCENE);
-console.error(`${CAT} t=${TN} ctx ${info.sr} Hz, scene button "${info.scene}"`);
+console.error(`${CAT} t=${TN} ctx ${info.sr} Hz, scene button "${info.scene}", ${info.gl}`);
+if (GPU && /SwiftShader|llvmpipe|lavapipe|softpipe/i.test(info.gl)) {console.error('--gpu: the browser fell back to a CPU renderer; it needs read and write access to /dev/dri/renderD128 and the Mesa Vulkan driver'); await browser.close(); process.exit(1)}
 if (!info.pinned) {console.error(`no scene named "${SCENE}" in the Scene menu`); await browser.close(); process.exit(1)}
 SR = info.sr; pcm = decode(SR);
 
