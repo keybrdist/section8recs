@@ -2,8 +2,9 @@
 
 Tools for cutting a short music video from the live experience: real footage of the scenes, cut on a track's drops or
 bars, with a title and an end card in the site's type. They made the 45 s Halloween demo of 2026-10-30
-(`shots/halloween-2026.tsv`, seven tracks at 1920×1080) and a 50 s vertical of DESIGN's Big Brother
-(`shots/big-brother-vertical.tsv`, one track at 1080×1920, with strobing cards).
+(`shots/halloween-2026.tsv`, seven tracks at 1920×1080), a 50 s vertical of DESIGN's Big Brother
+(`shots/big-brother-vertical.tsv`, one track at 1080×1920, with strobing cards), and a 2.5 min vertical of DESIGN's
+Radio RahRa on a single scene (`shots/radio-rahra-vertical.tsv`, its title swapping between track and artist).
 
 ## Steps
 
@@ -17,10 +18,11 @@ bars, with a title and an end card in the site's type. They made the 45 s Hallow
     npx astro preview stop
 
 A shot table has one tab-separated row per shot (name, catalogue number, track, file, start in the track, warm-up
-seconds, scene as named in the Scene menu, and optionally its length) and `@` lines for the size, the title card's
-text, the card lengths and `@flash`, which strobes each card every other frame over the footage next to it
-instead of a fade; `table.mjs` lists them. Rows that continue the same track where the one before ends share
-one unbroken stretch of audio, so a single-track video plays the track through while the scenes cut.
+seconds, scene as named in the Scene menu, and optionally its length) and `@` lines for the size, the title card's text,
+the card lengths and `@flash`, which strobes each card every other frame over the footage next to it instead of a fade.
+`@title` can list several titles for the card to swap between; `table.mjs` lists them. Rows that continue the same track
+where the one before ends share one unbroken stretch of audio, so a single-track video plays the track through while the
+scenes cut.
 
 `render.mjs` fetches each track from the label CDN into `<work-dir>/mp3` and renders each shot into
 `<work-dir>/shots` (30 fps, no audio), skipping shots already there: delete one to render it again. `assemble.mjs` draws

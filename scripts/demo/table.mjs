@@ -4,6 +4,7 @@
      @size    WxH of the video (1920x1080)            @title, @kicker, @line   text of the title card
      @intro   title card seconds (1.5, 0 for none)    @end     end card seconds (2.2)
      @shot    default shot length in seconds (5.9)    @flash   seconds the cards strobe over the footage (0)
+     @title   may list several titles, tab-separated: the title card swaps between them every @swap seconds (0.13)
    Lines starting with # and blank lines are skipped. */
 import {readFileSync} from 'node:fs';
 
