@@ -63,7 +63,10 @@ async function favRender(){
     <button class="fb${isFav(f)?' on':''}" id="favTog" aria-pressed="${isFav(f)}"><span aria-hidden="true">${isFav(f)?'♥':'♡'}</span>${isFav(f)?'Saved to favorites':'Save to favorites'}</button>`})()
     :`<p class="mono fk">Favorites</p><h2 id="favT">Nothing playing</h2>`;
   const saved=FAV.map((x,k)=>`<li><button class="fp" data-fp="${k}"${FILE2[x.f]?'':' disabled'}><span>${esc(x.t)}</span><em>${esc(x.a)}</em></button><button class="fx" data-fx="${k}" aria-label="Remove ${esc(x.t)} from favorites">✕</button></li>`).join('');
-  D2.querySelector('.fbody').innerHTML=head+(cur.r?`<p class="mono fh">Listen elsewhere</p><ul class="fo" id="favOut"><li class="mono fwait">Loading links…</li></ul>`:'')
+  // share this track: a link to it, at this moment if wanted, in the scene pinned now (src/lib/share.mjs reads it back)
+  const share=cur.r?`<p class="mono fh">Share</p><ul class="fo fsh"><li><label class="fat"><input type="checkbox" id="favAt"> Start at <b id="favAtT">${fmt(au.currentTime)}</b></label></li>`
+    +`<li><button type="button" id="favCopy">Copy link</button></li>${navigator.share?'<li><button type="button" id="favShare">Share…</button></li>':''}</ul>`:'';
+  D2.querySelector('.fbody').innerHTML=head+share+(cur.r?`<p class="mono fh">Listen elsewhere</p><ul class="fo" id="favOut"><li class="mono fwait">Loading links…</li></ul>`:'')
     +`<p class="mono fh">Saved on this device <span>${FAV.length}</span></p>`+(FAV.length?`<ul class="fl">${saved}</ul>`:`<p class="fe">Tap the heart on a track to keep it here.</p>`);
   if(cur.r){const r=cur.r,L=(await linksFor())[r.c]||{};if($('#favDlg').hidden||cur.r!==r)return;
     $('#favOut').innerHTML=Object.entries(L).filter(([k])=>OUTLETS[k]).map(([k,u])=>`<li><a href="${esc(u)}" target="_blank" rel="noopener">${OUTLETS[k]} <span aria-hidden="true">↗</span></a></li>`).join('')
@@ -71,11 +74,17 @@ async function favRender(){
 }
 function favOpen(o){const D2=$('#favDlg');o=o??D2.hidden;D2.hidden=!o;$('#favBtn').setAttribute('aria-expanded',o);if(o){favRender();setTimeout(()=>$('#favClose').focus({preventScroll:true}),30)}}
 $('#favBtn').onclick=()=>favOpen(true);
+// the start time is the moment the box was ticked, as its label shows
+function shareUrl(){const q=new URLSearchParams(),at=$('#favAt');q.set('track',cur.i+1);if(at.checked&&+at.dataset.t>=1)q.set('t',at.dataset.t);if(pinned!=null)q.set('scene',pinned+1);
+  return `${location.origin}/cat/${encodeURIComponent(cur.r.c)}?${q}`}
 $('#favDlg').addEventListener('click',e=>{
   if(e.target.id==='favDlg'||e.target.closest('#favClose'))return favOpen(false);
   if(e.target.closest('#favTog'))return favToggle(curFile());
+  if(e.target.closest('#favCopy')){const u=shareUrl();(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>qToast('Link copied'),()=>qToast(u));return}
+  if(e.target.closest('#favShare')){const [a,n]=splitT(cur.r.tr[cur.i][0]);navigator.share({title:`${n} · ${a||cur.r.a}`,url:shareUrl()}).catch(()=>{});return}
   const p=e.target.closest('[data-fp]');if(p){const x=FAV[+p.dataset.fp],t=FILE2[x.f];if(t){load(...t);favOpen(false)}return}
   const x=e.target.closest('[data-fx]');if(x){favToggle(FAV[+x.dataset.fx].f)}});
+$('#favDlg').addEventListener('change',e=>{if(e.target.id!=='favAt')return;e.target.dataset.t=Math.floor(au.currentTime);$('#favAtT').textContent=fmt(au.currentTime)});
 addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#favDlg').hidden)favOpen(false)});
 
 // the looking-up scenes turn the sky about the centre (and zoom out on a portrait screen), so where a craft appears on

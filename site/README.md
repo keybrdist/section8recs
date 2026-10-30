@@ -56,7 +56,7 @@ previous about page) live in `static/`.
   lists every page with each release's cover; `static/robots.txt` points at it
 
 Each page names what it shows in `<script id="s8-route">`; entering plays it (`site/src/v4-route.js`), and the address
-follows the release on air. A release page (`/cat/<CAT>`, `?t=<n>` for its nth track) skips the gate: once the forest has
+follows the release on air. A release page (`/cat/<CAT>`, see Share addresses for its parameters) skips the gate: once the forest has
 loaded it enters by itself and plays. Where the browser refuses sound without a gesture (always Safari on iPhone) it
 shows a "Tap to play" cue, and the first tap or click that is not on a control starts the track; a tap while the page
 is still loading opens the sound then and plays once ready. A visitor who scrolled down to the release while it loaded
@@ -65,6 +65,36 @@ Release info in the now-playing block reopens the gate on them (on a phone, in t
 addresses, the archived ones in `site/data/legacy-urls.json`, lowercase catalogue numbers and lgsites' player and
 checkout paths all 301 to the release page. `static/_headers` keeps previews out of search
 results.
+
+## Share addresses
+
+A release page takes parameters that open it on a moment, in any combination:
+
+| Parameter | Example | |
+|---|---|---|
+| `track` | `?track=3` | the track, counted from 1 |
+| `t` | `?t=90`, `?t=1:30`, `?t=1m30s` | where it starts |
+| `scene` | `?scene=15`, `?scene=clearing` | the scene, by its number in the scene menu or its id, pinned as if picked there |
+
+For example `/cat/SECTION8019D?track=2&t=90&scene=2`. `scene` works on every page. Until 2026-10-30 `?t=<n>` named the
+track; without `track`, a bare `t` no greater than the release's track count still does. While playing, the address
+keeps the track and a pinned scene, and the heart's dialog has Share: Copy link (or the phone's share sheet), with
+Start at to add the moment.
+
+Link previews never run the page's scripts, so two Cloudflare Pages Functions (`functions/`) answer for them, from
+`/share.json` (`src/pages/share.json.js`: every release's tracks and the scene names):
+
+- `functions/cat/[cat].js`: a release page reached with these parameters gets a title, description, `og:url` (the
+  address written back in one order, e.g. `?track=2&t=90&scene=2`) and `og:type` `music.song` for that track. The
+  canonical address stays the release page. Without parameters, or on any failure, the page goes out as built.
+- `functions/oembed.js`: [oEmbed](https://oembed.com) for release pages and their share addresses, found from the
+  `<link rel="alternate" type="application/json+oembed">` in each release page's head. It embeds the experience itself
+  in a 16:9 iframe (640×360, smaller with `maxwidth`/`maxheight`) for WordPress, Ghost, Notion, Medium and the like,
+  and gives Discord and Slack the artist and label for their previews.
+
+Every request to `/cat/*` and `/oembed` runs a Function (the free plan allows 100,000 a day), and `npx wrangler pages dev
+dist` runs them locally. X shows the large image card. Its player card would play the track in the post, but X only renders it for player
+domains it has approved. Both parsers, `src/lib/share.mjs` and the one in `site/src/v4-route.js`, have to agree.
 
 ## Catalogue sync
 
@@ -93,6 +123,7 @@ been entered, one at a time while the page is idle.
                                            # (a release page enters and plays by itself); --blocked refuses sound
                                            # outside a gesture, as iPhones do, and taps to play; --phone: 393×852 touch
     node scripts/check-urls.mjs --base <url>   # a deployment: every page 200, old addresses 301, unknown ones 404
+    node scripts/check-share.mjs --base <url>  # a deployment: share addresses' preview tags and oEmbed
 
 ## Phones
 

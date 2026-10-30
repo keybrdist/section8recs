@@ -38,7 +38,11 @@ function enter(withSound,start=routeStart()){
   entered=true;document.body.classList.add('entered');
   if(ROUTE.view==='releases')openIndex(true);
   if(R)R.precompile();
+  // the address's scene (?scene=) opens pinned, and its start time (?t=) applies to the track it names
+  const sc=routeScene(),rs=routeStart();if(sc!=null)pinned=sc;
   if(withSound){load(...(start||firstTrack()))}else if(start){load(...start,false)}else{note([{t:'ARCHIVE OPENED · SECTION 8 RECORDINGS',c:'acc'},`${D.length} RECORDINGS · ${NTRACKS} SEGMENTS · ${YEARS}`,{t:'NO AUDIO SIGNAL. PRESS PLAY.',c:'dim'}])}
+  if(sc!=null&&deck.cur.si!==sc)setScene(sc,true);
+  if(start&&rs&&start[0]===rs[0]&&start[1]===rs[1])routeSeek();
 }
 // the gate reopened on the page's own details, and back to the scene, carrying on with what is playing
 function openGate(sel){const g=$('#gate'),t=sel&&$(sel);g.classList.remove('gone');document.body.classList.add('gated');

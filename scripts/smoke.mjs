@@ -4,9 +4,12 @@
 // refuses sound outside a tap, click or key press, as Safari on iPhone does: a release page must then show its tap-to-play
 // cue, and one tap on the scene must start the track with sound. --phone uses a 393×852 touch screen instead of a
 // 1280×800 desktop.
+// A release URL with share parameters (?track=, ?t=, ?scene=, see src/lib/share.mjs) must open on that track and scene
+// and start at that time.
 // A URL may end in =<status> when it should answer something else, e.g. https://…/nope=404.
 // CHROME=<chromium binary> overrides the browser path.
 import { chromium } from 'playwright-core';
+import { shareParams } from '../src/lib/share.mjs';
 
 const flags = new Set(process.argv.slice(2).filter(a => a.startsWith('--')));
 const urls = process.argv.slice(2).filter(a => !a.startsWith('--'));
@@ -64,11 +67,20 @@ for (const arg of urls) {
   const after = await page.evaluate(() => { const r = JSON.parse(document.querySelector('#s8-route')?.textContent || '{}'), b = document.body.classList;
     return { gated: b.contains('gated'), nogl: b.contains('nogl'), cued: !r.c || document.querySelector('#npT').textContent.trim() !== 'Section 8',
       playing: b.contains('playing'), sound: window.__s8.eng.ctx?.state === 'running', cue: !document.getElementById('tapCue').hidden, controlsUp: !b.contains('ui-idle'),
-      info: !!document.querySelector('#release') && document.getElementById('npInfo').getAttribute('href') === `/cat/${r.c}` }; });
+      info: !!document.querySelector('#release') && document.getElementById('npInfo').getAttribute('href') === `/cat/${r.c}`,
+      at: { track: window.__s8.cur.i, scene: window.__s8.deck.cur.si, time: window.__s8.eng.el.currentTime, search: location.search } }; });
+  // what the address asked for, read the way the link previews read it
+  let share = null;
+  if (release && new URL(url).search) {
+    const d = await (await page.request.get(new URL('/share.json', url).href)).json(), q = new URL(url).searchParams;
+    const p = shareParams(q, d.releases[before.route.c].tr.length, d.ids), a = after.at;
+    share = { want: p, got: { track: a.track, scene: a.scene, time: +a.time.toFixed(1), address: a.search } };
+    share.ok = a.track === (p.track ?? 0) && (p.scene == null || a.scene === p.scene) && (p.t == null || a.time >= p.t - 1) && !/[?&]t=/.test(a.search);
+  }
   const ok = res.status() === +want && before.world && before.gated && !after.nogl && before.enter && !after.gated && after.cued && !errors.length
-    && (!release || (after.playing && after.sound && !after.cue && after.info && (!tapped || after.controlsUp)));
+    && (!release || (after.playing && after.sound && !after.cue && after.info && (!tapped || after.controlsUp))) && (!share || share.ok);
   console.log(`${ok ? 'PASS' : 'FAIL'} ${url} status=${res.status()} title=${JSON.stringify(before.title)} webgl=${!after.nogl} entered=${!after.gated} route=${JSON.stringify(before.route)} cued=${after.cued}`
-    + (release ? ` playing=${after.playing} sound=${after.sound}${blocked ? ` tapped=${tapped} controls=${after.controlsUp ? 'up' : 'hidden'}` : ''} info=${after.info}` : ''));
+    + (release ? ` playing=${after.playing} sound=${after.sound}${blocked ? ` tapped=${tapped} controls=${after.controlsUp ? 'up' : 'hidden'}` : ''} info=${after.info}` : '') + (share ? ` share=${JSON.stringify(share.got)}` : ''));
   for (const e of errors) console.log('  ' + e);
   failed += !ok;
   await ctx.close();
