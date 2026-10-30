@@ -1,5 +1,6 @@
-# The 2026-10-30 Halloween demo. Tab-separated: name, catalogue number, track (1-based), file on the label CDN,
-# start in the track (0.05 s before its drop, so the hit lands on the cut), warm-up seconds, scene as named in the Scene menu.
+# The 2026-10-30 Halloween demo, 45 s at 1920x1080: seven tracks from the default queue, each shot starting 0.05 s
+# before its drop, so the hit lands on the cut. Columns and @ settings: see ../table.mjs.
+@line	Tree line: movement
 1-deadcanopy	SECTION8087D	1	SECTION8087D-1-Coresplittaz-Android_Dreams.mp3	64.70	6	Looking up · Dead canopy
 2-effigies	SECTION8FILTH002D	3	SECTION8FILTH002D-3-SCOOB-Shine.mp3	21.90	30	Found footage · Effigies
 3-deadfall	SECTION8044D	3	SECTION8044D-3-Accelerated_Culture-The_Slayer.mp3	65.45	6	Walk · Deadfall
