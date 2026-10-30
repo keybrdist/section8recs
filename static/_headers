@@ -1,9 +1,7 @@
-# Preview deployments and about.section8recs.com (staging until section8recs.com moves here) stay out of search results.
+# Preview deployments stay out of search results (about.section8recs.com redirects to section8recs.com at the zone).
 https://:project.pages.dev/*
   X-Robots-Tag: noindex
 https://:version.:project.pages.dev/*
-  X-Robots-Tag: noindex
-https://about.section8recs.com/*
   X-Robots-Tag: noindex
 
 # app files and social cards change name when their content changes

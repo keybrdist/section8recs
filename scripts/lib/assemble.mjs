@@ -79,7 +79,7 @@ export function moduleSource() {
 }
 
 // releases: the client array the module reads as D; dataText: its JSON text, inlined with '</' escaped
-export function assemble({ releases, dataText = JSON.stringify(releases), origin = 'https://about.section8recs.com' }) {
+export function assemble({ releases, dataText = JSON.stringify(releases), origin = 'https://section8recs.com' }) {
   const page = rd('v4-page.html');
   const i0 = at(page, '<script type="module">') + '<script type="module">'.length, i1 = at(page, '</script>', i0);
   const base = page.slice(0, i0) + '\n' + moduleSource() + '\n' + page.slice(i1);

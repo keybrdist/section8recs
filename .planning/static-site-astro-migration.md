@@ -1,7 +1,7 @@
 ---
 title: section8recs.com on Astro — static immersive site with daily LabelGrid sync
 mode: plan
-status: in-progress (phases 1–4 done; phase 5 awaits the operator)
+status: in-progress (phases 1–6 done 2026-10-30; phase 7 monitoring)
 created: 2026-10-24T08:45:00Z
 modified: [2026-10-24T08:45:00Z, 2026-10-24T10:40:00Z]
 commits: [c597e35, 9d97aef, 94b948e, 7baab9d]
@@ -127,7 +127,23 @@ Deviations, none of which changes the outcome:
 - 8 archived `/r/` slugs containing `:` get no redirect, because Pages reads `:` as a placeholder.
 - A trailing slash (`/cat/X/`) gets a 301 from the `/cat/:cat/*` rule rather than Pages' 308. Both are permanent.
 
-### Cutover runbook (phase 6, ready to run once the operator approves)
+### Cutover done (2026-10-30)
+
+Run with the operator's approval, using defaults D6 (about. redirects to the apex) and D7 (`/dropbox` 404):
+
+1. Snapshot of the zone's DNS records, the Pages project and the (empty) redirect rules, saved before any change.
+2. Zone Single Redirect rules: `www.`, `dl.` and `about.section8recs.com` → `https://section8recs.com` + path (301,
+   query kept). www and dl now take one hop instead of going through http.
+3. `section8recs.com` added to the Pages project. The apex `A 157.90.158.72` became `CNAME section8recs.pages.dev`
+   (proxied), and the Pages domain went active.
+4. `check-urls` on https://section8recs.com: all 1,209 addresses as expected. Smoke tests pass on home, two releases,
+   `/releases` and the 404. robots.txt, the sitemap and the legacy redirects are served.
+5. The about. noindex rule is removed from `_headers` (this change).
+
+Still to do (phase 7): submit `https://section8recs.com/sitemap.xml` in Search Console; after 2–4 weeks of steady
+indexing, remove section8recs.com from lgsites' domain mapping.
+
+### Cutover runbook (phase 6, as planned)
 
 1. Snapshot the zone's DNS records and the Pages project config to `.scratch/cutover-<date>/`. This is the rollback reference.
 2. Create two zone wildcard Single Redirect rules (Free plan allows 10):
