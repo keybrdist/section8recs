@@ -10,7 +10,7 @@
      --start 85 --dur 6 --out shot.mp4 [--scene Rendlesham] [--w 1920 --h 1080] [--warm 6] [--q 0.68] [--gpu]
 
    --gpu draws on the GPU through Vulkan instead of on the CPU, and stops if the browser falls back to a CPU renderer.
-   --scene pins a scene by its name in the Scene menu. The clip has no audio: assemble.sh adds it. FFMPEG=<bin> (with
+   --scene pins a scene by its name in the Scene menu. The clip has no audio: assemble.mjs adds it. FFMPEG=<bin> (with
    libx264) and CHROME=<chromium binary> override the tools found by default. Run one shot at a time: two
    software-GPU browsers in parallel render slower in total. See README.md in this folder. */
 import {spawn, execFileSync} from 'node:child_process';
