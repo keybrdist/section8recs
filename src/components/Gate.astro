@@ -1,7 +1,8 @@
 ---
 // The home page gate (intro J): the forest hero with the wireframe logo and the enter buttons, then whatever the page
 // shows below it (a release, an artist, the release list), then the label's links. Every page opens on it; entering
-// hands over to the experience.
+// hands over to the experience. A release page enters by itself once loaded, and Release info in the now-playing block
+// reopens the gate on the release, with Back to the scene (#gClose) to return.
 import { figures, labels } from '../lib/catalog.mjs';
 
 interface Props {
@@ -29,6 +30,7 @@ const social = [
 ];
 ---
 <div id="gate" role="dialog" aria-modal="true" aria-labelledby="gT">
+<button class="g-x" type="button" id="gClose">Back to the scene <span aria-hidden="true">✕</span></button>
 <div class="g-hero">
   <div class="ff-imgw"><img class="ff-img" src="/assets/forest.jpg" srcset="/assets/forest-1280.jpg 1280w, /assets/forest.jpg 2560w" sizes="100vw" alt="Spruce forest standing in backlit fog at night" fetchpriority="high" decoding="async"></div>
   <div class="ff-shade f-shade"></div><div class="ff-grain"></div>

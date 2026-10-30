@@ -44,5 +44,14 @@ window.S8L=(()=>{
   requestAnimationFrame(()=>to(.36,7000,'Tuning in'));
   slow=setTimeout(()=>{if(!over)say('Weak signal · still tuning in')},25000);
   document.querySelector('script[type="module"][src]')?.addEventListener('error',lost);
+  // a release page enters by itself once the forest is ready (site/src/v4-route.js). A tap meanwhile says it will, and once
+  // the app has its audio engine it opens the sound right then, inside the gesture, which iOS insists on.
+  if((()=>{try{return JSON.parse(document.getElementById('s8-route').textContent).view==='release'}catch(e){return false}})()){
+    document.body.classList.add('autoplay');
+    const tap=e=>{if(over||e.target.closest('a,button,input,select'))return;window.S8L.unlock?.();say('Playing once the forest is ready')};
+    // a touch that scrolls the page down to the release is not a tap
+    let t0=null;addEventListener('touchstart',e=>{t0={x:e.touches[0].clientX,y:e.touches[0].clientY}},{capture:true,passive:true});
+    addEventListener('touchend',e=>{const c=e.changedTouches[0];if(t0&&Math.hypot(c.clientX-t0.x,c.clientY-t0.y)<10)tap(e)},{capture:true,passive:true});
+    addEventListener('mousedown',tap,{capture:true,passive:true})}
   return {stage:n=>{T.mark(n);stage(n)},done:()=>{T.mark('ready');done()},lost,mark:T.mark};
 })();

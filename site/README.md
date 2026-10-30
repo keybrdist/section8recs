@@ -56,7 +56,12 @@ previous about page) live in `static/`.
   lists every page with each release's cover; `static/robots.txt` points at it
 
 Each page names what it shows in `<script id="s8-route">`; entering plays it (`site/src/v4-route.js`), and the address
-follows the release on air. `scripts/redirects.mjs` writes `_redirects` at build time: lgsites' `/r/<slug>/<id>`
+follows the release on air. A release page (`/cat/<CAT>`, `?t=<n>` for its nth track) skips the gate: once the forest has
+loaded it enters by itself and plays. Where the browser refuses sound without a gesture (always Safari on iPhone) it
+shows a "Tap to play" cue, and the first tap or click that is not on a control starts the track; a tap while the page
+is still loading opens the sound then and plays once ready. A visitor who scrolled down to the release while it loaded
+keeps the gate. The release's details stay in the page below the gate for search engines and link previews, and
+Release info in the now-playing block reopens the gate on them (on a phone, in the full details the 8 shows). `scripts/redirects.mjs` writes `_redirects` at build time: lgsites' `/r/<slug>/<id>`
 addresses, the archived ones in `site/data/legacy-urls.json`, lowercase catalogue numbers and lgsites' player and
 checkout paths all 301 to the release page. `static/_headers` keeps previews out of search
 results.
@@ -85,6 +90,8 @@ been entered, one at a time while the page is idle.
 
     npm run check                          # catalogue and built site: fields, pages, metadata, redirects
     node scripts/smoke.mjs <url>...        # headless Chromium: the page boots, WebGL renders, the gate enters
+                                           # (a release page enters and plays by itself); --blocked refuses sound
+                                           # outside a gesture, as iPhones do, and taps to play; --phone: 393×852 touch
     node scripts/check-urls.mjs --base <url>   # a deployment: every page 200, old addresses 301, unknown ones 404
 
 ## Phones

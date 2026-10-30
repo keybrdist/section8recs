@@ -90,4 +90,7 @@ class Engine{
   }
 }
 const eng=new Engine();
+// a tap while a release page loads (site/intro/loader.js) opens the sound inside the gesture: the context starts running,
+// and a play() then (stopped at once) lets this element play later without one, which iOS otherwise refuses
+S8L.unlock=()=>{eng.ensure();eng.resume();const p=eng.el.play();eng.el.pause();p&&p.catch(()=>{})};
 

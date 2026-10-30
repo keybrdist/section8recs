@@ -93,14 +93,22 @@ function audit(state) {
         const f = `${slug}--${state}.png`; await p.screenshot({ path: path.join(OUT, f) }); (shots[state] ||= []).push([nameV, f, w, h]);
       } catch (e) { res.push({ state, kind: 'error', msg: e.message.split('\n')[0] }) }
     };
-    await p.goto(URL, { waitUntil: 'networkidle' }); await p.evaluate(() => localStorage.clear()); await p.reload({ waitUntil: 'networkidle' }); await sleep(1500);
+    // a release page streams its track as soon as it has loaded, so the network may never go quiet there
+    const settle = () => p.waitForLoadState('networkidle', { timeout: 5000 }).catch(() => {});
+    await p.goto(URL, { waitUntil: 'load' }); await settle(); await p.evaluate(() => localStorage.clear()); await p.reload({ waitUntil: 'load' }); await settle(); await sleep(1500);
     // the enter buttons wake once the forest has loaded (the gate's loading bar)
     await p.waitForFunction(() => !document.body.classList.contains('loading'), null, { polling: 250, timeout: 90000 }).catch(() => res.push({ state: 'home', kind: 'error', msg: 'still loading after 90 s' }));
     // layout, not animation: panels open instantly so they are measured where they settle
     await p.addStyleTag({ content: '#index,#qpanel{transition:none!important}' });
+    // a release page has already entered by itself, and has been playing long enough that a phone may have hidden the
+    // controls (the 10 s auto-hide): let the gate finish fading out, and bring the controls back with the 8, or restart
+    // their 10 s with a key that does nothing else
+    const entered = await p.evaluate(() => !document.body.classList.contains('gated'));
+    const wake = async () => { if (await p.evaluate(() => document.body.classList.contains('ui-idle'))) { await p.tap('#sigil'); await sleep(600); } else await p.keyboard.press('Shift'); };
+    if (entered) await sleep(1200);
     await snap('home');
-    await snap('playing', async () => { await p.tap('#enterSound'); await sleep(3500); });
-    await snap('scene-menu', async () => { await p.tap('#sceneBtn'); await sleep(300); });
+    await snap('playing', async () => { if (!entered) await p.tap('#enterSound'); await sleep(3500); await wake(); });
+    await snap('scene-menu', async () => { await wake(); await p.tap('#sceneBtn'); await sleep(300); });
     await snap('search', async () => { await p.keyboard.press('Escape'); await p.evaluate(() => document.querySelector('#sBtn').click()); await sleep(200); await p.fill('#sQ', 'biobird'); });
     await snap('queue', async () => { await p.keyboard.press('Escape'); await p.evaluate(() => document.querySelector('#qBtn').click()); });
     await snap('archive', async () => { await p.evaluate(() => { document.querySelector('#qClose').click(); }); await p.evaluate(() => document.querySelector('#ixBtn').click()); });
