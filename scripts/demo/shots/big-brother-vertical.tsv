@@ -1,12 +1,19 @@
-# DESIGN, Big Brother, 32 s vertical: one unbroken stretch of the track from its second drop (176.30 s), cut every
-# 4 bars at 174 BPM (5.517 s, alternating 166 and 165 frames), each 0.05 s before the bar line. Columns and @ settings: see ../table.mjs.
+# DESIGN, Big Brother, 50 s vertical: one unbroken stretch of the track from 0.05 s before its second drop (176.30 s).
+# The title card strobes over the drop, the FLIR shot holds 6 bars (8.27 s), then the scenes cut every 4 bars at
+# 174 BPM; the end card strobes in across the last bar line (frame 1407) and holds 3 s. Columns and @ settings: see
+# ../table.mjs.
 @size	1080x1920
 @kicker	DESIGN
 @title	Big Brother
 @line	Section 8 Recordings
-@end	2.9
-1-tictactrack	SECTION8115S1	1	SECTION8115S1-1-DESIGN-Big_Brother.mp3	176.250	6	FLIR · Tic Tac tracked	5.533
-2-nightvision	SECTION8115S1	1	SECTION8115S1-1-DESIGN-Big_Brother.mp3	181.783	6	Found footage · Night vision	5.500
-3-well	SECTION8115S1	1	SECTION8115S1-1-DESIGN-Big_Brother.mp3	187.283	6	Looking up · The well	5.533
-4-burn	SECTION8115S1	1	SECTION8115S1-1-DESIGN-Big_Brother.mp3	192.817	6	Walk · Burn scar	5.500
-5-clearing	SECTION8115S1	1	SECTION8115S1-1-DESIGN-Big_Brother.mp3	198.317	6	Looking up · Clearing	5.533
+@intro	0
+@flash	0.2
+@end	3
+1-tictactrack	SECTION8115S1	1	SECTION8115S1-1-DESIGN-Big_Brother.mp3	176.250	6	FLIR · Tic Tac tracked	8.267
+2-nightvision	SECTION8115S1	1	SECTION8115S1-1-DESIGN-Big_Brother.mp3	184.517	6	Found footage · Night vision	5.533
+3-well	SECTION8115S1	1	SECTION8115S1-1-DESIGN-Big_Brother.mp3	190.050	6	Looking up · The well	5.500
+4-deadfall	SECTION8115S1	1	SECTION8115S1-1-DESIGN-Big_Brother.mp3	195.550	6	Walk · Deadfall	5.533
+5-underneath	SECTION8115S1	1	SECTION8115S1-1-DESIGN-Big_Brother.mp3	201.083	6	Looking up · Underneath	5.500
+6-burn	SECTION8115S1	1	SECTION8115S1-1-DESIGN-Big_Brother.mp3	206.583	6	Walk · Burn scar	5.533
+7-deadcanopy	SECTION8115S1	1	SECTION8115S1-1-DESIGN-Big_Brother.mp3	212.117	6	Looking up · Dead canopy	5.500
+8-clearing	SECTION8115S1	1	SECTION8115S1-1-DESIGN-Big_Brother.mp3	217.617	6	Looking up · Clearing	5.633
