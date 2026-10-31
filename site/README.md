@@ -96,6 +96,10 @@ Link previews never run the page's scripts, so two Cloudflare Pages Functions (`
 Every request to `/cat/*` and `/oembed` runs a Function (the free plan allows 100,000 a day), and `npx wrangler pages dev
 dist` runs them locally.
 
+Embedded (an X card, an oEmbed iframe, any frame), a tap or click on the scene pauses the music and holds the scene
+still, with a Paused cue, and the next tap carries on from the same moment; controls work as usual. Outside a frame a
+tap on the scene hides a phone's controls instead.
+
 On X a release page is a player card: on desktop web the post plays the page itself (`twitter:player`, the share address
 when there is one) in a 480×480 frame, square because only there does the scene show between the controls; X's apps
 show the cover (`twitter:image`, 1200 px) and link through. A preview build points the player at the preview itself,
