@@ -74,7 +74,10 @@ for (let i = 0; i < 400 && !(await page.evaluate(() => !document.body.classList.
 // the other scenes would compile in the background while recording, which stalls a software GPU for minutes;
 // the one scene in the shot compiles when it first draws
 await page.evaluate(() => {window.__s8.R.precompile = () => {}});
-await page.click('#enterSound');
+// a release page enters and plays by itself once loaded; the gate's button is only pressed if it has not started
+const playing = () => page.evaluate(() => !!window.__s8.eng.ctx && !window.__s8.eng.el.paused);
+for (let i = 0; i < 120 && !(await playing()); i++) {await page.evaluate(() => window.__vstep(16.667)); await page.waitForTimeout(20)}
+if (!(await playing())) await page.evaluate(() => document.querySelector('#enterSound').click());
 await page.waitForFunction(() => window.__s8.eng.ctx && !window.__s8.eng.el.paused, null, {timeout: 30000});
 const info = await page.evaluate(scene => {
   const s8 = window.__s8, eng = s8.eng, au = eng.el;
