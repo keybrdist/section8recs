@@ -46,22 +46,27 @@ function tapPlay(){eng.ensure();eng.resume();au.play().catch(()=>{})}
 function routeReady(){if(AUTO)setTimeout(()=>{if(!entered&&!$('#gate').classList.contains('scrolled'))autoPlay()},400)}
 function autoPlay(){enter(false);
   au.play().then(()=>setTimeout(()=>{if(eng.ctx&&eng.ctx.state!=='running'){au.pause();awaitTap(true)}},300),()=>awaitTap(true))}
-/* embedded (an X player card, an oEmbed iframe), a tap or click on the scene pauses the music and holds the scene still,
-   and the next one carries on from there; the cue says Paused meanwhile. Elsewhere a tap on the scene hides the phone's
-   controls (site/src/v4-mobile.js). */
-const EMBED=window.self!==window.top;if(EMBED)document.body.classList.add('embed');
+/* a tap or click on the scene pauses the music and holds the scene still, with a Paused cue, and the next one carries
+   on from the same moment: on a phone, a desktop or embedded (an X player card, an oEmbed iframe). The scene is what lies
+   outside the controls, the header, the now-playing text and the notes; a tap that closes an open panel or menu only
+   closes it. Before the first sound, any tap that is not on a control plays (tap to play, above). */
 function hold(on){held=on;document.body.classList.toggle('held',on);const c=$('#tapCue');c.hidden=!on&&!document.body.classList.contains('await-tap');if(on)c.lastChild.textContent='Paused'}
-const holdable=()=>EMBED&&entered&&!!cur.r&&!document.body.classList.contains('gated');
+const holdable=()=>entered&&!!cur.r&&!document.body.classList.contains('gated');
+const panelOpen=()=>['#index','#qpanel','#sceneMenu','#ctx'].some(s=>$(s).classList.contains('open'))||!$('#srch').hidden||!$('#favDlg').hidden;
 function sceneTap(){if(document.body.classList.contains('await-tap'))return tapPlay();if(au.paused){hold(false);tapPlay()}else{au.pause();hold(true)}}
 au.addEventListener('play',()=>{awaitTap(false);hold(false)});
 $('#tapCue').onclick=tapPlay;
-{const CTL='button,a,input,select,[role="button"],[role="slider"],#index,#qpanel,#srch,#sceneMenu,#ctx,#favDlg,#gate';let t0=null;
-  const live=()=>document.body.classList.contains('await-tap')||holdable();
-  // a tap is a touch that barely moves; it stops there, so it neither swipes nor hides the controls (site/src/v4-mobile.js)
-  addEventListener('touchstart',e=>{t0=live()&&e.touches.length===1?{x:e.touches[0].clientX,y:e.touches[0].clientY,t:e.timeStamp}:null},{capture:true,passive:true});
-  addEventListener('touchend',e=>{const s=t0,c=e.changedTouches[0];t0=null;if(!s||!live()||e.target.closest(CTL))return;
+{const CTL='button,a,input,select,[role="button"],[role="slider"],#index,#qpanel,#srch,#sceneMenu,#ctx,#favDlg,#gate',CHROME='header,footer,.np,#note,#qtoast';
+  let t0=null,downOpen=false;
+  const awaiting=()=>document.body.classList.contains('await-tap');
+  const onScene=t=>!t.closest(CTL)&&(awaiting()||holdable()&&!downOpen&&!t.closest(CHROME));
+  // whether a panel was open as the press began: by the click, the press itself has closed it
+  addEventListener('pointerdown',()=>{downOpen=panelOpen()},{capture:true,passive:true});
+  // a tap is a touch that barely moves; it stops there, so it neither swipes nor reaches site/src/v4-mobile.js
+  addEventListener('touchstart',e=>{t0=(awaiting()||holdable())&&e.touches.length===1?{x:e.touches[0].clientX,y:e.touches[0].clientY,t:e.timeStamp}:null},{capture:true,passive:true});
+  addEventListener('touchend',e=>{const s=t0,c=e.changedTouches[0];t0=null;if(!s||!onScene(e.target))return;
     if(Math.hypot(c.clientX-s.x,c.clientY-s.y)>=10||e.timeStamp-s.t>600)return;e.stopPropagation();if(e.cancelable)e.preventDefault();sceneTap()},{capture:true});
-  addEventListener('click',e=>{if(live()&&!e.target.closest(CTL))sceneTap()});
+  addEventListener('click',e=>{if(onScene(e.target))sceneTap()});
 }
 $('#npInfo').addEventListener('click',e=>{if(!cur.r||cur.r.c!==ROUTE.c||!$('#release')||e.metaKey||e.ctrlKey||e.shiftKey)return;e.preventDefault();openGate('#release')});
 addEventListener('keydown',e=>{if(e.key==='Escape'&&entered&&document.body.classList.contains('gated'))closeGate(false)});

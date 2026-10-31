@@ -96,10 +96,6 @@ Link previews never run the page's scripts, so two Cloudflare Pages Functions (`
 Every request to `/cat/*` and `/oembed` runs a Function (the free plan allows 100,000 a day), and `npx wrangler pages dev
 dist` runs them locally.
 
-Embedded (an X card, an oEmbed iframe, any frame), a tap or click on the scene pauses the music and holds the scene
-still, with a Paused cue, and the next tap carries on from the same moment; controls work as usual. Outside a frame a
-tap on the scene hides a phone's controls instead.
-
 On X a release page is a player card: on desktop web the post plays the page itself (`twitter:player`, the share address
 when there is one) in a 480×480 frame, square because only there does the scene show between the controls; X's apps
 show the cover (`twitter:image`, 1200 px) and link through. A preview build points the player at the preview itself,
@@ -141,7 +137,9 @@ been entered, one at a time while the page is idle.
 
 On a phone the now-playing block shows four lines, and after 10 s of playing untouched the controls and text fade,
 leaving the 8 sigil in the corner: tapping it brings them back, again shows the full details, and again folds them;
-tapping the scene hides everything. Resting the mouse on the 8 (or tabbing to it) names what it does next (Show player, Track
+a tap or click on the scene (away from the controls and text) pauses the music and holds the scene still, with a Paused
+cue, and the next one carries on from the same moment, on a phone, a desktop or embedded (an X card, an oEmbed iframe).
+Resting the mouse on the 8 (or tabbing to it) names what it does next (Show player, Track
 details, Fewer details) above it, and while the controls are hidden lets them show through faintly; on a touch screen
 the first fade of a visit names the 8 once on its own (`s8.nudged` in sessionStorage). Swiping up skips to the next track and down to the previous one (a deliberate flick
 only, also when it starts on the seek bar, which seeks on a tap and scrubs when dragged sideways). The heart

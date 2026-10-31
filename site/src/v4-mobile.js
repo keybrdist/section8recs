@@ -4,7 +4,7 @@ const NARROW=matchMedia('(max-width: 760px)');
 
 // now playing on a phone: the four key lines (the scene needs the room), and after 10 s of playing untouched the controls
 // and text fade, leaving the 8 sigil in the corner. Tapping the 8 brings them back, tapping it again shows the full track
-// details, and once more folds them; tapping the scene hides everything again. On a larger screen the 8 (or the Section 8
+// details, and once more folds them; tapping the scene pauses (site/src/v4-route.js). On a larger screen the 8 (or the Section 8
 // mark at the top left) just shows or hides the full details.
 const MOBILE=matchMedia('(max-width: 760px), (pointer: coarse) and (max-height: 500px)');
 const UI=(()=>{const b=document.body,sig=$('#sigil'),brand=$('.brand');let tm=0;
@@ -39,17 +39,14 @@ const UI=(()=>{const b=document.body,sig=$('#sigil'),brand=$('.brand');let tm=0;
 // swipe up for the next track, down for the previous one. Only a deliberate flick counts: one finger, mostly vertical,
 // at least 80 px and an eighth of the screen, within 0.8 s, not started on a control or an open panel
 (()=>{let s=null;
-  const scene=t=>!t.closest('header,footer,.np,#note,#qtoast');
   const blocked=t=>document.body.classList.contains('gated')||t.closest('button,a,input,select,[role="button"],#index,#qpanel,#srch,#sceneMenu,#ctx,#favDlg')
     ||$('#index').classList.contains('open')||$('#qpanel').classList.contains('open')||!$('#srch').hidden||!$('#favDlg').hidden||$('#sceneMenu').classList.contains('open');
   // timed by the events' own timestamps: the render loop can hold up handling, and a quick flick must not read as slow
-  addEventListener('touchstart',e=>{s=e.touches.length===1&&!blocked(e.target)?{x:e.touches[0].clientX,y:e.touches[0].clientY,t:e.timeStamp,scene:scene(e.target)}:null},{passive:true});
+  addEventListener('touchstart',e=>{s=e.touches.length===1&&!blocked(e.target)?{x:e.touches[0].clientX,y:e.touches[0].clientY,t:e.timeStamp}:null},{passive:true});
   // a vertical drag would otherwise pull the page (refresh or rubber-band) instead of changing track
   addEventListener('touchmove',e=>{if(!s)return;if(e.touches.length>1){s=null;return}const dy=e.touches[0].clientY-s.y,dx=e.touches[0].clientX-s.x;
     if(Math.abs(dy)>10&&Math.abs(dy)>Math.abs(dx)&&e.cancelable)e.preventDefault()},{passive:false});
-  addEventListener('touchend',e=>{if(!s)return;const c=e.changedTouches[0],st=s,dx=c.clientX-s.x,dy=c.clientY-s.y,dt=e.timeStamp-s.t;s=null;
-    // a tap on the scene (not a drag, not a long press) hides the controls
-    if(st.scene&&Math.abs(dx)<10&&Math.abs(dy)<10&&dt<350){UI.hide();return}
+  addEventListener('touchend',e=>{if(!s)return;const c=e.changedTouches[0],dx=c.clientX-s.x,dy=c.clientY-s.y,dt=e.timeStamp-s.t;s=null;
     if(dt>800||Math.abs(dy)<Math.max(80,innerHeight*.12)||Math.abs(dy)<Math.abs(dx)*2.5)return;
     if(dy<0){next();qToast('Next ▲')}else{prev(true);qToast('Previous ▼')}},{passive:true});
   addEventListener('touchcancel',()=>{s=null},{passive:true});
