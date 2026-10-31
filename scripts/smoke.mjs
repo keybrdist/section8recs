@@ -9,7 +9,8 @@
 // A URL may end in =<status> when it should answer something else, e.g. https://…/nope=404.
 // CHROME=<chromium binary> overrides the browser path.
 import { chromium } from 'playwright-core';
-import { shareParams } from '../src/lib/share.mjs';
+import { secs, shareParams } from '../src/lib/share.mjs';
+const secsOk = (v, t) => Math.floor(secs(v)) === t;
 
 const flags = new Set(process.argv.slice(2).filter(a => a.startsWith('--')));
 const urls = process.argv.slice(2).filter(a => !a.startsWith('--'));
@@ -75,7 +76,9 @@ for (const arg of urls) {
     const d = await (await page.request.get(new URL('/share.json', url).href)).json(), q = new URL(url).searchParams;
     const p = shareParams(q, d.releases[before.route.c].tr.length, d.ids), a = after.at;
     share = { want: p, got: { track: a.track, scene: a.scene, time: +a.time.toFixed(1), address: a.search } };
-    share.ok = a.track === (p.track ?? 0) && (p.scene == null || a.scene === p.scene) && (p.t == null || a.time >= p.t - 1) && !/[?&]t=/.test(a.search);
+    share.ok = a.track === (p.track ?? 0) && (p.scene == null || a.scene === p.scene) && (p.t == null || a.time >= p.t - 1)
+      // a start time stays in the address while its track plays (with its track named), and an old ?t=<track> becomes ?track=
+      && (p.t == null ? !/[?&]t=/.test(a.search) : new URLSearchParams(a.search).get('track') === String((p.track ?? 0) + 1) && secsOk(new URLSearchParams(a.search).get('t'), p.t));
   }
   const ok = res.status() === +want && before.world && before.gated && !after.nogl && before.enter && !after.gated && after.cued && !errors.length
     && (!release || (after.playing && after.sound && !after.cue && after.info && (!tapped || after.controlsUp))) && (!share || share.ok);
