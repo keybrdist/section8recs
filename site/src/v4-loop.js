@@ -30,7 +30,7 @@ addEventListener('keydown',e=>{
   else if(e.key==='Escape'){openIndex(false);$('#sceneMenu').classList.remove('open')}
 });
 addEventListener('pointermove',e=>{const x=e.clientX/innerWidth*2-1,y=-(e.clientY/innerHeight*2-1);mouse.mv=(mouse.mv||0)+Math.hypot(x-mouse.x,y-mouse.y);mouse.x=x;mouse.y=y});
-let entered=false;
+let entered=false,held=false;
 function enter(withSound,start=routeStart()){
   $('#gate').classList.add('gone');document.body.classList.remove('gated');acquire();lastSceneT=performance.now()/1000;
   // a track button on the gate reopened over the experience (Release info) just plays that track
@@ -97,6 +97,8 @@ function sceneX(si,t){const id=SCENES[si].id;
   if(id==='gimbal')return [GX.s,0,0,0];
   return [1,.3*Math.sin(t*.04),0,0]}
 function frame(now){
+  // a held scene (an embed paused from the scene, site/src/v4-route.js) stands still, and its clock with it
+  if(held){t0+=now-last;last=now;requestAnimationFrame(frame);return}
   const rdt=Math.min(1,(now-last)/1000),dt=Math.min(.1,rdt);last=now;const t=(now-t0)/1000;const gated=document.body.classList.contains('gated');
   // audio (or idle heartbeat)
   const af=eng.frame();
