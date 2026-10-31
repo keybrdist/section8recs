@@ -21,7 +21,7 @@ export function room(sw, sh, src) {
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050506}
 #rig{position:absolute;left:0;top:0;transform-origin:0 0}
 #wall{position:absolute;left:${-2 * sw}px;top:${-3 * sh}px;width:${5 * sw}px;height:${7 * sh}px;
-  background:radial-gradient(${1.1 * sw}px ${1.6 * sh}px at 50% ${(3.5 * sh) / (7 * sh) * 100}%,#2e2b33,#17151b 45%,#09090b 75%)}
+  background:radial-gradient(${1.1 * sw}px ${1.6 * sh}px at 50% 50%,#2e2b33,#17151b 45%,#09090b 75%)}
 #desk{position:absolute;left:${-2 * sw}px;top:${sh + 120}px;width:${5 * sw}px;height:${3 * sh}px;
   background:linear-gradient(#1b1a1f,#0d0c0f 30%,#060607);border-top:2px solid #2a2930}
 #glow{position:absolute;left:${sw * .1}px;top:${sh + 122}px;width:${sw * .8}px;height:${sh * .7}px;
