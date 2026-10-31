@@ -34,6 +34,24 @@ not the details.
 Needs an ffmpeg with libx264 (`FFMPEG=<bin>` when it is not on the path) and Chromium (`CHROME=<binary>`, as for
 `scripts/smoke.mjs`, when playwright-core's own is not installed).
 
+## The phone look
+
+A locked-off frame of a scene can look flat. With an `@phone` line, every shot in the table is filmed as a phone held up to a
+desktop monitor showing the site, after the operator's own iPhone footage of it (2026-10-30). The monitor is `@screen`
+in size (3440×1440 by default) and shows the site's desktop interface. Around it are a browser bar, a bezel, a desk and the
+screen's glow, with a line texture at the screen's pixel pitch that shows as rows close up and as moiré further out. The camera
+pushes in, drifts and pulls back on the beats given, and shakes like a stabilised phone. `shots/radio-rahra-phone.tsv` is the
+15 s prototype:
+
+    @screen	3440x1440
+    @phone	0@.5,.5,1.35 2.5@.55,.58,2.2,-.8 6@.6,.62,4.6,.6 10@.45,.5,4,1.4 12.5@.5,.48,2.1,-.3
+
+A beat `t@cx,cy,z[,roll]` heads, from t seconds into the shot, for the point (cx, cy) of the screen (0–1 across and down) at
+zoom z, where 1 means the screen's width fills the frame's width, rolled `roll` degrees. The camera eases there over about
+2 s. A ninth column on a row gives that shot its own beats. The shake, the exposure and the easing are measured from the
+reference and documented in `phone.mjs`. It costs no render time: the camera is a CSS transform of the room page, set on the
+same virtual clock.
+
 ## How a shot is rendered
 
 `capture.mjs` runs the page on a virtual clock: `performance.now()` and `requestAnimationFrame` advance 1/60 s only when

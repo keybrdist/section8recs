@@ -7,20 +7,25 @@
    is screenshotted and piped to ffmpeg, giving a 30 fps clip in which the visuals follow the music exactly.
 
    node scripts/demo/capture.mjs --base http://localhost:8791 --cat SECTION8088D --t 2 --mp3 Specter.mp3 \
-     --start 85 --dur 6 --out shot.mp4 [--scene Rendlesham] [--w 1920 --h 1080] [--warm 6] [--q 0.68] [--gpu]
+     --start 85 --dur 6 --out shot.mp4 [--scene Rendlesham] [--w 1920 --h 1080] [--warm 6] [--q 0.68] [--gpu] \
+     [--phone '0@.5,.5,1.35 6@.6,.62,4.6' [--screen 3440x1440]]
 
    --gpu draws on the GPU through Vulkan instead of on the CPU, and stops if the browser falls back to a CPU renderer.
-   --scene pins a scene by its name in the Scene menu. The clip has no audio: assemble.mjs adds it. FFMPEG=<bin> (with
-   libx264) and CHROME=<chromium binary> override the tools found by default. Run one shot at a time: two
-   software-GPU browsers in parallel render slower in total. See README.md in this folder. */
+   --phone films the site as a phone held up to a monitor of --screen size, moving on the camera beats given
+   (phone.mjs); the desktop interface stays on screen. --scene pins a scene by its name in the Scene menu. The clip
+   has no audio: assemble.mjs adds it. FFMPEG=<bin> (with libx264) and CHROME=<chromium binary> override the tools
+   found by default. Run one shot at a time: two software-GPU browsers in parallel render slower in total. See
+   README.md in this folder. */
 import {spawn, execFileSync} from 'node:child_process';
 import {readFileSync} from 'node:fs';
 import {chromium} from 'playwright-core';
+import {BAR, camera, room} from './phone.mjs';
 
 const arg = (k, d) => {const i = process.argv.indexOf('--' + k); return i > 0 ? process.argv[i + 1] : d};
 const BASE = arg('base', 'http://localhost:8791'), CAT = arg('cat'), TN = +arg('t', 1), MP3 = arg('mp3'), OUT = arg('out');
 const START = +arg('start', 0), DUR = +arg('dur', 6), W = +arg('w', 1920), H = +arg('h', 1080), WARM = +arg('warm', 8);
 const SCENE = arg('scene'), GPU = process.argv.includes('--gpu'), FPS = 30, STEP = 60, N = 2048;
+const PHONE = arg('phone'), [SW, SH] = arg('screen', '3440x1440').split('x').map(Number);
 let SR, pcm;
 const FF = process.env.FFMPEG || 'ffmpeg', CHROME = process.env.CHROME || undefined;
 if (!CAT || !MP3 || !OUT) {console.error('need --cat, --mp3 and --out'); process.exit(2)}
@@ -68,18 +73,24 @@ await ctx.route('**/labels/section8recs/320/*.mp3', r => r.fulfill({status: 200,
 await ctx.addInitScript(CLOCK);
 const page = await ctx.newPage();
 page.on('pageerror', e => console.error('pageerror', e.message));
-await page.goto(`${BASE}/cat/${CAT}?track=${TN}`, {waitUntil: 'load'});
+// --phone: the site plays in an iframe at a desktop size on a monitor in a room page, and the shot films the room
+const SRC = `${BASE}/cat/${CAT}?track=${TN}`;
+if (PHONE) await ctx.route(`${BASE}/__phone`, r => r.fulfill({status: 200, contentType: 'text/html', body: room(SW, SH, SRC)}));
+await page.goto(PHONE ? `${BASE}/__phone` : SRC, {waitUntil: 'load'});
+let site = page;
+if (PHONE) {await page.waitForFunction(() => !!document.querySelector('iframe').contentWindow.__vstep); site = page.frames().find(f => f.parentFrame())}
+const resize = (w, h) => PHONE ? page.evaluate(([w, h]) => window.__size(w, h), [w, h]) : page.setViewportSize({width: w, height: h});
 // the gate wakes once the first frame has drawn
-for (let i = 0; i < 400 && !(await page.evaluate(() => !document.body.classList.contains('loading') && !!window.__s8?.R)); i++) {await page.evaluate(() => window.__vstep(16.667)); await page.waitForTimeout(20)}
+for (let i = 0; i < 400 && !(await site.evaluate(() => !document.body.classList.contains('loading') && !!window.__s8?.R)); i++) {await site.evaluate(() => window.__vstep(16.667)); await page.waitForTimeout(20)}
 // the other scenes would compile in the background while recording, which stalls a software GPU for minutes;
 // the one scene in the shot compiles when it first draws
-await page.evaluate(() => {window.__s8.R.precompile = () => {}});
+await site.evaluate(() => {window.__s8.R.precompile = () => {}});
 // a release page enters and plays by itself once loaded; the gate's button is only pressed if it has not started
-const playing = () => page.evaluate(() => !!window.__s8.eng.ctx && !window.__s8.eng.el.paused);
-for (let i = 0; i < 120 && !(await playing()); i++) {await page.evaluate(() => window.__vstep(16.667)); await page.waitForTimeout(20)}
-if (!(await playing())) await page.evaluate(() => document.querySelector('#enterSound').click());
-await page.waitForFunction(() => window.__s8.eng.ctx && !window.__s8.eng.el.paused, null, {timeout: 30000});
-const info = await page.evaluate(scene => {
+const playing = () => site.evaluate(() => !!window.__s8.eng.ctx && !window.__s8.eng.el.paused);
+for (let i = 0; i < 120 && !(await playing()); i++) {await site.evaluate(() => window.__vstep(16.667)); await page.waitForTimeout(20)}
+if (!(await playing())) await site.evaluate(() => document.querySelector('#enterSound').click());
+await site.waitForFunction(() => window.__s8.eng.ctx && !window.__s8.eng.el.paused, null, {timeout: 30000});
+const info = await site.evaluate(([scene, phone]) => {
   const s8 = window.__s8, eng = s8.eng, au = eng.el;
   // the track keeps playing (so the page stays in its playing state) but never ends or reaches an end marker
   au.loop = true; au.playbackRate = .0625;
@@ -90,12 +101,13 @@ const info = await page.evaluate(scene => {
     const out = this.bands.frame(this.fd, t, dt), e = this.energy.frame(out, this.fd, t, dt, this.binHz); out.state = e.state; out.rate = e.rate; return out;
   };
   // the interface goes, as on a phone after 10 s; the camcorder and FLIR read-outs belong to the scene and stay
+  // on a filmed monitor the desktop interface stays, as it does on screen
   const st = document.createElement('style');
   st.textContent = '.top,.bot,.np>div,.note,#qtoast,#sceneMenu{opacity:0!important;visibility:hidden!important;transition:none!important}';
-  document.head.append(st);
+  if (!phone) document.head.append(st);
   const g = s8.R.renderer.getContext(), x = g.getExtension('WEBGL_debug_renderer_info');
   return {sr: eng.ctx.sampleRate, pinned, scene: document.querySelector('#sceneBtn')?.textContent.trim(), gl: x ? g.getParameter(x.UNMASKED_RENDERER_WEBGL) : g.getParameter(g.RENDERER)};
-}, SCENE);
+}, [SCENE, !!PHONE]);
 console.error(`${CAT} t=${TN} ctx ${info.sr} Hz, scene button "${info.scene}", ${info.gl}`);
 if (GPU && /SwiftShader|llvmpipe|lavapipe|softpipe/i.test(info.gl)) {console.error('--gpu: the browser fell back to a CPU renderer; it needs read and write access to /dev/dri/renderD128 and the Mesa Vulkan driver'); await browser.close(); process.exit(1)}
 if (!info.pinned) {console.error(`no scene named "${SCENE}" in the Scene menu`); await browser.close(); process.exit(1)}
@@ -105,18 +117,18 @@ const step = async (t, n = 1) => {
   for (let i = 0; i < n; i++) {
     const at = t + i / STEP;
     // reading one pixel waits for the GPU: unsynced steps pile up in a software GPU and stall the screenshots
-    await page.evaluate(([s, at]) => {window.__spec = Float32Array.from(s); window.__vtSec = at; window.__vstep(1000 / 60);
+    await site.evaluate(([s, at]) => {window.__spec = Float32Array.from(s); window.__vtSec = at; window.__vstep(1000 / 60);
       const g = window.__s8.R.renderer.getContext(); g.readPixels(0, 0, 1, 1, g.RGBA, g.UNSIGNED_BYTE, new Uint8Array(4))}, [spectrum(at), at]);
   }
 };
 // settle at a small size first (cheap), then at full size so the trails and envelopes are right when recording starts
 const t0 = START - WARM;
-await page.setViewportSize({width: 480, height: 270});
+await resize(480, 270);
 for (let k = 0; k < (WARM - 1.5) * STEP; k += 2) await step(t0 + k / STEP, 2);
-await page.setViewportSize({width: W, height: H});
+await (PHONE ? resize(SW, SH - BAR) : resize(W, H));
 // render scale: the site's own desktop setting unless --q is given; the adaptive quality loop is held where it is
-if (arg('q')) await page.evaluate(q => window.__s8.R.setQ(q), +arg('q'));
-await page.evaluate(() => {window.__s8.R.setQ = () => {}});
+if (arg('q')) await site.evaluate(q => window.__s8.R.setQ(q), +arg('q'));
+await site.evaluate(() => {window.__s8.R.setQ = () => {}});
 for (let k = (WARM - 1.5) * STEP; k < WARM * STEP; k++) await step(t0 + k / STEP);
 
 const cdp = await ctx.newCDPSession(page);
@@ -126,8 +138,11 @@ const encoded = new Promise(r => enc.on('close', r));
 enc.stdin.on('error', () => {});
 encoded.then(code => {if (code !== 0) {console.error(`ffmpeg failed (exit ${code}), nothing written`); process.exit(1)}});
 const frames = Math.round(DUR * FPS), T = Date.now();
+const CAM = PHONE ? camera(PHONE, {frames, fps: FPS, w: W, h: H, sw: SW, sh: SH}) : null;
 for (let f = 0; f < frames; f++) {
-  const a = Date.now(); await step(START + f / FPS, 2); const b = Date.now();
+  const a = Date.now(); await step(START + f / FPS, 2);
+  if (CAM) await page.evaluate(p => window.__pose(p), CAM[f]);
+  const b = Date.now();
   const {data} = await cdp.send('Page.captureScreenshot', {format: 'jpeg', quality: 95});
   if (!enc.stdin.write(Buffer.from(data, 'base64'))) await new Promise(r => enc.stdin.once('drain', r));
   if (f % 30 === 0 || f < 3) console.error(`frame ${f}/${frames} ${((Date.now() - T) / (f + 1)).toFixed(0)} ms/frame (render ${b - a} ms, shot ${Date.now() - b} ms)`);

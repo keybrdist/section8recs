@@ -5,6 +5,8 @@
      @intro   title card seconds (1.5, 0 for none)    @end     end card seconds (2.2)
      @shot    default shot length in seconds (5.9)    @flash   seconds the cards strobe over the footage (0)
      @title   may list several titles, tab-separated: the title card swaps between them every @swap seconds (0.13)
+     @phone   camera beats for the phone look (phone.mjs), filmed off a monitor of @screen WxH (3440x1440);
+              a row's ninth column, when present, gives that shot its own beats
    Lines starting with # and blank lines are skipped. */
 import {readFileSync} from 'node:fs';
 
@@ -14,9 +16,9 @@ export function readTable(path) {
     if (!line.trim() || line.startsWith('#')) continue;
     const c = line.split('\t');
     if (line.startsWith('@')) {set[c[0].slice(1)] = c.slice(1).join('\t'); continue}
-    const [name, cat, track, file, start, warm, scene, len] = c;
+    const [name, cat, track, file, start, warm, scene, len, phone] = c;
     if (!scene) throw new Error(`${path}: a row needs 7 columns: ${line}`);
-    rows.push({name, cat, track: +track, file, start: +start, warm: +warm, scene, len: +(len || set.shot)});
+    rows.push({name, cat, track: +track, file, start: +start, warm: +warm, scene, len: +(len || set.shot), phone: phone || set.phone});
   }
   const [w, h] = set.size.split('x').map(Number);
   return {set, rows, w, h, intro: +set.intro, end: +set.end};

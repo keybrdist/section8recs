@@ -26,7 +26,8 @@ for (const r of T.rows) {
   if (existsSync(shot)) {console.log(`${r.name}: already rendered`); continue}
   const res = spawnSync(process.execPath, [capture, '--base', process.env.BASE || 'http://localhost:8791', '--cat', r.cat, '--t', String(r.track), '--mp3', mp3,
     '--start', String(r.start), '--warm', String(r.warm), '--scene', r.scene, '--dur', process.env.DUR || (r.len + .2).toFixed(2),
-    '--w', process.env.W || String(T.w), '--h', process.env.H || String(T.h), ...(gpu ? ['--gpu'] : []), '--out', `${work}/shots/${r.name}.part.mp4`], {stdio: 'inherit'});
+    '--w', process.env.W || String(T.w), '--h', process.env.H || String(T.h), ...(gpu ? ['--gpu'] : []),
+    ...(r.phone ? ['--phone', r.phone, '--screen', T.set.screen || '3440x1440'] : []), '--out', `${work}/shots/${r.name}.part.mp4`], {stdio: 'inherit'});
   if (res.status !== 0) {console.error(`${r.name}: capture failed`); process.exit(1)}
   renameSync(`${work}/shots/${r.name}.part.mp4`, shot);
   console.log(`${r.name}: rendered ${new Date().toTimeString().slice(0, 8)}`);
