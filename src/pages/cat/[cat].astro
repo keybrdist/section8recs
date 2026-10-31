@@ -17,7 +17,8 @@ const by = (t) => t.artist && t.artist !== r.artist ? t.artist : '';
 ---
 <Experience
   seo={{ title: `${r.title} by ${r.artist} [${r.cat}] · ${label.name}`, description: summary(r), path: releaseUrl(r),
-    image: cardUrl(r), imageAlt: `${r.title} by ${r.artist}: cover art`, type: 'music.album', oembed: true }}
+    image: cardUrl(r), imageAlt: `${r.title} by ${r.artist}: cover art`, type: 'music.album', oembed: true,
+    player: { image: coverUrl(r, 1200), imageAlt: `${r.title} by ${r.artist}: cover art` } }}
   route={{ view: 'release', c: r.cat }}
   gate={{ kicker: `${r.cat} · ${label.name}`, lede: `${r.title}, ${r.artist}. ${n} track${n > 1 ? 's' : ''}, ${r.date.slice(0, 4)}.`,
     enter: 'Play with sound', cue: 'Release', cueHref: '#release', nameIsHeading: false }}>
