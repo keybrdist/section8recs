@@ -12,10 +12,15 @@ interface Props {
   type?: string;                // og:type
   noindex?: boolean;
   oembed?: boolean;             // offer oEmbed (functions/oembed.js): release pages
+  player?: { image: string; imageAlt: string };  // an X player card: release pages, with a square image (the cover)
 }
 const { title, description, path, image = `${SITE}/assets/og.jpg`, imageAlt = 'Section 8 Recordings: a spruce forest in fog at night',
-  type = 'website', noindex = false, oembed = false } = Astro.props;
+  type = 'website', noindex = false, oembed = false, player } = Astro.props;
 const url = SITE + path;
+// X plays the page itself in the post (desktop web; its apps show the image and link through). Square, as the scene shows
+// between the controls only in a square frame at X's size. A preview build points the player at the preview itself, so
+// the card can be tried on X before it reaches section8recs.com (the dnbradio-player does the same).
+const env = process.env, playerOrigin = env.CF_PAGES_BRANCH && env.CF_PAGES_BRANCH !== 'main' && env.CF_PAGES_URL || SITE;
 // a share address (?track=, ?t=, ?scene=) gets its own title, description, og:url and oEmbed address from functions/cat/[cat].js
 ---
 <title>{title}</title>
@@ -30,8 +35,20 @@ const url = SITE + path;
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content={imageAlt}>
+{player ? <>
+<meta name="twitter:card" content="player">
+<meta name="twitter:site" content="@section8recs">
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+<meta name="twitter:player" content={playerOrigin + path}>
+<meta name="twitter:player:width" content="480">
+<meta name="twitter:player:height" content="480">
+<meta name="twitter:image" content={player.image}>
+<meta name="twitter:image:alt" content={player.imageAlt}>
+</> : <>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@section8recs">
 <meta name="twitter:image" content={image}>
 <meta name="twitter:image:alt" content={imageAlt}>
+</>}
 {oembed && <link rel="alternate" type="application/json+oembed" href={`${SITE}/oembed?url=${encodeURIComponent(url)}&format=json`} title={title}>}

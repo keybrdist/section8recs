@@ -94,8 +94,15 @@ Link previews never run the page's scripts, so two Cloudflare Pages Functions (`
   and gives Discord and Slack the artist and label for their previews.
 
 Every request to `/cat/*` and `/oembed` runs a Function (the free plan allows 100,000 a day), and `npx wrangler pages dev
-dist` runs them locally. X shows the large image card. Its player card would play the track in the post, but X only renders it for player
-domains it has approved. Both parsers, `src/lib/share.mjs` and the one in `site/src/v4-route.js`, have to agree.
+dist` runs them locally.
+
+On X a release page is a player card: on desktop web the post plays the page itself (`twitter:player`, the share address
+when there is one) in a 480×480 frame, square because only there does the scene show between the controls; X's apps
+show the cover (`twitter:image`, 1200 px) and link through. A preview build points the player at the preview itself,
+so a card can be tried on X before it reaches section8recs.com, and on a preview `?xcard=landscape` (480×270) or
+`?xcard=wide` (480×252) declares another shape with the release card as its image. This follows the dnbradio-player's
+X card. Other pages keep the large image card, and Facebook and Threads, which play no third-party players, show
+`og:image`. Both parsers, `src/lib/share.mjs` and the one in `site/src/v4-route.js`, have to agree.
 
 ## Catalogue sync
 
