@@ -141,7 +141,9 @@ been entered, one at a time while the page is idle.
 
 On a phone the now-playing block shows four lines, and after 10 s of playing untouched the controls and text fade,
 leaving the 8 sigil in the corner: tapping it brings them back, again shows the full details, and again folds them;
-tapping the scene hides everything. Swiping up skips to the next track and down to the previous one (a deliberate flick
+tapping the scene hides everything. Resting the mouse on the 8 (or tabbing to it) names what it does next (Show player, Track
+details, Fewer details) above it, and while the controls are hidden lets them show through faintly; on a touch screen
+the first fade of a visit names the 8 once on its own (`s8.nudged` in sessionStorage). Swiping up skips to the next track and down to the previous one (a deliberate flick
 only, also when it starts on the seek bar, which seeks on a tap and scrubs when dragged sideways). The heart
 opens the track's outlets and a Favorite toggle; favourites are kept in this browser (`s8.favorites.v1`, apart from
 the queue). In the looking-up scenes, craft stay above the bottom third of a phone screen (`site/src/v4-mobile.js`).
