@@ -78,7 +78,8 @@ A release page takes parameters that open it on a moment, in any combination:
 
 For example `/cat/SECTION8019D?track=2&t=90&scene=2`. `scene` works on every page. Until 2026-10-30 `?t=<n>` named the
 track; without `track`, a bare `t` no greater than the release's track count still does. While playing, the address
-keeps the track and a pinned scene, and the heart's dialog has Share: Copy link (or the phone's share sheet), with
+keeps the track and a pinned scene, and, as on YouTube, the start time until another track comes on (so a reload or a
+copied address starts there again). The heart's dialog has Share: Copy link (or the phone's share sheet), with
 Start at to add the moment.
 
 Link previews never run the page's scripts, so two Cloudflare Pages Functions (`functions/`) answer for them, from
