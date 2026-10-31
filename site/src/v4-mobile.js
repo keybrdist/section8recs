@@ -11,10 +11,21 @@ const UI=(()=>{const b=document.body,sig=$('#sigil'),brand=$('.brand');let tm=0;
   const busy=()=>b.classList.contains('gated')||!playing||$('#index').classList.contains('open')||$('#qpanel').classList.contains('open')
     ||!$('#srch').hidden||!$('#favDlg').hidden||$('#sceneMenu').classList.contains('open');
   const full=v=>{b.classList.toggle('np-full',v);for(const el of [sig,brand])el.setAttribute('aria-expanded',v)};
-  const hide=()=>{clearTimeout(tm);if(!MOBILE.matches||b.classList.contains('gated'))return;b.classList.add('ui-idle');full(false)};
+  const hide=()=>{clearTimeout(tm);if(!MOBILE.matches||b.classList.contains('gated'))return;b.classList.add('ui-idle');full(false);nudge()};
   const arm=()=>{clearTimeout(tm);if(!MOBILE.matches||b.classList.contains('ui-idle'))return;tm=setTimeout(()=>busy()?arm():hide(),10000)};
   const show=()=>{b.classList.remove('ui-idle');arm()};
-  const eight=()=>{if(b.classList.contains('ui-idle'))show();else{full(!b.classList.contains('np-full'));arm()}};
+  const eight=()=>{peek(false);if(b.classList.contains('ui-idle'))show();else{full(!b.classList.contains('np-full'));arm()}};
+  // the 8's hint, where the 8 does something (phones, and frames as small as X's card): a mouse resting on the 8, or
+  // keyboard focus, names what it does next, and while the controls are hidden they show through faintly. A touch
+  // screen has no hover, so the first fade of a visit names the 8 once on its own, for 2.5 s.
+  const hint=$('#npHint'),np=$('#np');let pk=0;
+  const say=t=>{hint.lastChild.textContent=t;hint.style.bottom=(b.classList.contains('ui-idle')?sig.offsetHeight+10:np.offsetHeight+8)+'px'};
+  const peek=on=>{clearTimeout(pk);b.classList.remove('peek');if(on)pk=setTimeout(()=>{if(!MOBILE.matches||b.classList.contains('gated'))return;
+    say(b.classList.contains('ui-idle')?'Show player':b.classList.contains('np-full')?'Fewer details':'Track details');b.classList.add('peek')},150)};
+  sig.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')peek(true)});sig.addEventListener('pointerleave',()=>peek(false));
+  sig.addEventListener('focus',()=>{if(sig.matches(':focus-visible'))peek(true)});sig.addEventListener('blur',()=>peek(false));
+  function nudge(){try{if(sessionStorage.getItem('s8.nudged'))return;sessionStorage.setItem('s8.nudged','1')}catch(e){return}
+    say(matchMedia('(hover:hover)').matches?'Click the 8 for the player':'Tap the 8 for the player');b.classList.add('nudge');setTimeout(()=>b.classList.remove('nudge'),2500)}
   for(const el of [sig,brand]){el.setAttribute('role','button');el.tabIndex=0;el.setAttribute('aria-controls','np');el.setAttribute('aria-label','Show the controls and track details');
     el.addEventListener('click',eight);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();eight()}})}
   // any touch or key while the controls are up restarts the 10 s; paused, they stay up

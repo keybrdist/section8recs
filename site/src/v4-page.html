@@ -442,6 +442,15 @@ body.ui-idle .np{bottom:calc(16px + env(safe-area-inset-bottom))}
   border:1px solid rgba(254,1,1,.7);border-radius:999px;background:rgba(5,5,6,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
   color:#f1efe9;font:500 11px var(--mono);letter-spacing:.3em;text-transform:uppercase;cursor:pointer;animation:tapIn .6s ease both}
 .tapcue[hidden],body.gated .tapcue{display:none}
+/* the 8's hint (site/src/v4-mobile.js): what the 8 does next, above it, and the hidden controls showing through */
+.np-hint{position:absolute;left:0;display:flex;align-items:center;gap:8px;font:500 10px var(--mono);letter-spacing:.26em;text-transform:uppercase;color:var(--fg);
+  white-space:nowrap;text-shadow:0 0 12px rgba(0,0,0,.9);opacity:0;transform:translateY(5px);transition:opacity .22s ease,transform .3s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.np-hint b{font-weight:500}
+.np-hint i{width:0;height:0;border-style:solid;border-width:0 4px 7px;border-color:transparent transparent var(--acc);filter:drop-shadow(0 0 4px var(--acc))}
+body.peek .np-hint,body.nudge .np-hint{opacity:1;transform:none}
+body.ui-idle.peek .top,body.ui-idle.peek .bot{opacity:.3;visibility:visible;pointer-events:none;transition:opacity .35s ease}
+body.gated .np-hint{display:none}
+@media (prefers-reduced-motion:reduce){.np-hint{transform:none;transition:opacity .2s}}
 .tapcue i{width:0;height:0;border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent #fe0101;filter:drop-shadow(0 0 6px rgba(254,1,1,.8));animation:tapPulse 1.6s ease-in-out infinite}
 @keyframes tapIn{from{opacity:0}to{opacity:1}}
 @keyframes tapPulse{50%{opacity:.35}}
@@ -490,6 +499,7 @@ body.ui-idle .np{bottom:calc(16px + env(safe-area-inset-bottom))}
     <p class="np-marks" id="npMarks" hidden></p>
     <p class="np-info" hidden><a class="mono" id="npInfo" href="/releases">Release info <span aria-hidden="true">→</span></a></p>
   </div>
+  <span class="np-hint" id="npHint" aria-hidden="true"><i></i><b>Show player</b></span>
 </section>
 
 <footer class="bot chrome">
